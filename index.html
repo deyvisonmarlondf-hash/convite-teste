@@ -17,7 +17,7 @@
 <meta property="og:image" content="https://maricriative.github.io/convite_MariaVitoria15Anos/Wedding_invitation_suite_design_1b18670d%20(1).jpg">
 <meta property="og:url" content="https://maricriative.github.io/convite_MariaVitoria15Anos/">
 <script>
-/* Rede de segurança (compatível com navegadores antigos): se o script principal falhar, o convite não fica preso na abertura */
+/* Rede de segurança: se o script principal falhar, o convite não fica preso na abertura */
 window.addEventListener('error', function () {
   try {
     if (window.__pronto) return;
@@ -30,52 +30,50 @@ window.addEventListener('error', function () {
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- fontes carregam sem travar a página (se o Google Fonts estiver lento ou bloqueado, o convite abre igual) -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Italiana&family=Pinyon+Script&family=Montserrat:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Italiana&family=Pinyon+Script&family=Montserrat:wght@300;400;500;600;700&display=swap"></noscript>
 <style>
-/* Valores padrão. Para mudar cores e fontes, edite CONFIG.paleta e CONFIG.fontes no script. */
+/* ===== ESTILO (não precisa mexer: cores, fontes e links ficam no CONFIG lá embaixo) ===== */
 :root{
   --fundo:#FBF3F5; --card:#FFFAFB; --secaoAlt:#F7E6EA;
   --claro:#F1CCD4; --rosa:#E6A9BA; --antigo:#D299A2; --salmao:#E3A1A8;
   --enfase:#8A4E5B; --texto:#5E2F3A; --textoSuave:#85535F; --textoClaro:#FFF7F8;
-  --f-tit:'Achetta','Italiana',serif; --f-script:'Barsela Calligraphy','Pinyon Script',cursive; --f-corpo:'Montserrat',sans-serif;
+  --textoForte:#3E1C26; --textoMedio:#4A2530;
+  --f-tit:'Playfair Display',serif; --f-script:'Pinyon Script',cursive; --f-corpo:'Raleway',sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth}
-body{background:var(--fundo);color:var(--texto);font-family:var(--f-corpo);font-weight:300;font-size:15px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body{background:var(--fundo);color:var(--textoForte);font-family:var(--f-corpo);font-weight:500;font-size:17px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased;font-variant-numeric:lining-nums}
 body.locked{overflow:hidden}
 img,video,iframe{max-width:100%;display:block}
 button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
-h2{font-family:var(--f-tit);font-weight:400;font-size:2.1rem;line-height:1.2;text-align:center;color:var(--enfase)}
-h3{font-family:var(--f-tit);font-weight:400;font-size:1.5rem;color:var(--enfase)}
-h3.script,.script{font-family:var(--f-script);font-weight:400;font-size:2.3rem;line-height:1.1}
-.sub{font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;text-align:center;color:var(--textoSuave);font-weight:500}
-.orn{display:flex;align-items:center;justify-content:center;gap:10px;margin:14px auto 26px;color:var(--antigo);font-size:11px}
+h2{font-family:var(--f-tit);font-weight:600;font-size:2.4rem;line-height:1.2;text-align:center;color:var(--enfase)}
+h3{font-family:var(--f-tit);font-weight:600;font-size:1.7rem;color:var(--enfase)}
+.script{font-family:var(--f-script);font-weight:400;font-size:2.3rem;line-height:1.1}
+.sub{font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;text-align:center;color:var(--textoForte);font-weight:700}
+.orn{display:flex;align-items:center;justify-content:center;gap:10px;margin:14px auto 26px;color:var(--antigo);font-size:14px}
 .orn::before,.orn::after{content:"";width:44px;height:1px;background:var(--antigo)}
-.texto{font-size:1.02rem;color:var(--textoSuave)}
-.data{font-family:var(--f-tit);font-size:1.15rem;color:var(--enfase)}
-.data-capa{font-size:1.75rem;line-height:1.25}
+.texto{font-size:1.2rem;color:var(--textoMedio);font-weight:500;line-height:1.7}
+.data{font-family:var(--f-corpo);font-weight:700;font-size:1.3rem;color:var(--textoForte)}
+.data-capa{font-size:clamp(1.7rem,7vw,2.5rem);line-height:1.3}
 
-section.sec{padding:64px 22px;position:relative;overflow:hidden}
+section.sec{padding:80px 22px;position:relative;overflow:hidden}
 .bg{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0}
 .veu{position:absolute;top:0;right:0;bottom:0;left:0;z-index:1}
 .wrap,.capa-card{position:relative;z-index:2}
 section.alt{background:var(--secaoAlt)}
-.wrap{max-width:480px;margin:0 auto;text-align:center}
+.wrap{max-width:680px;margin:0 auto;text-align:center}
 .ev{margin-top:34px}
 .ev+.ev{padding-top:34px;border-top:1px solid var(--antigo)}
 .ev-card{position:relative;overflow:hidden;margin-top:30px;padding:34px 20px;border:1px solid var(--antigo)}
 .ev-conteudo{position:relative;z-index:2}
-.ev-nome{font-family:var(--f-tit);font-weight:400;font-size:1.9rem;line-height:1.15;color:var(--enfase)}
-.btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 28px;border-radius:99px;border:1px solid var(--enfase);color:var(--enfase);
-  text-decoration:none;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;font-weight:500;transition:transform .2s}
+.ev-nome{font-family:var(--f-tit);font-weight:600;font-size:1.9rem;line-height:1.15;color:var(--enfase)}
+.btn{display:inline-flex;align-items:center;justify-content:center;background:var(--enfase);color:#fff;border:2px solid var(--enfase);min-height:54px;padding:16px 38px;border-radius:99px;
+  text-decoration:none;font-size:.95rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;box-shadow:0 6px 16px rgba(138,78,91,.35);transition:transform .2s}
 .btn:active{transform:scale(.97)}
 
-.foto{width:100%;max-width:280px;aspect-ratio:2/3;object-fit:cover;margin:30px auto 8px;
+.foto{width:100%;max-width:420px;aspect-ratio:2/3;object-fit:cover;margin:30px auto 8px;
   border-radius:140px 140px 6px 6px;border:3px solid var(--antigo);padding:6px;background:var(--card);
   outline:1px solid var(--rosa);outline-offset:6px;box-shadow:0 12px 30px rgba(138,78,91,.25)}
-.gal-wrap{position:relative;width:100%;max-width:300px;margin:0 auto}
+.gal-wrap{position:relative;width:100%;max-width:460px;margin:0 auto}
 .gal-wrap.com-renda{margin:70px auto 60px}
 .gal-wrap.com-faixa{margin:40px auto}
 .gal-renda{position:absolute;left:50%;top:50%;width:calc(var(--esc,1.3)*100%);max-width:calc(100vw - 8px);height:auto;transform:translate(-50%,-50%);pointer-events:none;z-index:3}
@@ -86,7 +84,7 @@ section.alt{background:var(--secaoAlt)}
 .gal-lado.esq{left:0;transform:translate(-50%,-50%) rotate(-90deg)}
 .gal-lado.dir{right:0;transform:translate(50%,-50%) rotate(90deg)}
 
-.carrossel{position:relative;width:100%;max-width:300px;aspect-ratio:3/4;margin:0 auto;overflow:hidden;border:3px solid var(--antigo);box-shadow:0 10px 26px rgba(138,78,91,.2)}
+.carrossel{position:relative;width:100%;max-width:460px;aspect-ratio:3/4;margin:0 auto;overflow:hidden;border:3px solid var(--antigo);box-shadow:0 10px 26px rgba(138,78,91,.2)}
 .slide{position:absolute;top:0;right:0;bottom:0;left:0;opacity:0;transition:opacity .9s}
 .slide.ativo{opacity:1;z-index:1}
 .slide img{width:100%;height:100%;max-width:none;object-fit:cover}
@@ -102,15 +100,26 @@ section.alt{background:var(--secaoAlt)}
 #intro.open{transform:translateY(-100%);opacity:0}
 #introVid{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;height:100%;object-fit:cover;z-index:10;background:transparent;opacity:0;pointer-events:none;transition:opacity .25s}
 #introVid.pronto{opacity:1;pointer-events:auto}
-.selo{width:104px;height:104px;border-radius:50%;background:var(--enfase);color:var(--textoClaro);border:3px solid var(--card);font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;font-weight:500}
+.selo{width:104px;height:104px;border-radius:50%;background:var(--enfase);color:var(--textoClaro);border:3px solid var(--card);font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;font-weight:600}
 .selo-clique{width:130px;height:130px;border-radius:50%;background:transparent}
+/* faixa "Toque para abrir" (PNG): pequena, por cima da imagem de abertura */
+#intro .toque{position:absolute;left:50%;bottom:calc(7% + env(safe-area-inset-bottom,0px));z-index:5;
+  width:min(36vw,170px);height:auto;transform:translateX(-50%);pointer-events:none;
+  filter:drop-shadow(0 5px 10px rgba(94,47,58,.35));opacity:0;animation:surge 1s ease 2.5s forwards,pulsa 2.2s ease-in-out 3.5s infinite}
+@keyframes pulsa{0%,100%{transform:translateX(-50%) scale(1)}50%{transform:translateX(-50%) scale(1.07)}}
+@keyframes surge{to{opacity:1}}
+#intro .dica{position:absolute;bottom:calc(9% + env(safe-area-inset-bottom,0px));z-index:5;left:50%;transform:translateX(-50%);width:max-content;max-width:90vw;
+  font-size:1.1rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:#fff;background:var(--enfase);padding:14px 30px;border-radius:99px;
+  box-shadow:0 6px 16px rgba(138,78,91,.4);opacity:0;animation:surge 1s ease 2.5s forwards;pointer-events:none}
 
 .hero{position:relative;overflow:hidden;min-height:100vh;min-height:100svh;display:flex;align-items:center;justify-content:center;padding:36px 20px;background:var(--fundo) center/cover no-repeat}
-.capa-card{width:100%;max-width:400px;text-align:center;padding:10px}
+.capa-card{width:100%;max-width:620px;text-align:center;padding:10px 6px}
 .capa-card .nome{font-family:var(--f-script);font-size:clamp(2.8rem,14vw,4rem);line-height:1.05;color:var(--enfase);margin:8px 0}
-.frase{font-family:var(--f-tit);font-size:1.08rem;color:var(--texto);margin:16px 0 4px;line-height:1.45}
+.capa-card .sub{font-size:.95rem;line-height:1.9}
+.capa-card .logo-nome{width:92%;max-width:480px}
+.frase{font-family:var(--f-corpo);font-size:clamp(1.25rem,4.6vw,1.7rem);font-weight:600;color:var(--textoForte);margin:22px 0 8px;line-height:1.5}
 
-.escuro{background:var(--enfase);color:var(--textoClaro);padding:90px 22px}
+.escuro{background:var(--enfase);color:var(--textoClaro);padding:100px 22px}
 .escuro h2{color:var(--textoClaro)}
 .escuro .sub{color:var(--claro)}
 .renda{position:absolute;left:0;right:0;z-index:3;background-repeat:repeat-x;background-position:center top;background-size:auto 100%;pointer-events:none}
@@ -118,22 +127,34 @@ section.alt{background:var(--secaoAlt)}
 .renda.base{bottom:0;transform:scaleY(-1)}
 .cd{display:flex;justify-content:center}
 .cd>div{margin:0 8px}
-.cd b{display:block;font-family:var(--f-tit);font-weight:400;font-size:2.1rem;line-height:1}
-.cd span{font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--claro)}
+.cd b{display:block;font-family:var(--f-corpo);font-weight:700;font-size:2.4rem;line-height:1}
+.cd span{font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--claro)}
 
-.tl{position:relative;text-align:left}
-.tl::before{content:"";position:absolute;left:103px;top:10px;bottom:10px;width:1px;background:var(--antigo)}
-.tl-i{display:grid;grid-template-columns:84px 18px 1fr;gap:10px;margin-bottom:26px;align-items:start}
-.tl-h{font-family:var(--f-tit);font-size:1.35rem;color:var(--enfase);text-align:right;line-height:1.1}
-.tl-h small{display:block;font-family:var(--f-corpo);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--textoSuave)}
+.tl{position:relative;text-align:left;--col:104px}
+.tl::before{content:"";position:absolute;left:calc(var(--col) + 19px);top:10px;bottom:10px;width:1px;background:var(--antigo)}
+.tl-i{display:grid;grid-template-columns:var(--col) 18px 1fr;gap:10px;margin-bottom:26px;align-items:start}
+.tl-h{font-family:var(--f-corpo);font-weight:700;font-size:1.4rem;color:var(--textoForte);text-align:right;line-height:1.1}
+.tl-h small{display:block;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--textoMedio)}
 .tl-d{color:var(--antigo);font-size:.8rem;text-align:center}
-.tl-t b{display:block;font-family:var(--f-tit);font-weight:400;font-size:1.15rem;color:var(--enfase)}
-.tl-t span{font-size:.85rem;color:var(--textoSuave)}
+.tl-t b{display:block;font-family:var(--f-tit);font-weight:600;font-size:1.3rem;color:var(--enfase)}
+.tl-t span{font-size:1rem;font-weight:500;color:var(--textoMedio)}
+.tl-t em{display:block;margin-top:4px;font-style:normal;font-weight:700;color:var(--enfase)}
 
-/* Confirmar presença (apenas aviso, sem formulário) */
+/* Vídeo da mensagem */
+.video-frame{position:relative;max-width:460px;margin:34px auto 0;border:3px solid var(--antigo);box-shadow:0 10px 26px rgba(138,78,91,.2);overflow:hidden;background:#000}
+.video-frame video{width:100%;max-height:80vh;display:block}
+
+/* Confirmar presença */
 .rsvp-ico{width:84px;height:84px;border-radius:50%;background:var(--enfase);color:var(--textoClaro);display:grid;place-items:center;margin:8px auto 4px;border:4px solid var(--claro)}
 .rsvp-ico svg{width:40px;height:40px}
 .rsvp-ico img{width:44px;height:44px;object-fit:contain}
+.rsvp-form{max-width:460px;margin:0 auto;text-align:left}
+.rsvp-form label{display:block;font-weight:700;font-size:1.05rem;margin:18px 0 6px;color:var(--textoForte)}
+.rsvp-form input,.rsvp-form textarea{width:100%;font:inherit;font-size:1.1rem;font-weight:500;padding:14px 16px;border:2px solid var(--antigo);border-radius:12px;background:var(--card);color:var(--textoForte);outline:none}
+.rsvp-form input:focus,.rsvp-form textarea:focus{border-color:var(--enfase)}
+.rsvp-form textarea{resize:vertical}
+.rsvp-erro{margin-top:10px;font-weight:700;color:#A12B3C}
+.rsvp-form .btn{display:flex;width:100%;margin-top:24px}
 
 footer{position:relative;overflow:hidden;background:var(--enfase);color:var(--textoClaro);text-align:center;padding:52px 20px calc(52px + env(safe-area-inset-bottom,0px))}
 footer .script{font-size:2.8rem}
@@ -149,89 +170,19 @@ footer p{letter-spacing:.2em;font-size:.8rem;color:var(--claro)}
 .logo-nome{display:block;width:80%;max-width:300px;height:auto;margin:10px auto}
 .logo-nome.branca{filter:brightness(0) invert(1)}
 .presente-lista{margin-top:22px}
-.presente-lista p{padding:10px 0;border-bottom:1px solid var(--rosa)}
+.presente-lista p{padding:14px 0;border-bottom:1px solid var(--rosa)}
 .presente-lista p:last-child{border-bottom:none}
-.pix{margin-top:30px;padding:26px 18px;border:1px solid var(--antigo);background:var(--card)}
-.pix-num{font-size:1.5rem;margin:6px 0 16px}
-.video-frame{position:relative;max-width:320px;margin:0 auto;border:3px solid var(--antigo);box-shadow:0 10px 26px rgba(138,78,91,.2);overflow:hidden;background:#000}
-.video-frame video{width:100%;max-height:80vh;display:block;cursor:pointer}
-.vplay{position:absolute;top:50%;left:50%;width:74px;height:74px;margin:-37px 0 0 -37px;border-radius:50%;background:var(--enfase);color:var(--textoClaro);border:3px solid var(--claro);display:grid;place-items:center;transition:opacity .3s}
-.vplay svg{width:34px;height:34px;margin-left:4px}
-.vplay.oculto{opacity:0;pointer-events:none}
-#intro .dica{position:absolute;left:0;right:0;bottom:calc(9% + env(safe-area-inset-bottom,0px));z-index:5;font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;font-weight:500;color:var(--enfase);text-shadow:0 1px 8px rgba(255,255,255,.9);opacity:0;animation:surge 1s ease 2.5s forwards;pointer-events:none}
-@keyframes surge{to{opacity:1}}
+.pix{margin-top:30px;padding:30px 18px;border:1px solid var(--antigo);background:var(--card)}
+.pix .sub{font-size:.9rem}
+.pix-num{font-family:Arial,Helvetica,sans-serif;font-size:clamp(1.9rem,8vw,2.6rem);font-weight:700;letter-spacing:.06em;color:var(--textoForte);margin:10px 0 20px}
 .deslize{margin-top:26px;display:flex;flex-direction:column;align-items:center}
-.deslize span{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;font-weight:500}
-.deslize svg{width:22px;height:22px;margin-top:4px;animation:desce 1.6s ease-in-out infinite}
+.deslize span{font-size:.95rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700}
+.deslize svg{width:32px;height:32px;margin-top:4px;animation:desce 1.6s ease-in-out infinite}
 @keyframes desce{0%,100%{transform:translateY(0);opacity:.6}50%{transform:translateY(6px);opacity:1}}
-/* Celulares antigos sem aspect-ratio (iOS < 15, Android antigo) */
 @supports not (aspect-ratio:1/1){
   .carrossel{height:0;padding-top:133.33%}
   .foto{height:400px}
 }
-
-/* ==========================================================================
-   AJUSTES DE LEITURA, CONTRASTE E TOQUE (revisão da cliente)
-   ========================================================================== */
-body{font-size:17px;font-weight:400;color:#3E1C26}
-
-/* Textos: maiores, mais escuros e mais firmes */
-.sub{font-size:.85rem;font-weight:600;letter-spacing:.2em;color:#3E1C26}
-.escuro .sub{color:var(--claro)}
-.texto{font-size:1.2rem;font-weight:500;color:#4A2530;line-height:1.7}
-h2{font-size:2.6rem;-webkit-text-stroke:.5px var(--enfase)}
-h3{font-size:1.8rem;-webkit-text-stroke:.4px var(--enfase)}
-.escuro h2{-webkit-text-stroke:0}
-.orn{font-size:14px}
-
-/* Números e datas: fonte reta (a Italiana corta as pontas dos dígitos) */
-.data,.tl-h{font-family:var(--f-corpo);font-weight:600;font-variant-numeric:lining-nums;color:#3E1C26}
-.cd b{font-family:var(--f-corpo);font-weight:600;font-variant-numeric:lining-nums;font-size:2.4rem}
-.cd span{font-size:.7rem;font-weight:600}
-.data{font-size:1.3rem}
-.tl{--col:104px}
-.tl::before{left:calc(var(--col) + 19px)}
-.tl-i{grid-template-columns:var(--col) 18px 1fr}
-.tl-h{font-size:1.4rem}
-.tl-h small{font-size:.7rem;font-weight:600;color:#4A2530}
-.tl-t b{font-size:1.3rem;-webkit-text-stroke:.4px var(--enfase)}
-.tl-t span{font-size:1rem;font-weight:500;color:#4A2530}
-
-/* Capa: bloco maior, ocupando melhor a tela */
-.capa-card{max-width:620px;padding:10px 6px}
-.capa-card .sub{font-size:.95rem;font-weight:700;color:#3E1C26;line-height:1.9}
-.capa-card .logo-nome{width:92%;max-width:480px}
-.frase{font-family:var(--f-corpo);font-size:clamp(1.25rem,4.6vw,1.7rem);font-weight:600;color:#3E1C26;line-height:1.5;margin:22px 0 8px}
-.data-capa{font-size:clamp(1.7rem,7vw,2.5rem);font-weight:700;line-height:1.3}
-.deslize span{font-size:.95rem;font-weight:700}
-.deslize svg{width:32px;height:32px}
-
-/* Seções mais largas (menos vazio) */
-.wrap{max-width:680px}
-section.sec{padding:80px 22px}
-.escuro{padding:100px 22px}
-
-/* Fotos, galeria e vídeo maiores */
-.foto{max-width:420px}
-.gal-wrap,.carrossel{max-width:460px}
-.video-frame{max-width:460px}
-
-/* Presentes e chave Pix legíveis */
-.presente-lista p{padding:14px 0}
-.pix{padding:30px 18px}
-.pix .sub{font-size:.9rem}
-.pix-num{font-family:Arial,Helvetica,sans-serif;font-size:clamp(1.9rem,8vw,2.6rem);font-weight:700;letter-spacing:.06em;color:#3E1C26;margin:10px 0 20px}
-
-/* Botões grandes, preenchidos e fáceis de tocar */
-.btn{background:var(--enfase);color:#fff;border:2px solid var(--enfase);min-height:54px;padding:16px 38px;
-  font-size:.95rem;font-weight:700;letter-spacing:.14em;box-shadow:0 6px 16px rgba(138,78,91,.35)}
-
-/* Abertura: faixa "Toque para abrir" (PNG) por cima da imagem inicial */
-#intro .toque{position:absolute;left:50%;bottom:calc(6% + env(safe-area-inset-bottom,0px));z-index:5;
-  width:min(78vw,420px);height:auto;transform:translateX(-50%);pointer-events:none;
-  filter:drop-shadow(0 6px 14px rgba(94,47,58,.35));opacity:0;animation:surge 1s ease 2.5s forwards,pulsa 2.2s ease-in-out 3.5s infinite}
-@keyframes pulsa{0%,100%{transform:translateX(-50%) scale(1)}50%{transform:translateX(-50%) scale(1.06)}}
-#intro .dica{font-size:1.1rem;font-weight:700;color:#fff;background:var(--enfase);width:max-content;max-width:90vw;left:50%;right:auto;transform:translateX(-50%);padding:14px 30px;border-radius:99px;text-shadow:none;box-shadow:0 6px 16px rgba(138,78,91,.4)}
 </style>
 </head>
 <body class="locked">
@@ -243,143 +194,340 @@ section.sec{padding:80px 22px}
 <div id="barra-inf"></div>
 
 <script>
-/* ==========================================================================
-   ✏️ CONFIGURAÇÕES — XV ANOS MARIA VITÓRIA
-   EM TODAS AS SEÇÕES VOCÊ PODE USAR:
-     fundo: imagem, GIF ou vídeo .mp4 (o vídeo toca sozinho, mudo e em loop). "" = sem fundo.
-     repetir: false = o vídeo de fundo toca UMA vez só (começa quando a seção aparece na tela).
-     espacoTopo: espaço (px) acima do título da seção: aumente para afastar o texto das flores.
-     cor:   cor de fundo da seção, em hexadecimal. "" = cor padrão da seção.
-     veu:   de 0 a 1, cobre o fundo com a cor da seção para dar leitura ao texto.
-     renda: imagem PNG de renda repetida no topo e na base da seção. "" = sem renda.
-            A altura agora se ajusta sozinha ao formato da imagem (nunca menor que rendaAltura).
-     rendaAltura: altura MÍNIMA da renda, em px (padrão 24).
-     rendaPos: "ambas" (padrão), "topo" ou "base".
-   ========================================================================== */
+/* ████████████████████████████████████████████████████████████████████████████
+   ██   📖  COMO USAR ESTA CONFIGURAÇÃO  (XV ANOS MARIA VITÓRIA)             ██
+   ████████████████████████████████████████████████████████████████████████████
+
+   Cada seção do convite tem um bloco numerado abaixo, na ordem em que aparece no site.
+   Dentro de cada bloco, as linhas são agrupadas pelos ícones:
+
+     ✏️  TEXTOS      → o que está escrito no convite
+     🖼️  IMAGENS     → links de fotos, logos e fundos (.png .jpg .gif)
+     🎬  VÍDEOS      → links ou nomes de arquivos .mp4
+     🌸  RENDA       → link do PNG de renda (enfeite repetido no topo/base da seção)
+     🎨  CORES       → cores em hexadecimal, ex.: "#8A4E5B"
+     🔗  LINKS       → endereços de sites, mapas, WhatsApp
+     📐  TAMANHOS    → medidas em pixels
+     🎵  MÚSICA      → música de fundo
+
+   Regras gerais (valem para TODAS as seções):
+     • Para trocar algo, mexa só no que está entre aspas "…". Não apague vírgulas nem aspas.
+     • "" (aspas vazias) = não usar / deixar em branco.
+     • Arquivo na mesma pasta do site → escreva só o nome:  "VideoMariaVitoria02.mp4"
+     • Arquivo na internet (GitHub etc.) → cole o link inteiro:  "https://…/foto.png?raw=true"
+     • fundo  = imagem OU vídeo de fundo da seção.
+     • cor    = cor de fundo da seção ("" = cor padrão).
+     • veu    = de 0 a 1: camada de cor sobre o fundo para o texto ficar legível.
+     • renda  = PNG de renda no topo/base da seção ("" = sem renda).
+   ============================================================================ */
 const CONFIG = {
+
+/* ┌──────────────────────────────────────────────────────────────────────────┐
+   │ 0️⃣  GERAL — nome, hashtag, cores do site, fontes, música                │
+   └──────────────────────────────────────────────────────────────────────────┘ */
+
+  // ✏️ TEXTOS
   nome: "Maria Vitória",
-  logoNome: "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/Posicionar_XV_abaixo_do_nome_b63098b8.png?raw=true",
-  logoRodape: "",
-  logoRodapeBranca: true,
   hashtag: "#MariaVitóriaXV",
   cidade: "São Francisco - MG",
-  celebracao: "Aniversário de\nMaria Vitória\ne de seu Vô Tone Veloso",   // \n = quebra de linha
 
+  // 🖼️ IMAGENS (logos)
+  logoNome: "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/Posicionar_XV_abaixo_do_nome_b63098b8.png?raw=true",   // logo grande da capa
+  logoRodape: "",              // logo do rodapé ("" = usa a logo da capa)
+  logoRodapeBranca: true,      // true = logo do rodapé fica branca
+
+  // 🌸 RENDA geral (usada nas seções que não têm renda própria, ex.: Contagem)
+  renda: "https://github.com/maricriative/convite_MariaVitoria15Anos/blob/main/Novo%20Projeto%20(11).png?raw=true",
+  // 📐 TAMANHOS da renda
+  rendaAltura: 24,             // altura mínima (px)
+  rendaAlturaMax: 110,         // altura máxima (px)
+  rendaTile: 360,              // largura de cada repetição (px) — aumente para rendas maiores
+
+  // 🎨 CORES das barras do celular (topo e rodapé do navegador)
   barras: { superior: "#F1CCD4", inferior: "#F1CCD4" },
 
+  // 🎨 PALETA — cores de todo o site
   paleta: {
-    fundo:       "#FBF3F5",
-    card:        "#FFFAFB",
-    secaoAlt:    "#F7E6EA",
-    claro:       "#F1CCD4",
+    fundo:       "#FBF3F5",   // fundo geral
+    card:        "#FFFAFB",   // caixas e campos
+    secaoAlt:    "#F7E6EA",   // seções alternadas (rosa claro)
+    claro:       "#F1CCD4",   // rosa claro
     rosa:        "#E6A9BA",
-    antigo:      "#D299A2",
+    antigo:      "#D299A2",   // linhas e detalhes
     salmao:      "#E3A1A8",
-    enfase:      "#8A4E5B",
+    enfase:      "#8A4E5B",   // vinho: títulos, botões
     texto:       "#5E2F3A",
     textoSuave:  "#85535F",
-    textoClaro:  "#FFF7F8"
+    textoClaro:  "#FFF7F8",   // texto sobre fundo escuro
+    textoForte:  "#3E1C26",   // texto principal (bem escuro, para leitura)
+    textoMedio:  "#4A2530"    // texto de parágrafos
   },
 
-  fontes: { arquivoTitulo: "", arquivoScript: "" },
+  // 🔤 FONTES — nomes do Google Fonts (https://fonts.google.com). Use fontes que tenham pesos 400 a 800.
+  fontes: {
+    titulo: "Playfair Display",   // títulos
+    corpo:  "Raleway",            // textos, datas e números
+    script: "Pinyon Script",      // nome cursivo (rodapé / fallback)
+    arquivoTitulo: "",            // (opcional) arquivo de fonte próprio para títulos
+    arquivoScript: ""             // (opcional) arquivo de fonte próprio para o script
+  },
 
-  renda: "https://github.com/maricriative/convite_MariaVitoria15Anos/blob/main/Novo%20Projeto%20(11).png?raw=true",
-  rendaAltura: 24,       // altura mínima (px) de todas as rendas
-  rendaAlturaMax: 110,   // altura máxima (px) quando a renda é ajustada automaticamente
-  rendaTile: 360,        // largura (px) de cada repetição da renda: aumente para rendas maiores
+  // 🎵 MÚSICA DE FUNDO (use UMA das duas)
+  musica: "",      // arquivo .mp3 (ex.: "musica.mp3")
+  youtube: "",     // 🔗 link do YouTube (ex.: "https://youtu.be/xxxxxxxxxxx")
 
-  /* 👉 Quando você tiver a nova imagem e o novo vídeo (com o monograma "MV"), troque os nomes de "imagem" e "video" abaixo.
-     toque = faixa PNG "Toque para abrir" (fundo transparente), colocada por cima da imagem inicial. "" = usa o texto simples. */
-  abertura: { usar: true, cor: "", imagem: "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/Trocar_monograma_da_imagem_26dffaa1.jpg?raw=true", texto: "Toque para abrir" },
 
-  musica: "",
-  youtube: "",
+/* ┌──────────────────────────────────────────────────────────────────────────┐
+   │ 1️⃣  ABERTURA — tela inicial (brasão) antes do convite                   │
+   └──────────────────────────────────────────────────────────────────────────┘ */
+  abertura: {
+    usar: true,                // true = mostra a abertura | false = pula direto para o convite
+    // 🖼️ IMAGEM da abertura (com o monograma MV)
+    imagem: "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/Trocar_monograma_da_imagem_26dffaa1.jpg?raw=true",
+    // 🎬 VÍDEO da abertura (toca quando a pessoa toca na tela). "" = sem vídeo
+    video: "",
+    // 🖼️ IMAGEM da faixa "Toque para abrir" (PNG transparente, fica pequena sobre a imagem). "" = usa só o texto
+    toque: "toque-para-abrir.png",
+    // ✏️ TEXTO (aparece se a faixa PNG não carregar)
+    texto: "Toque para abrir",
+    // 🎨 COR de fundo enquanto a imagem carrega
+    cor: ""
+  },
 
+
+/* ┌──────────────────────────────────────────────────────────────────────────┐
+   │ 2️⃣  CAPA — primeira tela do convite (logo, frase, data)                 │
+   └──────────────────────────────────────────────────────────────────────────┘ */
   capa: {
+    // ✏️ TEXTOS
+    celebracao: "Aniversário de\nMaria Vitória",   // \n = quebra de linha
     frase: "Nada acontece sem antes existir um sonho, e na idade dos sonhos tudo é possível!",
-    renda: "", fundo: "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/FloresCapa.png?raw=true", cor: "", veu: 0
+    dataTexto: "",             // "" = a data é montada sozinha a partir da seção 5 (Eventos)
+    // 🖼️ IMAGEM / 🎬 VÍDEO de fundo da capa
+    fundo: "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/FloresCapa.png?raw=true",
+    // 🌸 RENDA
+    renda: "",
+    // 🎨 CORES
+    cor: "", veu: 0
   },
-  dataTexto: "",
-  deslize: { texto: "Deslize para baixo", cor: "#1F3A2A" },   // aviso no fim da capa; texto vazio = não mostra. cor = verde escuro
+  // ✏️ + 🎨 aviso "Deslize para baixo" no fim da capa (texto vazio = não mostra)
+  deslize: { texto: "Deslize para baixo", cor: "#1F3A2A" },
 
+
+/* ┌──────────────────────────────────────────────────────────────────────────┐
+   │ 3️⃣  MENSAGEM — logo, frase e VÍDEO da debutante                         │
+   └──────────────────────────────────────────────────────────────────────────┘ */
   mensagem: {
-    titulo: "Maria Vitória XV anos",   // só aparece se usarLogo for false (aqui vai TEXTO, não link)
-    usarLogo: true,      // true = mostra a imagem de "logo" no lugar do nome; false = mostra o texto do título
-    logo: "https://github.com/maricriative/convite_MariaVitoria15Anos/blob/main/ID%20VISUAL%20MARIA%20VITORIA-02.png?raw=true",   // logo da seção Mensagem (vazio = usa a logoNome da capa)
-    textoEspaco: 34,     // distância (px) entre a logo e o texto: aumente para descer o texto
+    // ✏️ TEXTOS
+    titulo: "Maria Vitória XV anos",   // só aparece se usarLogo for false
     texto: "Nunca deixe de sonhar, pois se podemos sonhar, também podemos tornar nossos sonhos realidade.",
-    foto: "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/FloresCapa.png?raw=true",
-    renda: "", fundo: "gesso_flores.png", cor: "", veu: 0
+    // 🖼️ IMAGENS
+    usarLogo: true,            // true = mostra a logo | false = mostra o título em texto
+    logo: "https://github.com/maricriative/convite_MariaVitoria15Anos/blob/main/ID%20VISUAL%20MARIA%20VITORIA-02.png?raw=true",   // "" = usa a logo da capa
+    foto: "",                  // foto (só aparece se NÃO houver vídeo abaixo)
+    // 🎬 VÍDEO da debutante (com play e som; ao tocar, a música de fundo pausa e volta quando o vídeo para)
+    video: "VideoMariaVitoria02.mp4",
+    poster: "",                // 🖼️ imagem de capa do vídeo (opcional)
+    // 📐 TAMANHOS
+    textoEspaco: 34,           // distância (px) entre a logo e o texto
+    // 🖼️ / 🎬 FUNDO da seção
+    fundo: "gesso_flores.png",
+    // 🌸 RENDA
+    renda: "",
+    // 🎨 CORES
+    cor: "", veu: 0
   },
 
-  contagem: { subtitulo: "Faltam", titulo: "Contagem regressiva", renda: "", fundo: "", cor: "", veu: 0.0 },
 
+/* ┌──────────────────────────────────────────────────────────────────────────┐
+   │ 4️⃣  CONTAGEM REGRESSIVA (seção escura, usa a data do 1º evento)         │
+   └──────────────────────────────────────────────────────────────────────────┘ */
+  contagem: {
+    // ✏️ TEXTOS
+    subtitulo: "Faltam", titulo: "Contagem regressiva",
+    // 🖼️ / 🎬 FUNDO
+    fundo: "",
+    // 🌸 RENDA ("" = usa a renda geral da seção 0)
+    renda: "",
+    // 🎨 CORES
+    cor: "", veu: 0
+  },
+
+
+/* ┌──────────────────────────────────────────────────────────────────────────┐
+   │ 5️⃣  EVENTOS — datas, horários e locais (alimentam Programação e Local)  │
+   └──────────────────────────────────────────────────────────────────────────┘ */
   eventos: [
-    { titulo: "Missa", dataHora: "2027-01-08T19:00:00", espaco: "Igreja Sagrada Família", endereco: "", mapsUrl: "",
-      fundo: "", cor: "", veu: 0 },
-    { titulo: "Baile", dataHora: "2027-01-09T20:00:00", espaco: "OAB São Francisco-MG",
+    {
+      // ✏️ TEXTOS
+      titulo: "Missa",
+      dataHora: "2027-01-08T19:00:00",     // formato: AAAA-MM-DDTHH:MM:SS
+      espaco: "Igreja Sagrada Família",
+      obs: "Celebração do aniversário do Vô Tone Veloso",   // aparece na Programação (em destaque). "" = nada
+      endereco: "",
+      // 🔗 LINK do mapa ("" = o Google Maps é montado sozinho)
+      mapsUrl: "",
+      // 🖼️ / 🎬 fundo e 🎨 cores do cartão
+      fundo: "", cor: "", veu: 0
+    },
+    {
+      titulo: "Baile",
+      dataHora: "2027-01-09T20:00:00",
+      espaco: "OAB São Francisco-MG",
+      obs: "",
       endereco: "Av. Montes Claros, 2550, João Aguiar - São Francisco",
       mapsUrl: "https://maps.app.goo.gl/kBrdsFXsnrKq6bA29?g_st=iw",
-      fundo: "", cor: "", veu: 0 }
+      fundo: "", cor: "", veu: 0
+    }
   ],
 
-  programacao: { titulo: "O Grande Dia", subtitulo: "Programação", itens: null, espacoTopo: 130, renda: "", fundo: "https://github.com/maricriative/convite_MariaVitoria15Anos/blob/main/Novo%20Projeto%20(10).png?raw=true", cor: "", veu: 0 },
 
-  /* repetir: false = o vídeo toca só 1 vez (quando a seção aparece) e fica parado no fim.
-     congelarAntes: segundos antes do final em que o vídeo é congelado (evita a tela preta do último quadro).
-     Ainda aparece preto? aumente (ex.: 0.8). Ainda aparecem borboletas? diminua (ex.: 0.2). */
-  local: { titulo: "Onde & Quando", renda: "", fundo: "Borboletas.mp4", poster: "", repetir: false, congelarAntes: 0.5, cor: "#fbf3f5", veu: 0 },
+/* ┌──────────────────────────────────────────────────────────────────────────┐
+   │ 6️⃣  PROGRAMAÇÃO — "O Grande Dia" (linha do tempo)                       │
+   └──────────────────────────────────────────────────────────────────────────┘ */
+  programacao: {
+    // ✏️ TEXTOS
+    titulo: "O Grande Dia", subtitulo: "Programação",
+    itens: null,               // null = montado sozinho a partir dos Eventos (seção 5)
+    // 📐 TAMANHOS
+    espacoTopo: 130,           // espaço (px) acima do título (afasta das flores)
+    // 🖼️ / 🎬 FUNDO
+    fundo: "https://github.com/maricriative/convite_MariaVitoria15Anos/blob/main/Novo%20Projeto%20(10).png?raw=true",
+    // 🌸 RENDA
+    renda: "",
+    // 🎨 CORES
+    cor: "", veu: 0
+  },
 
-  dressCode: { titulo: "Dress Code", texto: "", cores: [], renda: "", fundo: "", cor: "", veu: 0 },
 
+/* ┌──────────────────────────────────────────────────────────────────────────┐
+   │ 7️⃣  LOCAL — "Onde & Quando" (cartões com botão Como chegar)             │
+   └──────────────────────────────────────────────────────────────────────────┘ */
+  local: {
+    // ✏️ TEXTOS
+    titulo: "Onde & Quando",
+    // 🎬 VÍDEO de fundo (aqui é um vídeo de borboletas)
+    fundo: "Borboletas.mp4",
+    poster: "",                // 🖼️ imagem de espera do vídeo
+    repetir: false,            // false = toca 1 vez só | true = em loop
+    congelarAntes: 0.5,        // 📐 segundos antes do fim em que o vídeo congela (aparece preto? aumente; aparecem borboletas? diminua)
+    // 🌸 RENDA
+    renda: "",
+    // 🎨 CORES
+    cor: "#fbf3f5", veu: 0
+  },
+
+
+/* ┌──────────────────────────────────────────────────────────────────────────┐
+   │ 8️⃣  DRESS CODE — (só aparece se tiver texto ou cores)                   │
+   └──────────────────────────────────────────────────────────────────────────┘ */
+  dressCode: {
+    titulo: "Dress Code", texto: "",
+    cores: [],                 // 🎨 ex.: ["#F1CCD4", "#8A4E5B"]
+    fundo: "", renda: "", cor: "", veu: 0
+  },
+
+
+/* ┌──────────────────────────────────────────────────────────────────────────┐
+   │ 9️⃣  GALERIA — carrossel de fotos                                        │
+   └──────────────────────────────────────────────────────────────────────────┘ */
   galeria: {
+    // ✏️ TEXTOS
     titulo: "Galeria",
+    // 🖼️ FOTOS (uma por linha)
     fotos: [
       "https://github.com/maricriative/convite_MariaVitoria15Anos/blob/main/WhatsApp%20Image%202026-11-19%20at%2011.33.21.jpeg?raw=true",
       "https://github.com/maricriative/convite_MariaVitoria15Anos/blob/main/WhatsApp%20Image%202026-11-19%20at%2011.33.26.jpeg?raw=true",
       "https://github.com/maricriative/convite_MariaVitoria15Anos/blob/main/Foto%20de%20Deyvison%20Marlon%20(7).jpg?raw=true",
       "https://github.com/maricriative/convite_MariaVitoria15Anos/blob/main/Foto%20de%20Deyvison%20Marlon%20(5).jpg?raw=true"
     ],
+    // 🌸 RENDA em volta das fotos (moldura)
     rendaMoldura: "https://github.com/maricriative/convite_MariaVitoria15Anos/blob/main/Novo%20Projeto%20(11).png?raw=true",
-    escalaMoldura: 1.3,
-    rendaFaixaAltura: 28,   // altura MÍNIMA da faixa (tipo A); cresce sozinha conforme a imagem
-    renda: "", fundo: "", cor: "#fbf3f5", veu: 0
+    // 📐 TAMANHOS
+    escalaMoldura: 1.3,        // tamanho da moldura (1 = mesmo tamanho da foto)
+    rendaFaixaAltura: 28,      // altura mínima da faixa (px)
+    // 🖼️ / 🎬 FUNDO e 🌸 renda da seção
+    fundo: "", renda: "",
+    // 🎨 CORES
+    cor: "#fbf3f5", veu: 0
   },
 
+
+/* ┌──────────────────────────────────────────────────────────────────────────┐
+   │ 🔟  HOSPEDAGEM — hotéis e pousadas                                      │
+   └──────────────────────────────────────────────────────────────────────────┘ */
   hospedagem: {
+    // ✏️ TEXTOS
     titulo: "Onde se Hospedar",
     texto: "Sugestões de hotel e pousada para hospedagem:",
+    // 🔗 LISTA (nome, link do botão, texto do botão, 🖼️ imagem opcional)
     lista: [
       { nome: "Hotel Supremo", link: "https://www.hotelsupremo.com.br/", botao: "Visitar site", imagem: "" },
       { nome: "Hotel Moriah", link: "https://www.instagram.com/hotelmoriah_/", botao: "Ver Instagram", imagem: "" }
     ],
-    renda: "https://github.com/maricriative/convite_MariaVitoria15Anos/blob/main/Novo%20Projeto%20(11).png?raw=true", fundo: "", cor: "", veu: 0
+    // 🌸 RENDA
+    renda: "https://github.com/maricriative/convite_MariaVitoria15Anos/blob/main/Novo%20Projeto%20(11).png?raw=true",
+    // 🖼️ / 🎬 FUNDO e 🎨 CORES
+    fundo: "", cor: "", veu: 0
   },
 
-  rodape: { renda: "", rendaAltura: 24, rendaPos: "topo" },
 
+/* ┌──────────────────────────────────────────────────────────────────────────┐
+   │ 1️⃣1️⃣  PRESENTES — sugestões e chave Pix                                 │
+   └──────────────────────────────────────────────────────────────────────────┘ */
   presentes: {
+    // ✏️ TEXTOS
     titulo: "Sugestão de Presente", subtitulo: "Ideias de presentes", texto: "",
     itens: ["Tamanho de roupa P", "Calça 36 boca de sino, flare", "Joias em prata ou ouro"],
-    pix: "45988415642", pixTexto: "45 98841-5642",   // pix = o que é copiado; pixTexto = o que aparece (vazio em pix = sem bloco Pix)
-    renda: "", fundo: "", cor: "#fbf3f5", veu: 0
+    // 🔗 PIX
+    pix: "45988415642",            // o que é COPIADO (só números/letras da chave). "" = sem bloco Pix
+    pixTexto: "45 98841-5642",     // o que APARECE na tela
+    // 🖼️ / 🎬 FUNDO e 🌸 RENDA
+    fundo: "", renda: "",
+    // 🎨 CORES
+    cor: "#fbf3f5", veu: 0
   },
 
-  /* 🎬 VÍDEO DA DEBUTANTE: coloque o arquivo na mesma pasta do convite com este nome (ou mude o nome aqui).
-     Se o arquivo não existir, a seção some sozinha. poster = imagem de capa do vídeo (opcional). */
-  video: { titulo: "Um Pouco da\nMaria Vitória", subtitulo: "", arquivo: "VideoMariaVitoria02.mp4", poster: "", renda: "", fundo: "", cor: "", veu: 0 },
 
-  /* Confirmar presença: agora só mostra o aviso de que a assessoria entrará em contato */
+/* ┌──────────────────────────────────────────────────────────────────────────┐
+   │ 1️⃣2️⃣  CONFIRMAR PRESENÇA — nome + acompanhantes → abre o WhatsApp       │
+   └──────────────────────────────────────────────────────────────────────────┘ */
   rsvp: {
+    // ✏️ TEXTOS
     titulo: "Confirmar Presença",
+    instrucao: "Para confirmar a sua presença, informe o seu nome e o de seus acompanhantes e toque no botão abaixo.",
+    rotuloNome: "Seu nome",
+    placeholderNome: "Digite o seu nome completo",
+    rotuloAcomp: "Nome dos acompanhantes",
+    placeholderAcomp: "Um nome por linha (deixe em branco se for sozinho)",
+    avisoNome: "Por favor, digite o seu nome.",
+    botao: "Confirmar pelo WhatsApp",
+    // mensagem enviada no WhatsApp ({nome} e {acompanhantes} são trocados automaticamente; \n = nova linha)
+    mensagemWhats: "Olá! Confirmo a minha presença no XV anos da Maria Vitória.\n\nNome: {nome}\nAcompanhantes: {acompanhantes}",
+    // 🔗 WHATSAPP que vai receber a confirmação — só números, com 55 + DDD. Ex.: "5538999999999"
+    //    ⚠️ PREENCHA! Se ficar "", o WhatsApp abre pedindo para escolher o contato.
+    whatsapp: "",
+    // 🖼️ ÍCONE do círculo ("" = ícone de confirmado)
     iconeImagem: "",
-    mensagem: "Em breve a nossa assessoria entrará em contato para confirmar a sua presença e a dos seus acompanhantes.",
-    renda: "", fundo: "https://github.com/maricriative/convite_MariaVitoria15Anos/blob/main/Novo%20Projeto%20(13).png?raw=true", cor: "", veu: 0
-  }
+    // 🖼️ / 🎬 FUNDO e 🌸 RENDA
+    fundo: "https://github.com/maricriative/convite_MariaVitoria15Anos/blob/main/Novo%20Projeto%20(13).png?raw=true",
+    renda: "",
+    // 🎨 CORES
+    cor: "", veu: 0
+  },
+
+
+/* ┌──────────────────────────────────────────────────────────────────────────┐
+   │ 1️⃣3️⃣  RODAPÉ                                                           │
+   └──────────────────────────────────────────────────────────────────────────┘ */
+  rodape: { renda: "", rendaAltura: 24, rendaPos: "topo" }   // 🌸 renda do rodapé (rendaPos: "topo", "base" ou "ambas")
 };
 
-/* 🔧 No GitHub Pages usa os arquivos da própria pasta do site (mais rápido e estável que o link do github.com).
-   Também codifica espaços nos nomes de arquivos locais. */
+/* ████████████████████████████████████████████████████████████████████████████
+   ██   ⛔  DAQUI PARA BAIXO É O FUNCIONAMENTO — NÃO PRECISA MEXER           ██
+   ████████████████████████████████████████████████████████████████████████████ */
+
+/* No GitHub Pages usa os arquivos da própria pasta do site e codifica espaços nos nomes locais */
 (function (o) {
   var pages = /\.github\.io$/i.test(location.hostname);
   var rx = /^https:\/\/github\.com\/[^\/]+\/[^\/]+\/(?:blob|raw)\/[^\/]+\/(.+?)(?:\?raw=true)?$/i;
@@ -396,9 +544,6 @@ const CONFIG = {
   })(o);
 })(CONFIG);
 
-/* ==========================================================================
-   ⚙️ LÓGICA
-   ========================================================================== */
 const $ = (s, r = document) => r.querySelector(s), C = CONFIG, enc = encodeURIComponent, root = document.documentElement;
 Object.entries(C.paleta || {}).forEach(([k, v]) => v && root.style.setProperty('--' + k, v));
 
@@ -407,12 +552,19 @@ if (corTopo) document.querySelectorAll('meta[name="theme-color"],meta[name="msap
 root.style.colorScheme = 'light';
 if (corBase) { root.style.backgroundColor = corBase; $('#barra-inf').style.background = corBase; }
 
-const F = C.fontes || {}; let ff = '';
+/* Fontes: carrega do Google Fonts pelos nomes do CONFIG.fontes */
+const F = C.fontes || {}, fTit = F.titulo || 'Playfair Display', fCorpo = F.corpo || 'Raleway', fScript = F.script || 'Pinyon Script';
+const gf = (n, pesos) => 'family=' + n.trim().replace(/ /g, '+') + (pesos ? ':wght@400;500;600;700;800' : '');
+{ const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'https://fonts.googleapis.com/css2?' + [gf(fTit, 1), gf(fCorpo, 1), gf(fScript, 0)].join('&') + '&display=swap'; document.head.appendChild(l); }
+root.style.setProperty('--f-tit', (F.arquivoTitulo ? "'Achetta'," : '') + `'${fTit}',serif`);
+root.style.setProperty('--f-corpo', `'${fCorpo}',sans-serif`);
+root.style.setProperty('--f-script', (F.arquivoScript ? "'Barsela Calligraphy'," : '') + `'${fScript}',cursive`);
+let ff = '';
 if (F.arquivoTitulo) ff += `@font-face{font-family:'Achetta';src:url("${F.arquivoTitulo}")}`;
 if (F.arquivoScript) ff += `@font-face{font-family:'Barsela Calligraphy';src:url("${F.arquivoScript}")}`;
 if (ff) { const st = document.createElement('style'); st.textContent = ff; document.head.appendChild(st); }
 
-/* renda: faixa de imagem repetida no topo e/ou na base de uma seção (altura ajustada depois por ajustarRendas) */
+/* renda: faixa de imagem repetida no topo e/ou na base de uma seção */
 const rendaHTML = c => {
   if (!c || !c.renda) return '';
   const min = c.rendaAltura || C.rendaAltura || 24, pos = c.rendaPos || 'ambas',
@@ -420,7 +572,6 @@ const rendaHTML = c => {
   return (pos !== 'base' ? `<i class="renda topo"${at} style="${st}"></i>` : '') + (pos !== 'topo' ? `<i class="renda base"${at} style="${st}"></i>` : '');
 };
 
-/* altura automática da renda conforme o formato da imagem (evita rendas minúsculas) */
 function alturaRenda(w, h, min, max) { return Math.round(Math.min(max, Math.max(min, (C.rendaTile || 360) * h / w))); }
 function ajustarRendas() {
   const cache = {};
@@ -449,7 +600,7 @@ const fm = (d, o) => new Intl.DateTimeFormat('pt-BR', o).format(d);
 const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
 const hora = d => fm(d, { hour: '2-digit', minute: '2-digit' }).replace(':', 'h');
 const ev = C.eventos, d0 = new Date(ev[0].dataHora);
-const dataTexto = C.dataTexto || (ev.map(e => fm(new Date(e.dataHora), { day: '2-digit' })).join(' e ') + ' de ' + cap(fm(d0, { month: 'long' })) + '<br>de ' + fm(d0, { year: 'numeric' }));
+const dataTexto = C.capa.dataTexto || (ev.map(e => fm(new Date(e.dataHora), { day: '2-digit' })).join(' e ') + ' de ' + cap(fm(d0, { month: 'long' })) + '<br>de ' + fm(d0, { year: 'numeric' }));
 document.title = `${C.nome} — XV Anos`;
 
 const corSec = c => { let st = ''; if (c && c.cor) st += `background-color:${c.cor};`; if (c && c.espacoTopo) st += `padding-top:${c.espacoTopo}px;`; return st ? ` style="${st}"` : ''; };
@@ -500,7 +651,7 @@ if (A.usar !== false) {
     if (aberto) return; aberto = true; tocar();
     const v = $('#introVid');
     if (!v) return entrar();
-    /* se o vídeo não começar em 6 s (internet lenta, formato não suportado, economia de dados), abre o convite sem ele */
+    /* se o vídeo não começar em 6 s, abre o convite sem ele */
     let rodando = false, espera = null;
     const limite = setTimeout(() => { if (!rodando) entrar(); }, 6000);
     v.addEventListener('playing', () => { rodando = true; clearTimeout(limite); clearTimeout(espera); v.classList.add('pronto'); });
@@ -512,7 +663,6 @@ if (A.usar !== false) {
   if (A.imagem) intro.style.backgroundImage = `url("${A.imagem}")`;
   const conn = navigator.connection || {}, leve = conn.saveData || /(^|-)(2g|3g)$/.test(conn.effectiveType || ''),
     vid = (A.video && !conn.saveData) ? `<video id="introVid" src="${A.video}" ${A.imagem ? `poster="${A.imagem}"` : ''} playsinline preload="${leve ? 'none' : 'auto'}"></video>` : '';
-  /* aviso "Toque para abrir": faixa PNG por cima da imagem (se não carregar, cai para o texto em botão) */
   const aviso = A.toque
     ? `<img class="toque" src="${A.toque}" alt="${A.texto || 'Toque para abrir'}" onerror="var p=document.createElement('p');p.className='dica';p.textContent='${A.texto || 'Toque para abrir'}';this.replaceWith(p)">`
     : `<p class="dica">${A.texto || 'Toque para abrir'}</p>`;
@@ -521,7 +671,6 @@ if (A.usar !== false) {
     : `${vid}<button class="selo" id="abrir">${A.texto || 'Abrir'}</button>`;
   if (A.imagem) {
     intro.onclick = abrir;
-    /* se a imagem de abertura não carregar, mostra o botão redondo visível */
     const t = new Image();
     t.onerror = () => { intro.style.backgroundImage = 'none'; const b = $('#abrir'); if (b) { b.className = 'selo'; b.textContent = A.texto || 'Abrir'; } };
     t.src = A.imagem;
@@ -531,7 +680,7 @@ if (A.usar !== false) {
 
 /* Seções */
 const secoes = [];
-const CFG = { convite: C.mensagem, contagem: C.contagem && { ...C.contagem, renda: C.contagem.renda || C.renda }, dia: C.programacao, local: C.local, traje: C.dressCode, galeria: C.galeria, video: C.video, hospedagem: C.hospedagem, presentes: C.presentes, confirmar: C.rsvp };
+const CFG = { convite: C.mensagem, contagem: C.contagem && { ...C.contagem, renda: C.contagem.renda || C.renda }, dia: C.programacao, local: C.local, traje: C.dressCode, galeria: C.galeria, hospedagem: C.hospedagem, presentes: C.presentes, confirmar: C.rsvp };
 const sec = (id, rot, html, cls = '') => {
   const cor = cls.includes('escuro') ? 'var(--enfase)' : cls.includes('alt') ? 'var(--secaoAlt)' : 'var(--fundo)';
   secoes.push(`<section class="sec ${cls}" id="${id}"${corSec(CFG[id])}>${fundoHTML(CFG[id], cor)}${rendaHTML(CFG[id])}<div class="wrap">${html}</div></section>`);
@@ -541,9 +690,8 @@ const ICONE_OK = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" str
 
 const capa = `<header class="hero" id="inicio"${corSec(C.capa)}>${fundoHTML(C.capa, 'var(--fundo)')}${rendaHTML(C.capa)}
   <div class="capa-card">
-    <p class="sub">${C.celebracao.replace(/\n/g, '<br>')}</p>
+    <p class="sub">${C.capa.celebracao.replace(/\n/g, '<br>')}</p>
     ${nomeHTML('nome')}
-    <p class="sub">XV Anos</p>
     <p class="frase">“${C.capa.frase}”</p>
     <div class="orn">♥</div>
     <p class="data data-capa">${dataTexto}</p>
@@ -551,15 +699,17 @@ const capa = `<header class="hero" id="inicio"${corSec(C.capa)}>${fundoHTML(C.ca
     ${C.deslize && C.deslize.texto ? `<div class="deslize" style="color:${C.deslize.cor || '#1F3A2A'}"><span>${C.deslize.texto}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></div>` : ''}
   </div></header>`;
 
-/* Mensagem: logo no lugar do nome + texto mais abaixo */
+/* Mensagem: logo + texto + vídeo (ou foto) */
 const M = C.mensagem;
-if (M) sec('convite', 'Convite', `${(M.usarLogo !== false && (M.logo || C.logoNome)) ? `<img class="logo-nome" src="${M.logo || C.logoNome}" alt="${C.nome}"><p class="sub">XV Anos</p><div class="orn">♥</div>` : tit(M.titulo)}<p class="texto" style="margin-top:${M.textoEspaco != null ? M.textoEspaco : 28}px">${M.texto}</p>${M.foto ? `<img class="foto" src="${M.foto}" alt="${C.nome}">` : ''}`);
+if (M) sec('convite', 'Convite', `${(M.usarLogo !== false && (M.logo || C.logoNome)) ? `<img class="logo-nome" src="${M.logo || C.logoNome}" alt="${C.nome}"><div class="orn">♥</div>` : tit(M.titulo)}<p class="texto" style="margin-top:${M.textoEspaco != null ? M.textoEspaco : 28}px">${M.texto}</p>${M.video
+  ? `<div class="video-frame"><video id="videoMaria" src="${M.video}#t=0.1" ${M.poster ? `poster="${M.poster}"` : ''} controls controlsList="nodownload" playsinline webkit-playsinline preload="metadata" onerror="this.parentNode.style.display='none'"></video></div>`
+  : (M.foto ? `<img class="foto" src="${M.foto}" alt="${C.nome}">` : '')}`);
 
 if (C.contagem) sec('contagem', 'Contagem', `<p class="sub">${C.contagem.subtitulo || ''}</p><h2>${C.contagem.titulo}</h2><div id="cd" class="cd" style="margin-top:22px"></div>`, 'escuro');
 
 const P = C.programacao;
 if (P) {
-  const itens = P.itens || ev.map(e => { const d = new Date(e.dataHora); return { hora: hora(d), dia: fm(d, { day: '2-digit', month: 'short' }).replace('.', ''), titulo: e.titulo, descricao: e.espaco }; });
+  const itens = P.itens || ev.map(e => { const d = new Date(e.dataHora); return { hora: hora(d), dia: fm(d, { day: '2-digit', month: 'short' }).replace('.', ''), titulo: e.titulo, descricao: e.espaco + (e.obs ? `<em>${e.obs}</em>` : '') }; });
   sec('dia', 'Programação', `${tit(P.titulo, P.subtitulo)}<div class="tl">${itens.map(i => `<div class="tl-i"><div class="tl-h">${i.hora}<small>${i.dia || ''}</small></div><div class="tl-d">♥</div><div class="tl-t"><b>${i.titulo}</b><span>${i.descricao || ''}</span></div></div>`).join('')}</div>`);
 }
 
@@ -568,10 +718,6 @@ if (fotosG.length) sec('galeria', 'Galeria', `${tit(GA.titulo || 'Galeria')}
   <div class="gal-wrap${GA.rendaMoldura ? ' com-renda' : ''}" style="--fh:${GA.rendaFaixaAltura || 28}px"><div class="carrossel">${fotosG.map((g, i) => `<div class="slide${i ? '' : ' ativo'}"><img src="${g}" alt="Foto ${i + 1}" loading="lazy"></div>`).join('')}
   ${fotosG.length > 1 ? `<div class="pontos">${fotosG.map((_, i) => `<i class="${i ? '' : 'ativo'}"></i>`).join('')}</div>` : ''}</div>
   ${GA.rendaMoldura ? `<img class="gal-renda" src="${GA.rendaMoldura}" alt="" style="--esc:${GA.escalaMoldura || 1.3}" onload="galRenda(this)">` : ''}</div>`, 'alt');
-
-/* Vídeo da debutante */
-const V = C.video;
-if (V && V.arquivo) sec('video', 'Vídeo', `${tit(V.titulo, V.subtitulo)}<div class="video-frame"><video id="videoMaria" src="${V.arquivo}#t=0.1" ${V.poster ? `poster="${V.poster}"` : ''} playsinline webkit-playsinline disablepictureinpicture preload="metadata" oncontextmenu="return false" onerror="var s=this.closest('section');if(s)s.style.display='none'"></video><button class="vplay" id="vplay" type="button" aria-label="Reproduzir vídeo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></button></div>`);
 
 if (C.local) sec('local', 'Local', tit(C.local.titulo) + ev.map(e => {
   const d = new Date(e.dataHora), q = [e.espaco, e.endereco, C.cidade].filter(Boolean).join(' ');
@@ -584,18 +730,25 @@ if (C.local) sec('local', 'Local', tit(C.local.titulo) + ev.map(e => {
 const D = C.dressCode, coresD = D ? (D.cores || []).filter(Boolean) : [];
 if (D && (D.texto || coresD.length)) sec('traje', 'Traje', `${tit(D.titulo)}${D.texto ? `<p class="texto">${D.texto}</p>` : ''}${coresD.length ? `<div class="cores">${coresD.map(c => `<i style="background:${c}"></i>`).join('')}</div>` : ''}`);
 
-
 const H = C.hospedagem;
 if (H) sec('hospedagem', 'Hospedagem', `${tit(H.titulo)}<p class="texto">${H.texto}</p>` + H.lista.map(h => `<div class="ev">${h.imagem ? `<img src="${h.imagem}" alt="${h.nome}" style="margin-bottom:14px">` : ''}<h3>${h.nome}</h3><a class="btn" style="margin-top:14px" href="${h.link}" target="_blank" rel="noopener">${h.botao || 'Saiba mais'}</a></div>`).join(''));
 
 const G = C.presentes;
 if (G && (G.texto || (G.itens || []).length || G.pix)) sec('presentes', 'Presentes', `${tit(G.titulo, G.subtitulo)}${G.texto ? `<p class="texto">${G.texto}</p>` : ''}${(G.itens || []).length ? `<div class="presente-lista">${G.itens.map(i => `<p class="texto">${i}</p>`).join('')}</div>` : ''}${G.pix ? `<div class="pix"><p class="sub">Chave Pix</p><p class="data pix-num">${G.pixTexto || G.pix}</p><button class="btn" id="copiarPix" type="button">Copiar chave</button></div>` : ''}`, 'alt');
 
-/* Confirmar presença: só o aviso, sem formulário */
+/* Confirmar presença: nome + acompanhantes → WhatsApp */
 const R = C.rsvp;
 if (R) sec('confirmar', 'Confirmar', `${tit(R.titulo)}
   <div class="rsvp-ico" aria-hidden="true">${R.iconeImagem ? `<img src="${R.iconeImagem}" alt="">` : ICONE_OK}</div>
-  <p class="texto" style="margin-top:18px">${R.mensagem}</p>`, 'alt');
+  <p class="texto" style="margin:18px 0 8px">${R.instrucao}</p>
+  <div class="rsvp-form">
+    <label for="rsvpNome">${R.rotuloNome}</label>
+    <input id="rsvpNome" type="text" autocomplete="name" placeholder="${R.placeholderNome}">
+    <label for="rsvpAcomp">${R.rotuloAcomp}</label>
+    <textarea id="rsvpAcomp" rows="3" placeholder="${R.placeholderAcomp}"></textarea>
+    <p class="rsvp-erro" id="rsvpErro" hidden>${R.avisoNome}</p>
+    <button class="btn" id="rsvpEnviar" type="button">${R.botao}</button>
+  </div>`, 'alt');
 
 $('#app').innerHTML = capa + secoes.join('') + `<footer>${rendaHTML(C.rodape)}${nomeHTML('script', true, C.logoRodape)}<p>${C.hashtag}</p></footer>`;
 
@@ -609,26 +762,33 @@ if (cp) cp.onclick = () => {
   if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(ok, alt); else alt();
 };
 
-/* vídeo da debutante (a música de fundo continua tocando normalmente) */
+/* confirmar presença → abre o WhatsApp com a mensagem pronta */
+const envia = $('#rsvpEnviar');
+if (envia) envia.onclick = () => {
+  const nome = $('#rsvpNome').value.trim(), acomp = $('#rsvpAcomp').value.trim().replace(/\n+/g, ', '), erro = $('#rsvpErro');
+  if (!nome) { erro.hidden = false; $('#rsvpNome').focus(); return; }
+  erro.hidden = true;
+  const msg = (R.mensagemWhats || '').replace('{nome}', () => nome).replace('{acompanhantes}', () => acomp || 'sem acompanhantes'),
+    num = (R.whatsapp || '').replace(/\D/g, '');
+  window.open('https://wa.me/' + num + '?text=' + enc(msg), '_blank');
+};
+
+/* vídeo da mensagem: ao dar play, a música de fundo pausa; ao pausar/terminar, ela volta */
 const vm = $('#videoMaria');
 if (vm) {
-  /* só botão de play/pausa: sem barra de controles e sem volume (o volume é o do aparelho) */
-  const bt = $('#vplay');
-  const alterna = () => { if (vm.paused) { const p = vm.play(); if (p && p.catch) p.catch(() => {}); } else vm.pause(); };
-  bt.onclick = alterna; vm.onclick = alterna;
-  vm.addEventListener('play', () => bt.classList.add('oculto'));
-  vm.addEventListener('pause', () => bt.classList.remove('oculto'));
-  vm.addEventListener('ended', () => bt.classList.remove('oculto'));
+  let retomar = false;
+  vm.addEventListener('play', () => { if (tocando) { retomar = true; pausar(); } });
+  const volta = () => { if (vm.seeking || !retomar) return; retomar = false; tocar(); };
+  vm.addEventListener('pause', volta);
+  vm.addEventListener('ended', volta);
 }
 
-/* ajusta o tamanho das rendas conforme a imagem enviada */
 try { ajustarRendas(); } catch (e) {}
 
-/* vídeos que tocam uma vez só: começam quando a seção aparece na tela e param no último quadro */
+/* vídeos de fundo que tocam uma vez só: começam quando a seção aparece e param no último quadro */
 document.querySelectorAll('video[data-uma-vez]').forEach(v => {
   v.muted = true;
   const play = () => v.play().catch(() => {});
-  /* congela o vídeo um pouco antes do fim, para não aparecer o último quadro (preto) */
   const antes = parseFloat(v.dataset.antes) || 0;
   if (antes) {
     let vigia = false;
