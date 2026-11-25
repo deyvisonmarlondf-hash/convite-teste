@@ -54,7 +54,7 @@ h3{font-family:var(--f-tit);font-weight:600;font-size:1.7rem;line-height:1.25;co
 .orn::before,.orn::after{content:"";width:44px;height:1px;background:var(--antigo)}
 .texto{font-size:1.2rem;color:var(--textoMedio);font-weight:500;line-height:1.65}
 .data{font-family:var(--f-corpo);font-weight:700;font-size:1.3rem;color:var(--textoForte)}
-.data-capa{font-size:clamp(1.7rem,7vw,2.5rem);line-height:1.3}
+.data-capa{font-family:var(--f-data,var(--f-corpo));font-weight:600;font-size:clamp(1.9rem,8vw,2.9rem);line-height:1.25}
 
 section.sec{padding:46px 22px;position:relative;overflow:hidden}
 .bg{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0}
@@ -136,16 +136,22 @@ section.alt{background:var(--secaoAlt)}
 .frase{font-family:var(--f-corpo);font-size:clamp(1.25rem,4.6vw,1.7rem);font-weight:600;color:var(--textoForte);margin:22px 0 8px;line-height:1.5}
 
 .escuro{padding:56px 22px}
-#contagem{background-color:var(--ct-fundo,var(--enfase))}
-#contagem h2{color:var(--ct-titulo,var(--textoClaro))}
-#contagem .sub{color:var(--ct-sub,var(--claro))}
+#contagem{background-color:var(--ct-fundo,var(--fundo))}
+#contagem h2{color:var(--ct-titulo,var(--enfase))}
+#contagem .sub{color:var(--ct-sub,var(--textoForte))}
 .renda{position:absolute;left:0;right:0;z-index:3;background-repeat:repeat-x;background-position:center top;background-size:auto 100%;pointer-events:none}
 .renda.topo{top:0}
 .renda.base{bottom:0;transform:scaleY(-1)}
-.cd{display:flex;justify-content:center;margin-top:20px}
+.cd{display:flex;justify-content:center;margin:0}
 .cd>div{margin:0 8px}
-.cd b{display:block;font-family:var(--f-corpo);font-weight:700;font-size:2.4rem;line-height:1;margin-bottom:6px;color:var(--ct-num,var(--textoClaro))}
-.cd span{font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ct-rot,var(--claro))}
+.cd b{display:block;font-family:var(--f-num,var(--f-corpo));font-weight:600;font-size:2.8rem;line-height:1;margin-bottom:6px;color:var(--ct-num,var(--enfase))}
+.cd span{font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ct-rot,var(--enfase))}
+/* MOLDURA DA CONTAGEM — linhas duplas com coraçõezinhos */
+.cd-moldura{max-width:430px;margin:18px auto 0;color:var(--ct-moldura,var(--antigo))}
+.cd-lin{display:flex;align-items:center;gap:8px;font-size:12px;line-height:1}
+.cd-lin .g{font-size:20px}
+.cd-lin i{flex:1;height:5px;border-top:1px solid currentColor;border-bottom:1px solid currentColor}
+.cd-moldura .cd{padding:22px 0}
 
 .tl{position:relative;text-align:left;--col:104px}
 .tl::before{content:"";position:absolute;left:calc(var(--col) + 19px);top:10px;bottom:10px;width:1px;background:var(--antigo)}
@@ -160,7 +166,7 @@ section.alt{background:var(--secaoAlt)}
 /* MOLDURA DO VÍDEO + RENDA NOS CANTOS (imagens no CONFIG.mensagem.videoRenda) */
 .video-frame{position:relative;max-width:460px;margin:24px auto 0;border:3px solid var(--antigo);box-shadow:0 10px 26px rgba(138,78,91,.2);background:#000}
 .video-frame video{width:100%;max-height:80vh;display:block}
-.video-frame .canto{position:absolute;width:var(--vr,110px);height:auto;max-width:none;pointer-events:none;z-index:3}
+.video-frame .canto{position:absolute;width:var(--vr,42%);height:auto;max-width:none;pointer-events:none;z-index:3}
 .video-frame .canto.sd{top:-8px;right:-8px}
 .video-frame .canto.ie{bottom:-8px;left:-8px}
 .video-frame .canto.gira{transform:rotate(180deg)}
@@ -273,6 +279,8 @@ const CONFIG = {
     titulo: "Playfair Display",
     corpo:  "Raleway",
     script: "Pinyon Script",
+    data:    "Cormorant Garamond",   // fonte da data da capa (08 e 09 de janeiro de 2027). Ideias: "Bodoni Moda", "Italiana", "Marcellus", "Playfair Display", "Cinzel"
+    numeros: "Bodoni Moda",          // fonte dos números da contagem. Ideias: "Syne", "Outfit", "Unbounded", "Cormorant Garamond", "Italiana"
     arquivoTitulo: "",
     arquivoScript: ""
   },
@@ -284,7 +292,7 @@ const CONFIG = {
 /* 1 — ABERTURA */
   abertura: {
     usar: true,
-    imagem: "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/CapaAbertura.jpg?raw=true",
+    imagem: "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/PortaEntrada02.jpg?raw=true",
     video: "VideoMariaVitoria03.mp4",
     toque: "",                       // opcional: imagem sua de "toque para abrir" (ex.: "ToqueParaAbrir.png"); se preencher, substitui o texto
     texto: "Toque para abrir",
@@ -314,9 +322,9 @@ const CONFIG = {
     video: "VideoMaria.mp4",
     poster: "",
     videoRenda: {
-      superiorDireito: "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/renda.png?raw=true",     // ⚠️ imagem da renda do canto SUPERIOR DIREITO (nome do arquivo ou link)
-      inferiorEsquerdo: "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/renda.png?raw=true",    // ⚠️ imagem do canto INFERIOR ESQUERDO (se deixar vazio, usa a de cima girada 180°)
-      tamanho: 110             // largura da renda em px (aumente ou diminua)
+      superiorDireito: "",     // ⚠️ imagem da renda do canto SUPERIOR DIREITO (nome do arquivo ou link)
+      inferiorEsquerdo: "",    // ⚠️ imagem do canto INFERIOR ESQUERDO (se deixar vazio, usa a de cima girada 180°)
+      largura: 42              // largura da renda em % da moldura do vídeo (42 = grande | 30 = média | 55 = bem grande)
     },
     textoEspaco: 0,
     fundo: "", renda: "", cor: "", veu: 0
@@ -328,12 +336,13 @@ const CONFIG = {
     subtitulo: "Faltam", titulo: "Contagem regressiva",
     paleta: {
       fundo:     "#FBF3F5",
-      titulo:    "#ebbbac",
-      subtitulo: "#ebbbac",
-      numeros:   "#ebbbac",
-      rotulos:   "#ebbbac"
+      titulo:    "",     // vazio = usa a cor de título do convite. Se preencher, usa exatamente a cor que você colocar
+      subtitulo: "",     // vazio = cor do texto forte
+      numeros:   "",     // vazio = cor de título
+      rotulos:   "",     // vazio = cor de título
+      moldura:   ""      // cor das linhas e corações da moldura (vazio = rosa antigo)
     },
-    fundo: "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/Moldura.png?raw=true",
+    fundo: "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/BolaFlor.png?raw=true",
     renda: "", cor: "", veu: 0
   },
 
@@ -395,8 +404,8 @@ const CONFIG = {
       "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/foto05.jpeg?raw=true",
       "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/foto04.jpeg?raw=true",   // foto 5
       "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/foto02.jpg?raw=true",   // foto 6
-      "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/foto08.jpg?raw=true",   // foto 7
-      "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/foto7.jpg?raw=true"    // foto 8
+      "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/foto8.jpg?raw=true",   // foto 7
+      "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/foto07.jpg?raw=true"    // foto 8
     ],
     fundo: "", renda: "", cor: "#fbf3f5", veu: 0
   },
@@ -501,7 +510,13 @@ if (corBase) { root.style.backgroundColor = corBase; $('#barra-inf').style.backg
 
 const F = C.fontes || {}, fTit = F.titulo || 'Playfair Display', fCorpo = F.corpo || 'Raleway', fScript = F.script || 'Pinyon Script';
 const gf = (n, pesos) => 'family=' + n.trim().replace(/ /g, '+') + (pesos ? ':wght@400;500;600;700;800' : '');
-{ const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'https://fonts.googleapis.com/css2?' + [gf(fTit, 1), gf(fCorpo, 1), gf(fScript, 0)].join('&') + '&display=swap'; document.head.appendChild(l); }
+const fData = F.data || '', fNum = F.numeros || '', jaTem = [fTit, fCorpo, fScript];
+const gfx = n => 'family=' + n.trim().replace(/ /g, '+') + ':wght@400;500;600;700';
+{ const fam = [gf(fTit, 1), gf(fCorpo, 1), gf(fScript, 0)];
+  [fData, fNum].forEach((n, i) => { if (n && !jaTem.includes(n) && (i === 0 || n !== fData)) fam.push(gfx(n)); });
+  const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'https://fonts.googleapis.com/css2?' + fam.join('&') + '&display=swap'; document.head.appendChild(l); }
+if (fData) root.style.setProperty('--f-data', `'${fData}',serif`);
+if (fNum) root.style.setProperty('--f-num', `'${fNum}',serif`);
 root.style.setProperty('--f-tit', (F.arquivoTitulo ? "'Achetta'," : '') + `'${fTit}',serif`);
 root.style.setProperty('--f-corpo', `'${fCorpo}',sans-serif`);
 root.style.setProperty('--f-script', (F.arquivoScript ? "'Barsela Calligraphy'," : '') + `'${fScript}',cursive`);
@@ -536,7 +551,7 @@ const ev = C.eventos, d0 = new Date(ev[0].dataHora);
 const dataTexto = C.capa.dataTexto || (ev.map(e => fm(new Date(e.dataHora), { day: '2-digit' })).join(' e ') + ' de ' + cap(fm(d0, { month: 'long' })) + '<br>de ' + fm(d0, { year: 'numeric' }));
 document.title = `${C.nome} — XV Anos`;
 
-const PC = { fundo: '--ct-fundo', titulo: '--ct-titulo', subtitulo: '--ct-sub', numeros: '--ct-num', rotulos: '--ct-rot' };
+const PC = { fundo: '--ct-fundo', titulo: '--ct-titulo', subtitulo: '--ct-sub', numeros: '--ct-num', rotulos: '--ct-rot', moldura: '--ct-moldura' };
 const corSec = c => {
   let st = '';
   if (c && c.cor) st += `background-color:${c.cor};`;
@@ -627,7 +642,7 @@ $('#janelaX').onclick = fechaJ;
 const secoes = [];
 const CFG = { convite: C.mensagem, contagem: C.contagem && { ...C.contagem, renda: C.contagem.renda || C.renda }, dia: C.programacao, local: C.local, traje: C.dressCode, galeria: C.galeria, hospedagem: C.hospedagem, presentes: C.presentes, confirmar: C.rsvp };
 const sec = (id, rot, html, cls = '') => {
-  const cor = cls.includes('escuro') ? 'var(--ct-fundo,var(--enfase))' : cls.includes('alt') ? 'var(--secaoAlt)' : 'var(--fundo)';
+  const cor = cls.includes('escuro') ? 'var(--ct-fundo,var(--fundo))' : cls.includes('alt') ? 'var(--secaoAlt)' : 'var(--fundo)';
   secoes.push(`<section class="sec ${cls}" id="${id}"${corSec(CFG[id])}>${fundoHTML(CFG[id], cor)}${rendaHTML(CFG[id])}<div class="wrap">${html}</div></section>`);
 };
 const tit = (t, s) => `${s ? `<p class="sub">${s}</p>` : ''}<h2>${String(t).replace(/\n/g, '<br>')}</h2><div class="orn">♥</div>`;
@@ -646,7 +661,7 @@ const capa = `<header class="hero" id="inicio"${corSec(C.capa)}>${fundoHTML(C.ca
 
 /* Renda nos cantos da moldura do vídeo */
 const VR = (C.mensagem && C.mensagem.videoRenda) || {};
-const cantoImg = (src, cls) => `<img class="canto ${cls}" src="${src}" alt="" style="--vr:${VR.tamanho || 110}px" onerror="this.style.display='none'">`;
+const cantoImg = (src, cls) => `<img class="canto ${cls}" src="${src}" alt="" style="--vr:${VR.largura || 42}%" onerror="this.style.display='none'">`;
 const cantosV = (VR.superiorDireito ? cantoImg(VR.superiorDireito, 'sd') : '')
   + ((VR.inferiorEsquerdo || VR.superiorDireito) ? cantoImg(VR.inferiorEsquerdo || VR.superiorDireito, 'ie' + (VR.inferiorEsquerdo ? '' : ' gira')) : '');
 
@@ -655,7 +670,8 @@ if (M) sec('convite', 'Convite', `${(M.usarLogo !== false && (M.logo || C.logoNo
   ? `<div class="video-frame"><video id="videoMaria" src="${M.video}#t=0.1" ${M.poster ? `poster="${M.poster}"` : ''} controls controlsList="nodownload" playsinline webkit-playsinline preload="metadata" onerror="this.parentNode.style.display='none'"></video>${cantosV}</div>`
   : (M.foto ? `<img class="foto" src="${M.foto}" alt="${C.nome}">` : '')}`);
 
-if (C.contagem) sec('contagem', 'Contagem', `<p class="sub">${C.contagem.subtitulo || ''}</p><h2>${C.contagem.titulo}</h2><div id="cd" class="cd"></div>`, 'escuro');
+const linhaCD = '<div class="cd-lin"><span>♥</span><i></i><span class="g">♥</span><i></i><span>♥</span></div>';
+if (C.contagem) sec('contagem', 'Contagem', `<h2>${C.contagem.titulo}</h2>${C.contagem.subtitulo ? `<p class="sub" style="margin-top:4px">${C.contagem.subtitulo}</p>` : ''}<div class="cd-moldura">${linhaCD}<div id="cd" class="cd"></div>${linhaCD}</div>`, 'escuro');
 
 const P = C.programacao;
 if (P) {
