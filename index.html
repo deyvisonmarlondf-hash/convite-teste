@@ -71,14 +71,12 @@ section.alt{background:var(--secaoAlt)}
 .ev-nome{font-family:var(--f-tit);font-weight:600;font-size:1.9rem;line-height:1.15;color:var(--enfase);margin-bottom:8px}
 .ev-card .btn{margin-top:16px}
 
-/* BOTÕES — estilo vidro rosa claro (cores no CONFIG.botoes) */
+/* BOTÕES — apenas contorno e texto, sem preenchimento (cores no CONFIG.botoes) */
 .btn,.rsvp-ico,#musicBtn,.pix-num{
-  background:linear-gradient(180deg,rgba(255,255,255,.7) 0%,rgba(var(--btn-rgb),var(--btn-op)) 100%);
-  -webkit-backdrop-filter:blur(12px) saturate(1.5);backdrop-filter:blur(12px) saturate(1.5);
-  color:var(--btn-txt);border:1px solid rgba(255,255,255,.9);
-  box-shadow:inset 0 2px 1px rgba(255,255,255,.95),inset 0 -4px 10px rgba(var(--btn-rgb),.7),0 8px 22px rgba(138,78,91,.22)}
+  background:transparent;color:var(--btn-txt);
+  border:2px solid var(--btn-borda,var(--btn-txt));box-shadow:none}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:15px 38px;border-radius:var(--btn-raio);
-  text-decoration:none;font-size:.95rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;text-shadow:0 1px 0 rgba(255,255,255,.6);transition:transform .2s}
+  text-decoration:none;font-size:.95rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;transition:transform .2s}
 .btn:active,.pix-num:active{transform:scale(.97)}
 .texto+.btn-abrir{margin-top:22px}
 
@@ -159,8 +157,13 @@ section.alt{background:var(--secaoAlt)}
 .tl-t span{font-size:1rem;font-weight:500;color:var(--textoMedio)}
 .tl-t em{display:block;margin-top:6px;font-style:normal;font-weight:700;color:var(--enfase)}
 
-.video-frame{position:relative;max-width:460px;margin:24px auto 0;border:3px solid var(--antigo);box-shadow:0 10px 26px rgba(138,78,91,.2);overflow:hidden;background:#000}
+/* MOLDURA DO VÍDEO + RENDA NOS CANTOS (imagens no CONFIG.mensagem.videoRenda) */
+.video-frame{position:relative;max-width:460px;margin:24px auto 0;border:3px solid var(--antigo);box-shadow:0 10px 26px rgba(138,78,91,.2);background:#000}
 .video-frame video{width:100%;max-height:80vh;display:block}
+.video-frame .canto{position:absolute;width:var(--vr,110px);height:auto;max-width:none;pointer-events:none;z-index:3}
+.video-frame .canto.sd{top:-8px;right:-8px}
+.video-frame .canto.ie{bottom:-8px;left:-8px}
+.video-frame .canto.gira{transform:rotate(180deg)}
 
 .rsvp-ico{width:84px;height:84px;border-radius:50%;display:grid;place-items:center;margin:14px auto 4px}
 button.rsvp-ico{cursor:pointer;animation:anel 2.6s ease-out infinite;transition:transform .2s}
@@ -202,12 +205,11 @@ footer p{letter-spacing:.2em;font-size:.8rem;color:var(--claro);margin-top:10px}
 .presente-lista p:last-child{border-bottom:none}
 .pix{margin-top:22px;padding:24px 18px;border:1px solid var(--antigo);background:var(--card)}
 .pix .sub{font-size:.9rem}
-.pix-num{display:block;width:100%;margin:10px 0 8px;padding:16px 10px;border-radius:18px;font-family:Arial,Helvetica,sans-serif;font-size:clamp(1.15rem,5vw,1.5rem);font-weight:700;letter-spacing:.05em;color:var(--btn-txt);transition:transform .2s;
-  background:linear-gradient(180deg,#fff 0%,#f3e7ea 100%);border:1px solid rgba(210,153,162,.55);box-shadow:inset 0 2px 1px rgba(255,255,255,1),0 6px 16px rgba(138,78,91,.18)}
+.pix-num{display:block;width:100%;margin:10px 0 8px;padding:16px 10px;border-radius:18px;font-family:Arial,Helvetica,sans-serif;font-size:clamp(1.15rem,5vw,1.5rem);font-weight:700;letter-spacing:.05em;color:var(--btn-txt);transition:transform .2s}
 .pix-dica{font-size:.85rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--enfase)}
-.deslize{margin-top:24px;display:flex;flex-direction:column;align-items:center}
-.deslize span{font-size:.95rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700}
-.deslize svg{width:32px;height:32px;margin-top:4px;animation:desce 1.6s ease-in-out infinite}
+.deslize{margin-top:18px;display:flex;flex-direction:column;align-items:center}
+.deslize span{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700}
+.deslize svg{width:20px;height:20px;margin-top:2px;animation:desce 1.6s ease-in-out infinite}
 @keyframes desce{0%,100%{transform:translateY(0);opacity:.6}50%{transform:translateY(6px);opacity:1}}
 @supports not (aspect-ratio:1/1){
   .mos-bloco{height:520px}
@@ -260,11 +262,10 @@ const CONFIG = {
     textoMedio:  "#4A2530"
   },
 
-  /* BOTÕES — estilo vidro (todos os botões do convite) */
+  /* BOTÕES — somente contorno e texto (sem preenchimento) */
   botoes: {
-    cor: "#F1CCD4",      // cor do vidro (rosa claro)
     texto: "#7A3F4C",    // cor das letras do botão
-    intensidade: 0.9,    // 0 a 1: quanto mais alto, mais colorido; mais baixo, mais transparente
+    contorno: "#7A3F4C", // cor da linha do contorno (se apagar, usa a cor do texto)
     raio: "99px"         // "99px" = pílula | "18px" = cantos mais retos
   },
 
@@ -285,8 +286,8 @@ const CONFIG = {
     usar: true,
     imagem: "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/PortaEntrada02.jpg?raw=true",
     video: "VideoMariaVitoria03.mp4",
-    toque: "",
-    texto: "",
+    toque: "",                       // opcional: imagem sua de "toque para abrir" (ex.: "ToqueParaAbrir.png"); se preencher, substitui o texto
+    texto: "Toque para abrir",
     cor: ""
   },
 
@@ -312,6 +313,11 @@ const CONFIG = {
     foto: "",
     video: "VideoMaria.mp4",
     poster: "",
+    videoRenda: {
+      superiorDireito: "",     // ⚠️ imagem da renda do canto SUPERIOR DIREITO (nome do arquivo ou link)
+      inferiorEsquerdo: "",    // ⚠️ imagem do canto INFERIOR ESQUERDO (se deixar vazio, usa a de cima girada 180°)
+      tamanho: 110             // largura da renda em px (aumente ou diminua)
+    },
     textoEspaco: 0,
     fundo: "", renda: "", cor: "", veu: 0
   },
@@ -387,7 +393,7 @@ const CONFIG = {
       "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/foto03.jpg?raw=true",
       "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/foto06.jpeg?raw=true",
       "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/foto05.jpeg?raw=true",
-      "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/foto04.jpeg?raw=true",   // foto 5 — ⚠️ coloque o link
+      "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/foto04.jpeg?raw=true",   // foto 5
       "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/foto02.jpg?raw=true",   // foto 6
       "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/foto8.jpg?raw=true",   // foto 7
       "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/foto07.jpg?raw=true"    // foto 8
@@ -480,13 +486,11 @@ const CONFIG = {
 const $ = (s, r = document) => r.querySelector(s), C = CONFIG, enc = encodeURIComponent, root = document.documentElement;
 Object.entries(C.paleta || {}).forEach(([k, v]) => v && root.style.setProperty('--' + k, v));
 
-/* Botões vidro */
+/* Botões (contorno) */
 {
-  const B = C.botoes || {}, h = (B.cor || '#F1CCD4').replace('#', '');
-  const f = h.length === 3 ? h.split('').map(x => x + x).join('') : h;
-  if (/^[0-9a-f]{6}$/i.test(f)) root.style.setProperty('--btn-rgb', [0, 2, 4].map(i => parseInt(f.substr(i, 2), 16)).join(','));
+  const B = C.botoes || {};
   if (B.texto) root.style.setProperty('--btn-txt', B.texto);
-  if (B.intensidade != null) root.style.setProperty('--btn-op', B.intensidade);
+  root.style.setProperty('--btn-borda', B.contorno || B.texto || '#7A3F4C');
   if (B.raio) root.style.setProperty('--btn-raio', B.raio);
 }
 
@@ -640,9 +644,15 @@ const capa = `<header class="hero" id="inicio"${corSec(C.capa)}>${fundoHTML(C.ca
     ${C.deslize && C.deslize.texto ? `<div class="deslize" style="color:${C.deslize.cor || '#1F3A2A'}"><span>${C.deslize.texto}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></div>` : ''}
   </div></header>`;
 
+/* Renda nos cantos da moldura do vídeo */
+const VR = (C.mensagem && C.mensagem.videoRenda) || {};
+const cantoImg = (src, cls) => `<img class="canto ${cls}" src="${src}" alt="" style="--vr:${VR.tamanho || 110}px" onerror="this.style.display='none'">`;
+const cantosV = (VR.superiorDireito ? cantoImg(VR.superiorDireito, 'sd') : '')
+  + ((VR.inferiorEsquerdo || VR.superiorDireito) ? cantoImg(VR.inferiorEsquerdo || VR.superiorDireito, 'ie' + (VR.inferiorEsquerdo ? '' : ' gira')) : '');
+
 const M = C.mensagem;
 if (M) sec('convite', 'Convite', `${(M.usarLogo !== false && (M.logo || C.logoNome)) ? `<img class="logo-nome logo-msg" style="--lw:${M.logoLargura || 460}px" src="${M.logo || C.logoNome}" alt="${C.nome}"><div class="orn">♥</div>` : tit(M.titulo)}<p class="texto" style="margin-top:${M.textoEspaco != null ? M.textoEspaco : 0}px">${M.texto}</p>${M.video
-  ? `<div class="video-frame"><video id="videoMaria" src="${M.video}#t=0.1" ${M.poster ? `poster="${M.poster}"` : ''} controls controlsList="nodownload" playsinline webkit-playsinline preload="metadata" onerror="this.parentNode.style.display='none'"></video></div>`
+  ? `<div class="video-frame"><video id="videoMaria" src="${M.video}#t=0.1" ${M.poster ? `poster="${M.poster}"` : ''} controls controlsList="nodownload" playsinline webkit-playsinline preload="metadata" onerror="this.parentNode.style.display='none'"></video>${cantosV}</div>`
   : (M.foto ? `<img class="foto" src="${M.foto}" alt="${C.nome}">` : '')}`);
 
 if (C.contagem) sec('contagem', 'Contagem', `<p class="sub">${C.contagem.subtitulo || ''}</p><h2>${C.contagem.titulo}</h2><div id="cd" class="cd"></div>`, 'escuro');
