@@ -142,16 +142,10 @@ section.alt{background:var(--secaoAlt)}
 .renda{position:absolute;left:0;right:0;z-index:3;background-repeat:repeat-x;background-position:center top;background-size:auto 100%;pointer-events:none}
 .renda.topo{top:0}
 .renda.base{bottom:0;transform:scaleY(-1)}
-.cd{display:flex;justify-content:center;margin:0}
-.cd>div{margin:0 8px}
-.cd b{display:block;font-family:var(--f-num,var(--f-corpo));font-weight:600;font-size:2.8rem;line-height:1;margin-bottom:6px;color:var(--ct-num,var(--enfase))}
-.cd span{font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ct-rot,var(--enfase))}
-/* MOLDURA DA CONTAGEM — linhas duplas com coraçõezinhos */
-.cd-moldura{max-width:430px;margin:18px auto 0;color:var(--ct-moldura,var(--antigo))}
-.cd-lin{display:flex;align-items:center;gap:8px;font-size:12px;line-height:1}
-.cd-lin .g{font-size:20px}
-.cd-lin i{flex:1;height:5px;border-top:1px solid currentColor;border-bottom:1px solid currentColor}
-.cd-moldura .cd{padding:22px 0}
+.cd{display:flex;justify-content:center;gap:8px;margin:22px auto 0;max-width:420px}
+.cd>div{flex:1;min-width:0;padding:16px 4px 12px;border:2px solid var(--ct-moldura,var(--ct-num,var(--enfase)));border-radius:14px}
+.cd b{display:block;font-family:var(--f-num,var(--f-corpo));font-weight:600;font-size:2.3rem;line-height:1;color:var(--ct-num,var(--enfase))}
+.cd span{display:block;margin:10px 10px 0;padding-top:7px;border-top:1px solid var(--ct-moldura,var(--ct-num,var(--enfase)));font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ct-rot,var(--enfase))}
 
 .tl{position:relative;text-align:left;--col:104px}
 .tl::before{content:"";position:absolute;left:calc(var(--col) + 19px);top:10px;bottom:10px;width:1px;background:var(--antigo)}
@@ -166,9 +160,9 @@ section.alt{background:var(--secaoAlt)}
 /* MOLDURA DO VÍDEO + RENDA NOS CANTOS (imagens no CONFIG.mensagem.videoRenda) */
 .video-frame{position:relative;max-width:460px;margin:24px auto 0;border:3px solid var(--antigo);box-shadow:0 10px 26px rgba(138,78,91,.2);background:#000}
 .video-frame video{width:100%;max-height:80vh;display:block}
-.video-frame .canto{position:absolute;width:var(--vr,42%);height:auto;max-width:none;pointer-events:none;z-index:3}
-.video-frame .canto.sd{top:-8px;right:-8px}
-.video-frame .canto.ie{bottom:-8px;left:-8px}
+.video-frame .canto{position:absolute;width:var(--vr,100%);height:var(--vh,auto);object-fit:cover;max-width:none;pointer-events:none;z-index:3}
+.video-frame .canto.sd{top:-6px;right:0;object-position:right center}
+.video-frame .canto.ie{bottom:-6px;left:0;object-position:left center}
 .video-frame .canto.gira{transform:rotate(180deg)}
 
 .rsvp-ico{width:84px;height:84px;border-radius:50%;display:grid;place-items:center;margin:14px auto 4px}
@@ -191,6 +185,7 @@ button.rsvp-ico:active{transform:scale(.94)}
 @keyframes pop{from{opacity:0;transform:scale(.92) translateY(14px)}}
 .janela-x{position:absolute;top:8px;right:10px;width:42px;height:42px;border-radius:50%;font-size:1.8rem;line-height:1;color:var(--enfase)}
 .janela .orn{margin:10px auto 18px}
+.janela-img{width:100%;height:auto;margin:0 auto 18px;border-radius:16px;border:2px solid var(--antigo);box-shadow:0 8px 20px rgba(138,78,91,.18)}
 .janela .pix{margin-top:20px}
 
 footer{position:relative;overflow:hidden;background:var(--enfase);color:var(--textoClaro);text-align:center;padding:44px 20px calc(44px + env(safe-area-inset-bottom,0px))}
@@ -322,9 +317,10 @@ const CONFIG = {
     video: "VideoMaria.mp4",
     poster: "",
     videoRenda: {
-      superiorDireito: "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/renda.png?raw=true",     // ⚠️ imagem da renda do canto SUPERIOR DIREITO (nome do arquivo ou link)
-      inferiorEsquerdo: "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/renda.png?raw=true",    // ⚠️ imagem do canto INFERIOR ESQUERDO (se deixar vazio, usa a de cima girada 180°)
-      largura: 42              // largura da renda em % da moldura do vídeo (42 = grande | 30 = média | 55 = bem grande)
+      superiorDireito: "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/renda.png?raw=true",     // renda da borda de CIMA
+      inferiorEsquerdo: "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/renda.png?raw=true",    // renda da borda de BAIXO (se deixar vazio, usa a de cima girada 180°)
+      largura: 100,            // largura da renda em % da moldura (100 = cobre a moldura inteira de ponta a ponta)
+      altura: 0                // 0 = altura natural da imagem. Para a renda ficar mais ALTA, coloque um valor em px (ex.: 40, 60)
     },
     textoEspaco: 0,
     fundo: "", renda: "", cor: "", veu: 0
@@ -340,7 +336,7 @@ const CONFIG = {
       subtitulo: "#c68f98",     // vazio = cor do texto forte
       numeros:   "#c68f98",     // vazio = cor de título
       rotulos:   "#c68f98",     // vazio = cor de título
-      moldura:   "#c68f98"      // cor das linhas e corações da moldura (vazio = rosa antigo)
+      moldura:   "#c68f98"      // cor do contorno dos quadradinhos (vazio = cor de título)
     },
     fundo: "",
     renda: "", cor: "", veu: 0
@@ -429,7 +425,7 @@ const CONFIG = {
     usar: true,
     abrirEmJanela: true,
     titulo: "Dress Code",
-    imagem: "",                // ⚠️ IMAGEM do Dress Code: nome do arquivo ou link (ex.: "DressCode.jpg")
+    imagem: "",                // ⚠️ IMAGEM do Dress Code: aparece na janela quando a pessoa toca no botão (ex.: "DressCode.jpg")
     introducao: "Confira como se vestir para a nossa celebração.",
     botao: "Ver Dress Code",
     traje: "Traje fino",
@@ -444,6 +440,7 @@ const CONFIG = {
     abrirEmJanela: true,
     titulo: "Sugestão de Presente", subtitulo: "Ideias de presentes", texto: "",
     botao: "Ver sugestões",
+    imagem: "",                    // ⚠️ IMAGEM dos presentes: aparece na janela quando a pessoa toca no botão (ex.: "Presentes.jpg")
     itens: ["Tamanho de roupa P", "Calça 36 boca de sino, flare", "Joias em prata ou ouro"],
     pix: "45988415642",            // o que é COPIADO
     pixTexto: "45 98841-5642",     // o que APARECE
@@ -661,7 +658,7 @@ const capa = `<header class="hero" id="inicio"${corSec(C.capa)}>${fundoHTML(C.ca
 
 /* Renda nos cantos da moldura do vídeo */
 const VR = (C.mensagem && C.mensagem.videoRenda) || {};
-const cantoImg = (src, cls) => `<img class="canto ${cls}" src="${src}" alt="" style="--vr:${VR.largura || 42}%" onerror="this.style.display='none'">`;
+const cantoImg = (src, cls) => `<img class="canto ${cls}" src="${src}" alt="" style="--vr:${VR.largura || 100}%${VR.altura ? ';--vh:' + VR.altura + 'px' : ''}" onerror="this.style.display='none'">`;
 const cantosV = (VR.superiorDireito ? cantoImg(VR.superiorDireito, 'sd') : '')
   + ((VR.inferiorEsquerdo || VR.superiorDireito) ? cantoImg(VR.inferiorEsquerdo || VR.superiorDireito, 'ie' + (VR.inferiorEsquerdo ? '' : ' gira')) : '');
 
@@ -670,8 +667,7 @@ if (M) sec('convite', 'Convite', `${(M.usarLogo !== false && (M.logo || C.logoNo
   ? `<div class="video-frame"><video id="videoMaria" src="${M.video}#t=0.1" ${M.poster ? `poster="${M.poster}"` : ''} controls controlsList="nodownload" playsinline webkit-playsinline preload="metadata" onerror="this.parentNode.style.display='none'"></video>${cantosV}</div>`
   : (M.foto ? `<img class="foto" src="${M.foto}" alt="${C.nome}">` : '')}`);
 
-const linhaCD = '<div class="cd-lin"><span>♥</span><i></i><span class="g">♥</span><i></i><span>♥</span></div>';
-if (C.contagem) sec('contagem', 'Contagem', `<h2>${C.contagem.titulo}</h2>${C.contagem.subtitulo ? `<p class="sub" style="margin-top:4px">${C.contagem.subtitulo}</p>` : ''}<div class="cd-moldura">${linhaCD}<div id="cd" class="cd"></div>${linhaCD}</div>`, 'escuro');
+if (C.contagem) sec('contagem', 'Contagem', `<h2>${C.contagem.titulo}</h2>${C.contagem.subtitulo ? `<p class="sub" style="margin-top:4px">${C.contagem.subtitulo}</p>` : ''}<div id="cd" class="cd"></div>`, 'escuro');
 
 const P = C.programacao;
 if (P) {
@@ -700,7 +696,8 @@ if (H) sec('hospedagem', 'Hospedagem', `${tit(H.titulo)}<p class="texto">${H.tex
 
 /* Dress Code (logo abaixo da Hospedagem) */
 const D = C.dressCode, coresD = D ? (D.cores || []).filter(Boolean) : [], temD = D && D.usar !== false && (D.texto || D.traje || D.imagem || coresD.length);
-const imgD = D && D.imagem ? `<img class="dress-img" src="${D.imagem}" alt="${D.titulo}" onerror="this.style.display='none'">` : '';
+const imgJ = s => s ? `<img class="janela-img" src="${s}" alt="" onerror="this.style.display='none'">` : '';
+const imgD = D && D.imagem && D.abrirEmJanela === false ? `<img class="dress-img" src="${D.imagem}" alt="${D.titulo}" onerror="this.style.display='none'">` : '';
 const corpoD = () => `${D.traje ? `<h3>${D.traje}</h3>` : ''}${D.texto ? `<p class="texto" style="margin-top:12px">${D.texto}</p>` : ''}${coresD.length ? `<div class="cores">${coresD.map(c => `<i style="background:${c}"></i>`).join('')}</div>` : ''}`;
 if (temD) sec('traje', 'Traje', tit(D.titulo) + imgD + (D.abrirEmJanela !== false
   ? `${D.introducao ? `<p class="texto" style="margin-top:14px">${D.introducao}</p>` : ''}<button class="btn btn-abrir" id="abrirTraje" type="button">${D.botao || 'Ver Dress Code'}</button>`
@@ -709,9 +706,9 @@ if (temD) sec('traje', 'Traje', tit(D.titulo) + imgD + (D.abrirEmJanela !== fals
 /* Presentes */
 const G = C.presentes, listaG = G ? (G.itens || []).length : 0;
 const corpoG = () => `${listaG ? `<div class="presente-lista">${G.itens.map(i => `<p class="texto">${i}</p>`).join('')}</div>` : ''}${G.pix ? `<div class="pix"><p class="sub">Chave Pix</p><button class="pix-num" id="copiarPix" type="button" aria-label="Copiar chave Pix">${G.pixTexto || G.pix}</button><p class="pix-dica" id="pixDica">Toque na chave para copiar</p></div>` : ''}`;
-if (G && (G.texto || listaG || G.pix)) sec('presentes', 'Presentes', tit(G.titulo, G.subtitulo) + (G.texto ? `<p class="texto">${G.texto}</p>` : '') + (G.abrirEmJanela !== false
+if (G && (G.texto || listaG || G.pix || G.imagem)) sec('presentes', 'Presentes', tit(G.titulo, G.subtitulo) + (G.texto ? `<p class="texto">${G.texto}</p>` : '') + (G.abrirEmJanela !== false
   ? `<button class="btn btn-abrir" id="abrirPresentes" type="button">${G.botao || 'Ver sugestões'}</button>`
-  : corpoG()), 'alt');
+  : imgJ(G.imagem) + corpoG()), 'alt');
 
 /* Confirmar presença */
 const R = C.rsvp, janR = R && R.abrirEmJanela !== false;
@@ -757,8 +754,8 @@ const bindRsvp = r => {
 };
 
 const bTraje = $('#abrirTraje'), bPres = $('#abrirPresentes'), bRsvp = $('#abrirRsvp');
-if (bTraje) bTraje.onclick = () => abreJ(`<p class="sub">${D.titulo}</p><div class="orn">♥</div>${corpoD()}`);
-if (bPres) bPres.onclick = () => abreJ(`<h3>${G.titulo}</h3><div class="orn">♥</div>${corpoG()}`, bindPix); else bindPix(document);
+if (bTraje) bTraje.onclick = () => abreJ(`<p class="sub">${D.titulo}</p><div class="orn">♥</div>${imgJ(D.imagem)}${corpoD()}`);
+if (bPres) bPres.onclick = () => abreJ(`<h3>${G.titulo}</h3><div class="orn">♥</div>${imgJ(G.imagem)}${corpoG()}`, bindPix); else bindPix(document);
 if (bRsvp) bRsvp.onclick = () => abreJ(`<h3>${R.titulo}</h3><div class="orn">♥</div>${formR()}`, bindRsvp); else bindRsvp(document);
 
 /* Galeria: tela cheia com deslize */
@@ -820,7 +817,7 @@ if ('IntersectionObserver' in window) {
 function contagem() {
   const el = $('#cd'); if (!el) return;
   const dif = d0 - new Date();
-  if (dif <= 0) { el.innerHTML = '<span style="font-size:.8rem">É HOJE!</span>'; return; }
+  if (dif <= 0) { el.innerHTML = '<div><b style="font-size:1.4rem">É HOJE!</b></div>'; return; }
   const n = [Math.floor(dif / 864e5), Math.floor(dif % 864e5 / 36e5), Math.floor(dif % 36e5 / 6e4), Math.floor(dif % 6e4 / 1e3)];
   el.innerHTML = n.map((v, i) => `<div><b>${String(v).padStart(2, '0')}</b><span>${['dias', 'horas', 'min', 'seg'][i]}</span></div>`).join('');
 }
