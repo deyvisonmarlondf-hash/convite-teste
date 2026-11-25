@@ -42,33 +42,37 @@ window.addEventListener('error', function () {
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth}
 body{background:var(--fundo);color:var(--textoForte);font-family:var(--f-corpo);font-weight:500;font-size:17px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased;font-variant-numeric:lining-nums}
-body.locked{overflow:hidden}
+body.locked,body.modal-aberto{overflow:hidden}
 img,video,iframe{max-width:100%;display:block}
 button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
 h2{font-family:var(--f-tit);font-weight:600;font-size:2.4rem;line-height:1.2;text-align:center;color:var(--enfase)}
-h3{font-family:var(--f-tit);font-weight:600;font-size:1.7rem;color:var(--enfase)}
+h3{font-family:var(--f-tit);font-weight:600;font-size:1.7rem;line-height:1.25;color:var(--enfase)}
 .script{font-family:var(--f-script);font-weight:400;font-size:2.3rem;line-height:1.1}
-.sub{font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;text-align:center;color:var(--textoForte);font-weight:700}
-.orn{display:flex;align-items:center;justify-content:center;gap:10px;margin:14px auto 26px;color:var(--antigo);font-size:14px}
+.sub{font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;text-align:center;color:var(--textoForte);font-weight:700;margin-bottom:6px}
+.orn{display:flex;align-items:center;justify-content:center;gap:10px;margin:16px auto 30px;color:var(--antigo);font-size:14px}
 .orn::before,.orn::after{content:"";width:44px;height:1px;background:var(--antigo)}
 .texto{font-size:1.2rem;color:var(--textoMedio);font-weight:500;line-height:1.7}
 .data{font-family:var(--f-corpo);font-weight:700;font-size:1.3rem;color:var(--textoForte)}
 .data-capa{font-size:clamp(1.7rem,7vw,2.5rem);line-height:1.3}
 
-section.sec{padding:80px 22px;position:relative;overflow:hidden}
+section.sec{padding:84px 24px;position:relative;overflow:hidden}
 .bg{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0}
 .veu{position:absolute;top:0;right:0;bottom:0;left:0;z-index:1}
 .wrap,.capa-card{position:relative;z-index:2}
 section.alt{background:var(--secaoAlt)}
 .wrap{max-width:680px;margin:0 auto;text-align:center}
-.ev{margin-top:34px}
-.ev+.ev{padding-top:34px;border-top:1px solid var(--antigo)}
-.ev-card{position:relative;overflow:hidden;margin-top:30px;padding:34px 20px;border:1px solid var(--antigo)}
+.ev{margin-top:38px}
+.ev+.ev{padding-top:38px;border-top:1px solid var(--antigo)}
+.ev h3{margin-bottom:4px}
+.ev-card{position:relative;overflow:hidden;margin-top:28px;padding:36px 22px;border:1px solid var(--antigo)}
 .ev-conteudo{position:relative;z-index:2}
-.ev-nome{font-family:var(--f-tit);font-weight:600;font-size:1.9rem;line-height:1.15;color:var(--enfase)}
+.ev-card .sub{margin-bottom:8px}
+.ev-nome{font-family:var(--f-tit);font-weight:600;font-size:1.9rem;line-height:1.15;color:var(--enfase);margin-bottom:10px}
+.ev-card .btn{margin-top:20px}
 .btn{display:inline-flex;align-items:center;justify-content:center;background:var(--enfase);color:#fff;border:2px solid var(--enfase);min-height:54px;padding:16px 38px;border-radius:99px;
   text-decoration:none;font-size:.95rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;box-shadow:0 6px 16px rgba(138,78,91,.35);transition:transform .2s}
 .btn:active{transform:scale(.97)}
+.texto+.btn-abrir{margin-top:28px}
 
 .foto{width:100%;max-width:420px;aspect-ratio:2/3;object-fit:cover;margin:30px auto 8px;
   border-radius:140px 140px 6px 6px;border:3px solid var(--antigo);padding:6px;background:var(--card);
@@ -92,7 +96,7 @@ section.alt{background:var(--secaoAlt)}
 .pontos i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.7);transition:.3s}
 .pontos i.ativo{background:var(--enfase);transform:scale(1.25)}
 
-.cores{display:flex;gap:12px;justify-content:center;margin-top:20px}
+.cores{display:flex;gap:12px;justify-content:center;margin-top:22px}
 .cores i{width:34px;height:34px;border-radius:50%;border:2px solid var(--card);box-shadow:0 2px 8px rgba(0,0,0,.2)}
 
 #intro{position:fixed;top:0;right:0;bottom:0;left:0;z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;color:var(--enfase);
@@ -102,7 +106,7 @@ section.alt{background:var(--secaoAlt)}
 #introVid.pronto{opacity:1;pointer-events:auto}
 .selo{width:104px;height:104px;border-radius:50%;background:var(--enfase);color:var(--textoClaro);border:3px solid var(--card);font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;font-weight:600}
 .selo-clique{width:130px;height:130px;border-radius:50%;background:transparent}
-/* faixa "Toque para abrir" (PNG): pequena, por cima da imagem de abertura */
+/* faixa opcional (só aparece se abertura.toque ou abertura.texto estiverem preenchidos) */
 #intro .toque{position:absolute;left:50%;bottom:calc(7% + env(safe-area-inset-bottom,0px));z-index:5;
   width:min(36vw,170px);height:auto;transform:translateX(-50%);pointer-events:none;
   filter:drop-shadow(0 5px 10px rgba(94,47,58,.35));opacity:0;animation:surge 1s ease 2.5s forwards,pulsa 2.2s ease-in-out 3.5s infinite}
@@ -116,49 +120,62 @@ section.alt{background:var(--secaoAlt)}
 .capa-card{width:100%;max-width:620px;text-align:center;padding:10px 6px}
 .capa-card .nome{font-family:var(--f-script);font-size:clamp(2.8rem,14vw,4rem);line-height:1.05;color:var(--enfase);margin:8px 0}
 .capa-card .sub{font-size:.95rem;line-height:1.9}
-.capa-card .logo-nome{width:92%;max-width:480px}
-.frase{font-family:var(--f-corpo);font-size:clamp(1.25rem,4.6vw,1.7rem);font-weight:600;color:var(--textoForte);margin:22px 0 8px;line-height:1.5}
+.capa-card .logo-nome{width:92%;max-width:480px;margin:14px auto}
+.frase{font-family:var(--f-corpo);font-size:clamp(1.25rem,4.6vw,1.7rem);font-weight:600;color:var(--textoForte);margin:26px 0 10px;line-height:1.5}
 
-.escuro{background:var(--enfase);color:var(--textoClaro);padding:100px 22px}
-.escuro h2{color:var(--textoClaro)}
-.escuro .sub{color:var(--claro)}
+.escuro{padding:100px 24px}
+/* Contagem: cores próprias (config contagem.paleta), separadas da paleta geral */
+#contagem{background-color:var(--ct-fundo,var(--enfase))}
+#contagem h2{color:var(--ct-titulo,var(--textoClaro))}
+#contagem .sub{color:var(--ct-sub,var(--claro))}
 .renda{position:absolute;left:0;right:0;z-index:3;background-repeat:repeat-x;background-position:center top;background-size:auto 100%;pointer-events:none}
 .renda.topo{top:0}
 .renda.base{bottom:0;transform:scaleY(-1)}
-.cd{display:flex;justify-content:center}
+.cd{display:flex;justify-content:center;margin-top:28px}
 .cd>div{margin:0 8px}
-.cd b{display:block;font-family:var(--f-corpo);font-weight:700;font-size:2.4rem;line-height:1}
-.cd span{font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--claro)}
+.cd b{display:block;font-family:var(--f-corpo);font-weight:700;font-size:2.4rem;line-height:1;margin-bottom:6px;color:var(--ct-num,var(--textoClaro))}
+.cd span{font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ct-rot,var(--claro))}
 
 .tl{position:relative;text-align:left;--col:104px}
 .tl::before{content:"";position:absolute;left:calc(var(--col) + 19px);top:10px;bottom:10px;width:1px;background:var(--antigo)}
-.tl-i{display:grid;grid-template-columns:var(--col) 18px 1fr;gap:10px;margin-bottom:26px;align-items:start}
+.tl-i{display:grid;grid-template-columns:var(--col) 18px 1fr;gap:10px;margin-bottom:30px;align-items:start}
 .tl-h{font-family:var(--f-corpo);font-weight:700;font-size:1.4rem;color:var(--textoForte);text-align:right;line-height:1.1}
-.tl-h small{display:block;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--textoMedio)}
+.tl-h small{display:block;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--textoMedio);margin-top:4px}
 .tl-d{color:var(--antigo);font-size:.8rem;text-align:center}
-.tl-t b{display:block;font-family:var(--f-tit);font-weight:600;font-size:1.3rem;color:var(--enfase)}
+.tl-t b{display:block;font-family:var(--f-tit);font-weight:600;font-size:1.3rem;color:var(--enfase);margin-bottom:2px}
 .tl-t span{font-size:1rem;font-weight:500;color:var(--textoMedio)}
-.tl-t em{display:block;margin-top:4px;font-style:normal;font-weight:700;color:var(--enfase)}
+.tl-t em{display:block;margin-top:6px;font-style:normal;font-weight:700;color:var(--enfase)}
 
-/* Vídeo da mensagem */
-.video-frame{position:relative;max-width:460px;margin:34px auto 0;border:3px solid var(--antigo);box-shadow:0 10px 26px rgba(138,78,91,.2);overflow:hidden;background:#000}
+.video-frame{position:relative;max-width:460px;margin:38px auto 0;border:3px solid var(--antigo);box-shadow:0 10px 26px rgba(138,78,91,.2);overflow:hidden;background:#000}
 .video-frame video{width:100%;max-height:80vh;display:block}
 
 /* Confirmar presença */
-.rsvp-ico{width:84px;height:84px;border-radius:50%;background:var(--enfase);color:var(--textoClaro);display:grid;place-items:center;margin:8px auto 4px;border:4px solid var(--claro)}
+.rsvp-ico{width:84px;height:84px;border-radius:50%;background:var(--enfase);color:var(--textoClaro);display:grid;place-items:center;margin:20px auto 8px;border:4px solid var(--claro)}
+button.rsvp-ico{cursor:pointer;animation:anel 2.6s ease-out infinite;transition:transform .2s}
+button.rsvp-ico:active{transform:scale(.94)}
+@keyframes anel{0%{box-shadow:0 0 0 0 rgba(210,153,162,.65)}70%,100%{box-shadow:0 0 0 20px rgba(210,153,162,0)}}
 .rsvp-ico svg{width:40px;height:40px}
 .rsvp-ico img{width:44px;height:44px;object-fit:contain}
 .rsvp-form{max-width:460px;margin:0 auto;text-align:left}
-.rsvp-form label{display:block;font-weight:700;font-size:1.05rem;margin:18px 0 6px;color:var(--textoForte)}
+.rsvp-form label{display:block;font-weight:700;font-size:1.05rem;margin:20px 0 8px;color:var(--textoForte)}
 .rsvp-form input,.rsvp-form textarea{width:100%;font:inherit;font-size:1.1rem;font-weight:500;padding:14px 16px;border:2px solid var(--antigo);border-radius:12px;background:var(--card);color:var(--textoForte);outline:none}
 .rsvp-form input:focus,.rsvp-form textarea:focus{border-color:var(--enfase)}
 .rsvp-form textarea{resize:vertical}
 .rsvp-erro{margin-top:10px;font-weight:700;color:#A12B3C}
-.rsvp-form .btn{display:flex;width:100%;margin-top:24px}
+.rsvp-form .btn{display:flex;width:100%;margin-top:26px}
 
-footer{position:relative;overflow:hidden;background:var(--enfase);color:var(--textoClaro);text-align:center;padding:52px 20px calc(52px + env(safe-area-inset-bottom,0px))}
+/* Janela (pop-up dentro do convite) */
+.janela-fundo{position:fixed;top:0;right:0;bottom:0;left:0;z-index:300;background:rgba(62,28,38,.55);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:20px}
+.janela-fundo.on{display:flex}
+.janela{position:relative;width:min(440px,100%);max-height:88vh;max-height:88svh;overflow:auto;background:var(--card);border:1px solid var(--antigo);border-radius:26px;padding:44px 24px 32px;text-align:center;box-shadow:0 20px 50px rgba(62,28,38,.35);animation:pop .45s cubic-bezier(.2,.9,.3,1.15)}
+@keyframes pop{from{opacity:0;transform:scale(.92) translateY(14px)}}
+.janela-x{position:absolute;top:8px;right:10px;width:42px;height:42px;border-radius:50%;font-size:1.8rem;line-height:1;color:var(--enfase)}
+.janela .orn{margin:14px auto 22px}
+.janela .pix{margin-top:26px}
+
+footer{position:relative;overflow:hidden;background:var(--enfase);color:var(--textoClaro);text-align:center;padding:60px 20px calc(60px + env(safe-area-inset-bottom,0px))}
 footer .script{font-size:2.8rem}
-footer p{letter-spacing:.2em;font-size:.8rem;color:var(--claro)}
+footer p{letter-spacing:.2em;font-size:.8rem;color:var(--claro);margin-top:10px}
 #musicBtn{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:120;width:46px;height:46px;border-radius:50%;
   border:1.5px solid var(--antigo);background:var(--enfase);color:var(--textoClaro);font-size:1.1rem;display:grid;place-items:center}
 #musicBtn.tocando{animation:giro 6s linear infinite}
@@ -169,13 +186,15 @@ footer p{letter-spacing:.2em;font-size:.8rem;color:var(--claro)}
 .rv.in{opacity:1;transform:none}
 .logo-nome{display:block;width:80%;max-width:300px;height:auto;margin:10px auto}
 .logo-nome.branca{filter:brightness(0) invert(1)}
+/* logo grande da seção Mensagem (largura em config mensagem.logoLargura) */
+.logo-msg{margin:0 0 0 50%;transform:translateX(-50%);width:min(var(--lw,460px),calc(100vw - 16px));max-width:none}
 .presente-lista{margin-top:22px}
-.presente-lista p{padding:14px 0;border-bottom:1px solid var(--rosa)}
+.presente-lista p{padding:16px 0;border-bottom:1px solid var(--rosa)}
 .presente-lista p:last-child{border-bottom:none}
-.pix{margin-top:30px;padding:30px 18px;border:1px solid var(--antigo);background:var(--card)}
+.pix{margin-top:34px;padding:32px 20px;border:1px solid var(--antigo);background:var(--card)}
 .pix .sub{font-size:.9rem}
-.pix-num{font-family:Arial,Helvetica,sans-serif;font-size:clamp(1.9rem,8vw,2.6rem);font-weight:700;letter-spacing:.06em;color:var(--textoForte);margin:10px 0 20px}
-.deslize{margin-top:26px;display:flex;flex-direction:column;align-items:center}
+.pix-num{font-family:Arial,Helvetica,sans-serif;font-size:clamp(1.9rem,8vw,2.6rem);font-weight:700;letter-spacing:.06em;color:var(--textoForte);margin:12px 0 22px}
+.deslize{margin-top:34px;display:flex;flex-direction:column;align-items:center}
 .deslize span{font-size:.95rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700}
 .deslize svg{width:32px;height:32px;margin-top:4px;animation:desce 1.6s ease-in-out infinite}
 @keyframes desce{0%,100%{transform:translateY(0);opacity:.6}50%{transform:translateY(6px);opacity:1}}
@@ -192,182 +211,120 @@ footer p{letter-spacing:.2em;font-size:.8rem;color:var(--claro)}
 <main id="app"></main>
 <button id="musicBtn" title="Música">♪</button>
 <div id="barra-inf"></div>
+<div class="janela-fundo" id="janela" role="dialog" aria-modal="true"><div class="janela"><button class="janela-x" id="janelaX" type="button" aria-label="Fechar">×</button><div id="janelaConteudo"></div></div></div>
 
 <script>
-/* ████████████████████████████████████████████████████████████████████████████
-   ██   📖  COMO USAR ESTA CONFIGURAÇÃO  (XV ANOS MARIA VITÓRIA)             ██
-   ████████████████████████████████████████████████████████████████████████████
-
-   Cada seção do convite tem um bloco numerado abaixo, na ordem em que aparece no site.
-   Dentro de cada bloco, as linhas são agrupadas pelos ícones:
-
-     ✏️  TEXTOS      → o que está escrito no convite
-     🖼️  IMAGENS     → links de fotos, logos e fundos (.png .jpg .gif)
-     🎬  VÍDEOS      → links ou nomes de arquivos .mp4
-     🌸  RENDA       → link do PNG de renda (enfeite repetido no topo/base da seção)
-     🎨  CORES       → cores em hexadecimal, ex.: "#8A4E5B"
-     🔗  LINKS       → endereços de sites, mapas, WhatsApp
-     📐  TAMANHOS    → medidas em pixels
-     🎵  MÚSICA      → música de fundo
-
-   Regras gerais (valem para TODAS as seções):
-     • Para trocar algo, mexa só no que está entre aspas "…". Não apague vírgulas nem aspas.
-     • "" (aspas vazias) = não usar / deixar em branco.
-     • Arquivo na mesma pasta do site → escreva só o nome:  "VideoMariaVitoria02.mp4"
-     • Arquivo na internet (GitHub etc.) → cole o link inteiro:  "https://…/foto.png?raw=true"
-     • fundo  = imagem OU vídeo de fundo da seção.
-     • cor    = cor de fundo da seção ("" = cor padrão).
-     • veu    = de 0 a 1: camada de cor sobre o fundo para o texto ficar legível.
-     • renda  = PNG de renda no topo/base da seção ("" = sem renda).
+/* ============================================================================
+   COMO USAR: cada seção do convite tem um bloco numerado, na ordem em que aparece.
+   Mexa só no que está entre aspas "…". "" (vazio) = não usar.
+   Arquivo na mesma pasta → só o nome:  "VideoMaria.mp4"   |   da internet → link inteiro.
+   fundo = imagem ou vídeo de fundo | cor = cor de fundo ("" = padrão)
+   veu = 0 a 1 (camada de cor sobre o fundo) | renda = PNG de renda no topo/base
    ============================================================================ */
 const CONFIG = {
 
-/* ┌──────────────────────────────────────────────────────────────────────────┐
-   │ 0️⃣  GERAL — nome, hashtag, cores do site, fontes, música                │
-   └──────────────────────────────────────────────────────────────────────────┘ */
-
-  // ✏️ TEXTOS
+/* 0 — GERAL */
   nome: "Maria Vitória",
   hashtag: "#MariaVitóriaXV",
   cidade: "São Francisco - MG",
-
-  // 🖼️ IMAGENS (logos)
   logoNome: "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/Posicionar_XV_abaixo_do_nome_b63098b8.png?raw=true",   // logo grande da capa
-  logoRodape: "",              // logo do rodapé ("" = usa a logo da capa)
-  logoRodapeBranca: true,      // true = logo do rodapé fica branca
+  logoRodape: "",              // "" = usa a logo da capa
+  logoRodapeBranca: true,
+  renda: "",                   // renda geral
+  rendaAltura: 24, rendaAlturaMax: 110, rendaTile: 360,
+  barras: { superior: "#F1CCD4", inferior: "#F1CCD4" },   // cores das barras do celular
 
-  // 🌸 RENDA geral (usada nas seções que não têm renda própria, ex.: Contagem)
-  renda: "",
-  // 📐 TAMANHOS da renda
-  rendaAltura: 24,             // altura mínima (px)
-  rendaAlturaMax: 110,         // altura máxima (px)
-  rendaTile: 360,              // largura de cada repetição (px) — aumente para rendas maiores
-
-  // 🎨 CORES das barras do celular (topo e rodapé do navegador)
-  barras: { superior: "#F1CCD4", inferior: "#F1CCD4" },
-
-  // 🎨 PALETA — cores de todo o site
+  // PALETA — cores de todo o site (a Contagem tem paleta própria, na seção 4)
   paleta: {
-    fundo:       "#FBF3F5",   // fundo geral
-    card:        "#FFFAFB",   // caixas e campos
-    secaoAlt:    "#F7E6EA",   // seções alternadas (rosa claro)
-    claro:       "#F1CCD4",   // rosa claro
+    fundo:       "#FBF3F5",
+    card:        "#FFFAFB",
+    secaoAlt:    "#F7E6EA",
+    claro:       "#F1CCD4",
     rosa:        "#E6A9BA",
-    antigo:      "#D299A2",   // linhas e detalhes
+    antigo:      "#D299A2",
     salmao:      "#E3A1A8",
-    enfase:      "#c48188",   // vinho: títulos, botões
+    enfase:      "#c48188",   // títulos e botões
     texto:       "#5E2F3A",
     textoSuave:  "#85535F",
-    textoClaro:  "#FFF7F8",   // texto sobre fundo escuro
-    textoForte:  "#59000b",   // texto principal (bem escuro, para leitura)
-    textoMedio:  "#4A2530"    // texto de parágrafos
+    textoClaro:  "#FFF7F8",
+    textoForte:  "#59000b",
+    textoMedio:  "#4A2530"
   },
 
-  // 🔤 FONTES — nomes do Google Fonts (https://fonts.google.com). Use fontes que tenham pesos 400 a 800.
+  // FONTES — nomes do Google Fonts (com pesos 400 a 800)
   fontes: {
-    titulo: "Playfair Display",   // títulos
-    corpo:  "Raleway",            // textos, datas e números
-    script: "Pinyon Script",      // nome cursivo (rodapé / fallback)
-    arquivoTitulo: "",            // (opcional) arquivo de fonte próprio para títulos
-    arquivoScript: ""             // (opcional) arquivo de fonte próprio para o script
+    titulo: "Playfair Display",
+    corpo:  "Raleway",
+    script: "Pinyon Script",
+    arquivoTitulo: "",
+    arquivoScript: ""
   },
 
-  // 🎵 MÚSICA DE FUNDO (use UMA das duas)
   musica: "",      // arquivo .mp3 (ex.: "musica.mp3")
-  youtube: "",     // 🔗 link do YouTube (ex.: "https://youtu.be/xxxxxxxxxxx")
+  youtube: "",     // ou link do YouTube
 
 
-/* ┌──────────────────────────────────────────────────────────────────────────┐
-   │ 1️⃣  ABERTURA — tela inicial (brasão) antes do convite                   │
-   └──────────────────────────────────────────────────────────────────────────┘ */
+/* 1 — ABERTURA (toque na tela abre o convite; o aviso "Toque para abrir" foi retirado) */
   abertura: {
-    usar: true,                // true = mostra a abertura | false = pula direto para o convite
-    // 🖼️ IMAGEM da abertura (com o monograma MV)
+    usar: true,
     imagem: "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/PortaEntrada02.jpg?raw=true",
-    // 🎬 VÍDEO da abertura (toca quando a pessoa toca na tela). "" = sem vídeo
     video: "VideoMariaVitoria03.mp4",
-    // 🖼️ IMAGEM da faixa "Toque para abrir" (PNG transparente, fica pequena sobre a imagem). "" = usa só o texto
-    toque: "toque-para-abrir.png",
-    // ✏️ TEXTO (aparece se a faixa PNG não carregar)
-    texto: "",
-    // 🎨 COR de fundo enquanto a imagem carrega
+    toque: "",      // PNG do aviso "Toque para abrir" ("" = sem aviso)
+    texto: "",      // texto do aviso ("" = sem aviso)
     cor: ""
   },
 
 
-/* ┌──────────────────────────────────────────────────────────────────────────┐
-   │ 2️⃣  CAPA — primeira tela do convite (logo, frase, data)                 │
-   └──────────────────────────────────────────────────────────────────────────┘ */
+/* 2 — CAPA */
   capa: {
-    // ✏️ TEXTOS
-    celebracao: "Aniversário de",   // \n = quebra de linha
+    celebracao: "Aniversário de",
     frase: "Nada acontece sem antes existir um sonho, e na idade dos sonhos tudo é possível!",
-    dataTexto: "",             // "" = a data é montada sozinha a partir da seção 5 (Eventos)
-    // 🖼️ IMAGEM / 🎬 VÍDEO de fundo da capa
+    dataTexto: "",             // "" = montada sozinha a partir dos Eventos
     fundo: "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/CapaFlor02.png?raw=true",
-    // 🌸 RENDA
-    renda: "",
-    // 🎨 CORES
-    cor: "", veu: 0
+    renda: "", cor: "", veu: 0
   },
-  // ✏️ + 🎨 aviso "Deslize para baixo" no fim da capa (texto vazio = não mostra)
   deslize: { texto: "Deslize para baixo", cor: "#1F3A2A" },
 
 
-/* ┌──────────────────────────────────────────────────────────────────────────┐
-   │ 3️⃣  MENSAGEM — logo, frase e VÍDEO da debutante                         │
-   └──────────────────────────────────────────────────────────────────────────┘ */
+/* 3 — MENSAGEM */
   mensagem: {
-    // ✏️ TEXTOS
     titulo: "Maria Vitória XV anos",   // só aparece se usarLogo for false
     texto: "Nunca deixe de sonhar, pois se podemos sonhar, também podemos tornar nossos sonhos realidade.",
-    // 🖼️ IMAGENS
-    usarLogo: true,            // true = mostra a logo | false = mostra o título em texto
-    logo: "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/Nome002.png?raw=true",   // "" = usa a logo da capa
-    foto: "",                  // foto (só aparece se NÃO houver vídeo abaixo)
-    // 🎬 VÍDEO da debutante (com play e som; ao tocar, a música de fundo pausa e volta quando o vídeo para)
+    usarLogo: true,
+    logo: "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/Nome002.png?raw=true",
+    logoLargura: 460,          // 📐 tamanho da logo em px (aumente para crescer; no celular ocupa até a largura da tela)
+    foto: "",
     video: "VideoMaria.mp4",
-    poster: "",                // 🖼️ imagem de capa do vídeo (opcional)
-    // 📐 TAMANHOS
-    textoEspaco: 34,           // distância (px) entre a logo e o texto
-    // 🖼️ / 🎬 FUNDO da seção
-    fundo: "",
-    // 🌸 RENDA
-    renda: "",
-    // 🎨 CORES
-    cor: "", veu: 0
+    poster: "",
+    textoEspaco: 0,            // 📐 espaço extra (px) entre a logo/ornamento e o texto
+    fundo: "", renda: "", cor: "", veu: 0
   },
 
 
-/* ┌──────────────────────────────────────────────────────────────────────────┐
-   │ 4️⃣  CONTAGEM REGRESSIVA (seção escura, usa a data do 1º evento)         │
-   └──────────────────────────────────────────────────────────────────────────┘ */
+/* 4 — CONTAGEM REGRESSIVA (cores PRÓPRIAS: não dependem da paleta geral) */
   contagem: {
-    // ✏️ TEXTOS
     subtitulo: "Faltam", titulo: "Contagem regressiva",
-    // 🖼️ / 🎬 FUNDO
+    paleta: {
+      fundo:     "#c48188",   // fundo da seção
+      titulo:    "#FFF7F8",   // título "Contagem regressiva"
+      subtitulo: "#F1CCD4",   // "Faltam"
+      numeros:   "#FFF7F8",   // números
+      rotulos:   "#F1CCD4"    // dias / horas / min / seg
+    },
     fundo: "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/BolaFlor.png?raw=true",
-    // 🌸 RENDA ("" = usa a renda geral da seção 0)
-    renda: "",
-    // 🎨 CORES
-    cor: "", veu: 0
+    renda: "", cor: "", veu: 0
   },
 
 
-/* ┌──────────────────────────────────────────────────────────────────────────┐
-   │ 5️⃣  EVENTOS — datas, horários e locais (alimentam Programação e Local)  │
-   └──────────────────────────────────────────────────────────────────────────┘ */
+/* 5 — EVENTOS */
   eventos: [
     {
-      // ✏️ TEXTOS
       titulo: "Missa",
-      dataHora: "2027-01-08T19:00:00",     // formato: AAAA-MM-DDTHH:MM:SS
+      dataHora: "2027-01-08T19:00:00",     // AAAA-MM-DDTHH:MM:SS
       espaco: "Igreja Sagrada Família",
-      obs: "Celebração do aniversário do Vô Tone Veloso",   // aparece na Programação (em destaque). "" = nada
+      obs: "Celebração do aniversário do Vô Tone Veloso",
       endereco: "",
-      // 🔗 LINK do mapa ("" = o Google Maps é montado sozinho)
       mapsUrl: "",
-      // 🖼️ / 🎬 fundo e 🎨 cores do cartão
       fundo: "", cor: "", veu: 0
     },
     {
@@ -382,150 +339,106 @@ const CONFIG = {
   ],
 
 
-/* ┌──────────────────────────────────────────────────────────────────────────┐
-   │ 6️⃣  PROGRAMAÇÃO — "O Grande Dia" (linha do tempo)                       │
-   └──────────────────────────────────────────────────────────────────────────┘ */
+/* 6 — PROGRAMAÇÃO */
   programacao: {
-    // ✏️ TEXTOS
     titulo: "O Grande Dia", subtitulo: "Programação",
-    itens: null,               // null = montado sozinho a partir dos Eventos (seção 5)
-    // 📐 TAMANHOS
-    espacoTopo: 130,           // espaço (px) acima do título (afasta das flores)
-    // 🖼️ / 🎬 FUNDO
+    itens: null,               // null = montado a partir dos Eventos
+    espacoTopo: 130,
     fundo: "https://github.com/maricriative/convite_MariaVitoria15Anos/blob/main/Novo%20Projeto%20(10).png?raw=true",
-    // 🌸 RENDA
-    renda: "",
-    // 🎨 CORES
-    cor: "", veu: 0
+    renda: "", cor: "", veu: 0
   },
 
 
-/* ┌──────────────────────────────────────────────────────────────────────────┐
-   │ 7️⃣  LOCAL — "Onde & Quando" (cartões com botão Como chegar)             │
-   └──────────────────────────────────────────────────────────────────────────┘ */
+/* 7 — LOCAL */
   local: {
-    // ✏️ TEXTOS
     titulo: "Onde & Quando",
-    // 🎬 VÍDEO de fundo (aqui é um vídeo de borboletas)
     fundo: "Borboletas.mp4",
-    poster: "",                // 🖼️ imagem de espera do vídeo
-    repetir: false,            // false = toca 1 vez só | true = em loop
-    congelarAntes: 0.5,        // 📐 segundos antes do fim em que o vídeo congela (aparece preto? aumente; aparecem borboletas? diminua)
-    // 🌸 RENDA
-    renda: "",
-    // 🎨 CORES
-    cor: "#fbf3f5", veu: 0
+    poster: "",
+    repetir: false,
+    congelarAntes: 0.5,
+    renda: "", cor: "#fbf3f5", veu: 0
   },
 
 
-/* ┌──────────────────────────────────────────────────────────────────────────┐
-   │ 8️⃣  DRESS CODE — (só aparece se tiver texto ou cores)                   │
-   └──────────────────────────────────────────────────────────────────────────┘ */
+/* 8 — DRESS CODE (botão que abre uma janela com as informações) */
   dressCode: {
-    titulo: "Dress Code", texto: "",
-    cores: [],                 // 🎨 ex.: ["#F1CCD4", "#8A4E5B"]
+    usar: true,
+    abrirEmJanela: true,       // true = botão + janela | false = mostra tudo direto na página
+    titulo: "Dress Code",
+    introducao: "Confira como se vestir para a nossa celebração.",   // texto acima do botão
+    botao: "Ver Dress Code",
+    traje: "Traje fino",       // título dentro da janela
+    texto: "Sugerimos que utilize um estilo de roupa elegante e confortável. Pedimos que evite o tom rosa da festa.",
+    cores: [],                 // ex.: ["#F1CCD4", "#8A4E5B"]
     fundo: "", renda: "", cor: "", veu: 0
   },
 
 
-/* ┌──────────────────────────────────────────────────────────────────────────┐
-   │ 9️⃣  GALERIA — carrossel de fotos                                        │
-   └──────────────────────────────────────────────────────────────────────────┘ */
+/* 9 — GALERIA */
   galeria: {
-    // ✏️ TEXTOS
     titulo: "Galeria",
-    // 🖼️ FOTOS (uma por linha)
     fotos: [
       "https://github.com/maricriative/convite_MariaVitoria15Anos/blob/main/WhatsApp%20Image%202026-11-19%20at%2011.33.21.jpeg?raw=true",
       "https://github.com/maricriative/convite_MariaVitoria15Anos/blob/main/WhatsApp%20Image%202026-11-19%20at%2011.33.26.jpeg?raw=true",
       "https://github.com/maricriative/convite_MariaVitoria15Anos/blob/main/Foto%20de%20Deyvison%20Marlon%20(7).jpg?raw=true",
       "https://github.com/maricriative/convite_MariaVitoria15Anos/blob/main/Foto%20de%20Deyvison%20Marlon%20(5).jpg?raw=true"
     ],
-    // 🌸 RENDA em volta das fotos (moldura)
     rendaMoldura: "https://github.com/maricriative/convite_MariaVitoria15Anos/blob/main/Novo%20Projeto%20(11).png?raw=true",
-    // 📐 TAMANHOS
-    escalaMoldura: 1.3,        // tamanho da moldura (1 = mesmo tamanho da foto)
-    rendaFaixaAltura: 28,      // altura mínima da faixa (px)
-    // 🖼️ / 🎬 FUNDO e 🌸 renda da seção
-    fundo: "", renda: "",
-    // 🎨 CORES
-    cor: "#fbf3f5", veu: 0
+    escalaMoldura: 1.3,
+    rendaFaixaAltura: 28,
+    fundo: "", renda: "", cor: "#fbf3f5", veu: 0
   },
 
 
-/* ┌──────────────────────────────────────────────────────────────────────────┐
-   │ 🔟  HOSPEDAGEM — hotéis e pousadas                                      │
-   └──────────────────────────────────────────────────────────────────────────┘ */
+/* 10 — HOSPEDAGEM */
   hospedagem: {
-    // ✏️ TEXTOS
     titulo: "Onde se Hospedar",
     texto: "Sugestões de hotel e pousada para hospedagem:",
-    // 🔗 LISTA (nome, link do botão, texto do botão, 🖼️ imagem opcional)
     lista: [
       { nome: "Hotel Supremo", link: "https://www.hotelsupremo.com.br/", botao: "Visitar site", imagem: "" },
       { nome: "Hotel Moriah", link: "https://www.instagram.com/hotelmoriah_/", botao: "Ver Instagram", imagem: "" }
     ],
-    // 🌸 RENDA
     renda: "https://github.com/maricriative/convite_MariaVitoria15Anos/blob/main/Novo%20Projeto%20(11).png?raw=true",
-    // 🖼️ / 🎬 FUNDO e 🎨 CORES
     fundo: "", cor: "", veu: 0
   },
 
 
-/* ┌──────────────────────────────────────────────────────────────────────────┐
-   │ 1️⃣1️⃣  PRESENTES — sugestões e chave Pix                                 │
-   └──────────────────────────────────────────────────────────────────────────┘ */
+/* 11 — PRESENTES (botão que abre uma janela com as sugestões e o Pix) */
   presentes: {
-    // ✏️ TEXTOS
+    abrirEmJanela: true,       // true = botão + janela | false = mostra tudo direto na página
     titulo: "Sugestão de Presente", subtitulo: "Ideias de presentes", texto: "",
+    botao: "Ver sugestões",
     itens: ["Tamanho de roupa P", "Calça 36 boca de sino, flare", "Joias em prata ou ouro"],
-    // 🔗 PIX
-    pix: "45988415642",            // o que é COPIADO (só números/letras da chave). "" = sem bloco Pix
-    pixTexto: "45 98841-5642",     // o que APARECE na tela
-    // 🖼️ / 🎬 FUNDO e 🌸 RENDA
-    fundo: "", renda: "",
-    // 🎨 CORES
-    cor: "#fbf3f5", veu: 0
+    pix: "45988415642",            // o que é COPIADO ("" = sem bloco Pix)
+    pixTexto: "45 98841-5642",     // o que APARECE
+    fundo: "", renda: "", cor: "#fbf3f5", veu: 0
   },
 
 
-/* ┌──────────────────────────────────────────────────────────────────────────┐
-   │ 1️⃣2️⃣  CONFIRMAR PRESENÇA — nome + acompanhantes → abre o WhatsApp       │
-   └──────────────────────────────────────────────────────────────────────────┘ */
+/* 12 — CONFIRMAR PRESENÇA (o ícone da bolinha abre uma janela com o formulário) */
   rsvp: {
-    // ✏️ TEXTOS
+    abrirEmJanela: true,       // true = ícone + janela | false = formulário direto na página
     titulo: "Confirmar Presença",
-    instrucao: "Para confirmar a sua presença, informe o seu nome e o de seus acompanhantes e toque no botão abaixo.",
+    instrucao: "Para confirmar a sua presença, toque no ícone abaixo e informe o seu nome e o de seus acompanhantes.",
     rotuloNome: "Seu nome",
     placeholderNome: "Digite o seu nome completo",
     rotuloAcomp: "Nome dos acompanhantes",
     placeholderAcomp: "Um nome por linha (deixe em branco se for sozinho)",
     avisoNome: "Por favor, digite o seu nome.",
     botao: "Confirmar pelo WhatsApp",
-    // mensagem enviada no WhatsApp ({nome} e {acompanhantes} são trocados automaticamente; \n = nova linha)
     mensagemWhats: "Olá! Confirmo a minha presença no XV anos da Maria Vitória.\n\nNome: {nome}\nAcompanhantes: {acompanhantes}",
-    // 🔗 WHATSAPP que vai receber a confirmação — só números, com 55 + DDD. Ex.: "5538999999999"
-    //    ⚠️ PREENCHA! Se ficar "", o WhatsApp abre pedindo para escolher o contato.
-    whatsapp: "",
-    // 🖼️ ÍCONE do círculo ("" = ícone de confirmado)
+    whatsapp: "",              // ⚠️ PREENCHA: só números com 55 + DDD. Ex.: "5538999999999"
     iconeImagem: "",
-    // 🖼️ / 🎬 FUNDO e 🌸 RENDA
     fundo: "https://github.com/maricriative/convite_MariaVitoria15Anos/blob/main/Novo%20Projeto%20(13).png?raw=true",
-    renda: "",
-    // 🎨 CORES
-    cor: "", veu: 0
+    renda: "", cor: "", veu: 0
   },
 
 
-/* ┌──────────────────────────────────────────────────────────────────────────┐
-   │ 1️⃣3️⃣  RODAPÉ                                                           │
-   └──────────────────────────────────────────────────────────────────────────┘ */
-  rodape: { renda: "", rendaAltura: 24, rendaPos: "topo" }   // 🌸 renda do rodapé (rendaPos: "topo", "base" ou "ambas")
+/* 13 — RODAPÉ */
+  rodape: { renda: "", rendaAltura: 24, rendaPos: "topo" }
 };
 
-/* ████████████████████████████████████████████████████████████████████████████
-   ██   ⛔  DAQUI PARA BAIXO É O FUNCIONAMENTO — NÃO PRECISA MEXER           ██
-   ████████████████████████████████████████████████████████████████████████████ */
+/* ============================ FUNCIONAMENTO — NÃO PRECISA MEXER ============================ */
 
 /* No GitHub Pages usa os arquivos da própria pasta do site e codifica espaços nos nomes locais */
 (function (o) {
@@ -603,7 +516,15 @@ const ev = C.eventos, d0 = new Date(ev[0].dataHora);
 const dataTexto = C.capa.dataTexto || (ev.map(e => fm(new Date(e.dataHora), { day: '2-digit' })).join(' e ') + ' de ' + cap(fm(d0, { month: 'long' })) + '<br>de ' + fm(d0, { year: 'numeric' }));
 document.title = `${C.nome} — XV Anos`;
 
-const corSec = c => { let st = ''; if (c && c.cor) st += `background-color:${c.cor};`; if (c && c.espacoTopo) st += `padding-top:${c.espacoTopo}px;`; return st ? ` style="${st}"` : ''; };
+/* estilo inline da seção: cor de fundo, espaço no topo e paleta própria (Contagem) */
+const PC = { fundo: '--ct-fundo', titulo: '--ct-titulo', subtitulo: '--ct-sub', numeros: '--ct-num', rotulos: '--ct-rot' };
+const corSec = c => {
+  let st = '';
+  if (c && c.cor) st += `background-color:${c.cor};`;
+  if (c && c.espacoTopo) st += `padding-top:${c.espacoTopo}px;`;
+  if (c && c.paleta) for (const k in c.paleta) if (PC[k] && c.paleta[k]) st += `${PC[k]}:${c.paleta[k]};`;
+  return st ? ` style="${st}"` : '';
+};
 
 /* fundo de seção: imagem, gif ou vídeo (repetir:false = vídeo toca uma vez só) */
 const fundoHTML = (c, cor) => {
@@ -613,7 +534,7 @@ const fundoHTML = (c, cor) => {
   return el + (c.veu > 0 ? `<div class="veu" style="background:${c.cor || cor};opacity:${c.veu}"></div>` : '');
 };
 
-/* 🎵 Música */
+/* Música */
 let audio = null, yt = null, tocando = false, quer = false;
 const mb = $('#musicBtn');
 if (C.musica) { audio = new Audio(C.musica); audio.loop = true; audio.volume = .7; }
@@ -631,7 +552,7 @@ function tocar() {
 function pausar() { quer = false; if (audio) audio.pause(); else if (yt && yt.pauseVideo) yt.pauseVideo(); mb.classList.remove('tocando'); tocando = false; }
 mb.onclick = () => tocando ? pausar() : tocar();
 
-/* ✉️ Abertura */
+/* Abertura */
 const intro = $('#intro'), A = C.abertura || {};
 if (A.cor) intro.style.backgroundColor = A.cor;
 if (A.imagem) { const l = document.createElement('link'); l.rel = 'preload'; l.as = 'image'; l.href = A.imagem; document.head.appendChild(l); }
@@ -663,9 +584,10 @@ if (A.usar !== false) {
   if (A.imagem) intro.style.backgroundImage = `url("${A.imagem}")`;
   const conn = navigator.connection || {}, leve = conn.saveData || /(^|-)(2g|3g)$/.test(conn.effectiveType || ''),
     vid = (A.video && !conn.saveData) ? `<video id="introVid" src="${A.video}" ${A.imagem ? `poster="${A.imagem}"` : ''} playsinline preload="${leve ? 'none' : 'auto'}"></video>` : '';
+  /* aviso "Toque para abrir": só aparece se toque (PNG) ou texto estiverem preenchidos */
   const aviso = A.toque
     ? `<img class="toque" src="${A.toque}" alt="${A.texto || 'Toque para abrir'}" onerror="var p=document.createElement('p');p.className='dica';p.textContent='${A.texto || 'Toque para abrir'}';this.replaceWith(p)">`
-    : `<p class="dica">${A.texto || 'Toque para abrir'}</p>`;
+    : (A.texto ? `<p class="dica">${A.texto}</p>` : '');
   intro.innerHTML = A.imagem
     ? `${vid}<button class="selo-clique" id="abrir" aria-label="Abrir convite"></button>${aviso}`
     : `${vid}<button class="selo" id="abrir">${A.texto || 'Abrir'}</button>`;
@@ -678,11 +600,19 @@ if (A.usar !== false) {
   $('#abrir').onclick = e => { e.stopPropagation(); abrir(); };
 } else { intro.remove(); document.body.classList.remove('locked'); }
 
+/* Janela (pop-up dentro do convite) */
+const janela = $('#janela'), jc = $('#janelaConteudo');
+const fechaJ = () => { janela.classList.remove('on'); document.body.classList.remove('modal-aberto'); };
+const abreJ = (html, fn) => { jc.innerHTML = html; janela.classList.add('on'); document.body.classList.add('modal-aberto'); jc.parentNode.scrollTop = 0; if (fn) fn(jc); };
+janela.onclick = e => { if (e.target === janela) fechaJ(); };
+$('#janelaX').onclick = fechaJ;
+addEventListener('keydown', e => { if (e.key === 'Escape') fechaJ(); });
+
 /* Seções */
 const secoes = [];
 const CFG = { convite: C.mensagem, contagem: C.contagem && { ...C.contagem, renda: C.contagem.renda || C.renda }, dia: C.programacao, local: C.local, traje: C.dressCode, galeria: C.galeria, hospedagem: C.hospedagem, presentes: C.presentes, confirmar: C.rsvp };
 const sec = (id, rot, html, cls = '') => {
-  const cor = cls.includes('escuro') ? 'var(--enfase)' : cls.includes('alt') ? 'var(--secaoAlt)' : 'var(--fundo)';
+  const cor = cls.includes('escuro') ? 'var(--ct-fundo,var(--enfase))' : cls.includes('alt') ? 'var(--secaoAlt)' : 'var(--fundo)';
   secoes.push(`<section class="sec ${cls}" id="${id}"${corSec(CFG[id])}>${fundoHTML(CFG[id], cor)}${rendaHTML(CFG[id])}<div class="wrap">${html}</div></section>`);
 };
 const tit = (t, s) => `${s ? `<p class="sub">${s}</p>` : ''}<h2>${String(t).replace(/\n/g, '<br>')}</h2><div class="orn">♥</div>`;
@@ -699,13 +629,13 @@ const capa = `<header class="hero" id="inicio"${corSec(C.capa)}>${fundoHTML(C.ca
     ${C.deslize && C.deslize.texto ? `<div class="deslize" style="color:${C.deslize.cor || '#1F3A2A'}"><span>${C.deslize.texto}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></div>` : ''}
   </div></header>`;
 
-/* Mensagem: logo + texto + vídeo (ou foto) */
+/* Mensagem: logo grande + texto + vídeo (ou foto) */
 const M = C.mensagem;
-if (M) sec('convite', 'Convite', `${(M.usarLogo !== false && (M.logo || C.logoNome)) ? `<img class="logo-nome" src="${M.logo || C.logoNome}" alt="${C.nome}"><div class="orn">♥</div>` : tit(M.titulo)}<p class="texto" style="margin-top:${M.textoEspaco != null ? M.textoEspaco : 28}px">${M.texto}</p>${M.video
+if (M) sec('convite', 'Convite', `${(M.usarLogo !== false && (M.logo || C.logoNome)) ? `<img class="logo-nome logo-msg" style="--lw:${M.logoLargura || 460}px" src="${M.logo || C.logoNome}" alt="${C.nome}"><div class="orn">♥</div>` : tit(M.titulo)}<p class="texto" style="margin-top:${M.textoEspaco != null ? M.textoEspaco : 0}px">${M.texto}</p>${M.video
   ? `<div class="video-frame"><video id="videoMaria" src="${M.video}#t=0.1" ${M.poster ? `poster="${M.poster}"` : ''} controls controlsList="nodownload" playsinline webkit-playsinline preload="metadata" onerror="this.parentNode.style.display='none'"></video></div>`
   : (M.foto ? `<img class="foto" src="${M.foto}" alt="${C.nome}">` : '')}`);
 
-if (C.contagem) sec('contagem', 'Contagem', `<p class="sub">${C.contagem.subtitulo || ''}</p><h2>${C.contagem.titulo}</h2><div id="cd" class="cd" style="margin-top:22px"></div>`, 'escuro');
+if (C.contagem) sec('contagem', 'Contagem', `<p class="sub">${C.contagem.subtitulo || ''}</p><h2>${C.contagem.titulo}</h2><div id="cd" class="cd"></div>`, 'escuro');
 
 const P = C.programacao;
 if (P) {
@@ -723,55 +653,74 @@ if (C.local) sec('local', 'Local', tit(C.local.titulo) + ev.map(e => {
   const d = new Date(e.dataHora), q = [e.espaco, e.endereco, C.cidade].filter(Boolean).join(' ');
   return `<div class="ev-card"${corSec(e)}>${fundoHTML(e, 'var(--secaoAlt)')}<div class="ev-conteudo"><p class="sub">${e.titulo}</p><h3 class="ev-nome">${e.espaco}</h3>
     <p class="data">${cap(fm(d, { weekday: 'long' }))}, ${fm(d, { day: 'numeric', month: 'long' })} · ${hora(d)}</p>
-    ${e.endereco ? `<p class="texto" style="margin-top:6px">${e.endereco}</p>` : ''}
-    <a class="btn" style="margin-top:16px" href="${e.mapsUrl || 'https://www.google.com/maps/search/?api=1&query=' + enc(q)}" target="_blank" rel="noopener">Como chegar</a></div></div>`;
+    ${e.endereco ? `<p class="texto" style="margin-top:8px">${e.endereco}</p>` : ''}
+    <a class="btn" href="${e.mapsUrl || 'https://www.google.com/maps/search/?api=1&query=' + enc(q)}" target="_blank" rel="noopener">Como chegar</a></div></div>`;
 }).join(''), 'alt');
 
-const D = C.dressCode, coresD = D ? (D.cores || []).filter(Boolean) : [];
-if (D && (D.texto || coresD.length)) sec('traje', 'Traje', `${tit(D.titulo)}${D.texto ? `<p class="texto">${D.texto}</p>` : ''}${coresD.length ? `<div class="cores">${coresD.map(c => `<i style="background:${c}"></i>`).join('')}</div>` : ''}`);
+/* Dress Code: botão que abre uma janela */
+const D = C.dressCode, coresD = D ? (D.cores || []).filter(Boolean) : [], temD = D && D.usar !== false && (D.texto || D.traje || coresD.length);
+const corpoD = () => `${D.traje ? `<h3>${D.traje}</h3>` : ''}${D.texto ? `<p class="texto" style="margin-top:12px">${D.texto}</p>` : ''}${coresD.length ? `<div class="cores">${coresD.map(c => `<i style="background:${c}"></i>`).join('')}</div>` : ''}`;
+if (temD) sec('traje', 'Traje', tit(D.titulo) + (D.abrirEmJanela !== false
+  ? `${D.introducao ? `<p class="texto">${D.introducao}</p>` : ''}<button class="btn btn-abrir" id="abrirTraje" type="button">${D.botao || 'Ver Dress Code'}</button>`
+  : corpoD()));
 
 const H = C.hospedagem;
-if (H) sec('hospedagem', 'Hospedagem', `${tit(H.titulo)}<p class="texto">${H.texto}</p>` + H.lista.map(h => `<div class="ev">${h.imagem ? `<img src="${h.imagem}" alt="${h.nome}" style="margin-bottom:14px">` : ''}<h3>${h.nome}</h3><a class="btn" style="margin-top:14px" href="${h.link}" target="_blank" rel="noopener">${h.botao || 'Saiba mais'}</a></div>`).join(''));
+if (H) sec('hospedagem', 'Hospedagem', `${tit(H.titulo)}<p class="texto">${H.texto}</p>` + H.lista.map(h => `<div class="ev">${h.imagem ? `<img src="${h.imagem}" alt="${h.nome}" style="margin-bottom:14px">` : ''}<h3>${h.nome}</h3><a class="btn" style="margin-top:16px" href="${h.link}" target="_blank" rel="noopener">${h.botao || 'Saiba mais'}</a></div>`).join(''));
 
-const G = C.presentes;
-if (G && (G.texto || (G.itens || []).length || G.pix)) sec('presentes', 'Presentes', `${tit(G.titulo, G.subtitulo)}${G.texto ? `<p class="texto">${G.texto}</p>` : ''}${(G.itens || []).length ? `<div class="presente-lista">${G.itens.map(i => `<p class="texto">${i}</p>`).join('')}</div>` : ''}${G.pix ? `<div class="pix"><p class="sub">Chave Pix</p><p class="data pix-num">${G.pixTexto || G.pix}</p><button class="btn" id="copiarPix" type="button">Copiar chave</button></div>` : ''}`, 'alt');
+/* Presentes: botão que abre uma janela */
+const G = C.presentes, listaG = G ? (G.itens || []).length : 0;
+const corpoG = () => `${listaG ? `<div class="presente-lista">${G.itens.map(i => `<p class="texto">${i}</p>`).join('')}</div>` : ''}${G.pix ? `<div class="pix"><p class="sub">Chave Pix</p><p class="data pix-num">${G.pixTexto || G.pix}</p><button class="btn" id="copiarPix" type="button">Copiar chave</button></div>` : ''}`;
+if (G && (G.texto || listaG || G.pix)) sec('presentes', 'Presentes', tit(G.titulo, G.subtitulo) + (G.texto ? `<p class="texto">${G.texto}</p>` : '') + (G.abrirEmJanela !== false
+  ? `<button class="btn btn-abrir" id="abrirPresentes" type="button">${G.botao || 'Ver sugestões'}</button>`
+  : corpoG()), 'alt');
 
-/* Confirmar presença: nome + acompanhantes → WhatsApp */
-const R = C.rsvp;
-if (R) sec('confirmar', 'Confirmar', `${tit(R.titulo)}
-  <div class="rsvp-ico" aria-hidden="true">${R.iconeImagem ? `<img src="${R.iconeImagem}" alt="">` : ICONE_OK}</div>
-  <p class="texto" style="margin:18px 0 8px">${R.instrucao}</p>
-  <div class="rsvp-form">
+/* Confirmar presença: o ícone da bolinha abre uma janela com o formulário → WhatsApp */
+const R = C.rsvp, janR = R && R.abrirEmJanela !== false;
+const iconeR = R ? (R.iconeImagem ? `<img src="${R.iconeImagem}" alt="">` : ICONE_OK) : '';
+const formR = () => `<div class="rsvp-form">
     <label for="rsvpNome">${R.rotuloNome}</label>
     <input id="rsvpNome" type="text" autocomplete="name" placeholder="${R.placeholderNome}">
     <label for="rsvpAcomp">${R.rotuloAcomp}</label>
     <textarea id="rsvpAcomp" rows="3" placeholder="${R.placeholderAcomp}"></textarea>
     <p class="rsvp-erro" id="rsvpErro" hidden>${R.avisoNome}</p>
     <button class="btn" id="rsvpEnviar" type="button">${R.botao}</button>
-  </div>`, 'alt');
+  </div>`;
+if (R) sec('confirmar', 'Confirmar', tit(R.titulo) + (janR
+  ? `<p class="texto">${R.instrucao}</p><button class="rsvp-ico" id="abrirRsvp" type="button" aria-label="${R.titulo}">${iconeR}</button>`
+  : `<div class="rsvp-ico" aria-hidden="true">${iconeR}</div><p class="texto" style="margin:18px 0 8px">${R.instrucao}</p>${formR()}`), 'alt');
 
 $('#app').innerHTML = capa + secoes.join('') + `<footer>${rendaHTML(C.rodape)}${nomeHTML('script', true, C.logoRodape)}<p>${C.hashtag}</p></footer>`;
 
 window.__pronto = true;
 
 /* copiar chave Pix */
-const cp = $('#copiarPix');
-if (cp) cp.onclick = () => {
-  const txt = C.presentes.pix, ok = () => { cp.textContent = 'Chave copiada!'; setTimeout(() => { cp.textContent = 'Copiar chave'; }, 2500); };
-  const alt = () => { const t = document.createElement('textarea'); t.value = txt; t.style.cssText = 'position:fixed;opacity:0'; document.body.appendChild(t); t.select(); try { document.execCommand('copy'); ok(); } catch (e) {} t.remove(); };
-  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(ok, alt); else alt();
+const bindPix = r => {
+  const cp = $('#copiarPix', r); if (!cp) return;
+  cp.onclick = () => {
+    const txt = C.presentes.pix, ok = () => { cp.textContent = 'Chave copiada!'; setTimeout(() => { cp.textContent = 'Copiar chave'; }, 2500); };
+    const alt = () => { const t = document.createElement('textarea'); t.value = txt; t.style.cssText = 'position:fixed;opacity:0'; document.body.appendChild(t); t.select(); try { document.execCommand('copy'); ok(); } catch (e) {} t.remove(); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(ok, alt); else alt();
+  };
 };
 
 /* confirmar presença → abre o WhatsApp com a mensagem pronta */
-const envia = $('#rsvpEnviar');
-if (envia) envia.onclick = () => {
-  const nome = $('#rsvpNome').value.trim(), acomp = $('#rsvpAcomp').value.trim().replace(/\n+/g, ', '), erro = $('#rsvpErro');
-  if (!nome) { erro.hidden = false; $('#rsvpNome').focus(); return; }
-  erro.hidden = true;
-  const msg = (R.mensagemWhats || '').replace('{nome}', () => nome).replace('{acompanhantes}', () => acomp || 'sem acompanhantes'),
-    num = (R.whatsapp || '').replace(/\D/g, '');
-  window.open('https://wa.me/' + num + '?text=' + enc(msg), '_blank');
+const bindRsvp = r => {
+  const envia = $('#rsvpEnviar', r); if (!envia) return;
+  envia.onclick = () => {
+    const nome = $('#rsvpNome', r).value.trim(), acomp = $('#rsvpAcomp', r).value.trim().replace(/\n+/g, ', '), erro = $('#rsvpErro', r);
+    if (!nome) { erro.hidden = false; $('#rsvpNome', r).focus(); return; }
+    erro.hidden = true;
+    const msg = (R.mensagemWhats || '').replace('{nome}', () => nome).replace('{acompanhantes}', () => acomp || 'sem acompanhantes'),
+      num = (R.whatsapp || '').replace(/\D/g, '');
+    window.open('https://wa.me/' + num + '?text=' + enc(msg), '_blank');
+  };
 };
+
+/* liga os botões que abrem as janelas (ou liga direto, se a janela estiver desativada) */
+const bTraje = $('#abrirTraje'), bPres = $('#abrirPresentes'), bRsvp = $('#abrirRsvp');
+if (bTraje) bTraje.onclick = () => abreJ(`<p class="sub">${D.titulo}</p><div class="orn">♥</div>${corpoD()}`);
+if (bPres) bPres.onclick = () => abreJ(`<h3>${G.titulo}</h3><div class="orn">♥</div>${corpoG()}`, bindPix); else bindPix(document);
+if (bRsvp) bRsvp.onclick = () => abreJ(`<h3>${R.titulo}</h3><div class="orn">♥</div>${formR()}`, bindRsvp); else bindRsvp(document);
 
 /* vídeo da mensagem: ao dar play, a música de fundo pausa; ao pausar/terminar, ela volta */
 const vm = $('#videoMaria');
