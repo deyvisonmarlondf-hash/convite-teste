@@ -104,6 +104,7 @@ section.alt{background:var(--secaoAlt)}
 #lb.on{display:flex}
 #lbImg{max-width:100%;max-height:100%;object-fit:contain;border-radius:6px;user-select:none;-webkit-user-select:none}
 #lb button{position:absolute;color:#fff;background:rgba(255,255,255,.14);border-radius:50%;width:44px;height:44px;font-size:1.9rem;line-height:1;display:grid;place-items:center}
+#lb.solo #lbP,#lb.solo #lbN{display:none}
 #lbX{top:calc(10px + env(safe-area-inset-top,0px));right:12px}
 #lbP{left:8px;top:50%;margin-top:-22px}
 #lbN{right:8px;top:50%;margin-top:-22px}
@@ -425,7 +426,7 @@ const CONFIG = {
     usar: true,
     abrirEmJanela: true,
     titulo: "Dress Code",
-    imagem: "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/IMADEM%2002.png?raw=true",                // ⚠️ IMAGEM do Dress Code: aparece na janela quando a pessoa toca no botão (ex.: "DressCode.jpg")
+    imagem: "",                // ⚠️ IMAGEM do Dress Code: abre em tela cheia (como a galeria) quando a pessoa toca no botão (ex.: "DressCode.jpg")
     introducao: "Confira como se vestir para a nossa celebração.",
     botao: "Ver Dress Code",
     traje: "Traje fino",
@@ -440,7 +441,7 @@ const CONFIG = {
     abrirEmJanela: true,
     titulo: "Sugestão de Presente", subtitulo: "Ideias de presentes", texto: "",
     botao: "Ver sugestões",
-    imagem: "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/IMAGEM01.png?raw=true",                    // ⚠️ IMAGEM dos presentes: aparece na janela quando a pessoa toca no botão (ex.: "Presentes.jpg")
+    imagem: "",                    // ⚠️ IMAGEM dos presentes: abre em tela cheia (como a galeria) quando a pessoa toca no botão (ex.: "Presentes.jpg")
     itens: ["Tamanho de roupa P", "Calça 36 boca de sino, flare", "Joias em prata ou ouro"],
     pix: "45988415642",            // o que é COPIADO
     pixTexto: "45 98841-5642",     // o que APARECE
@@ -754,23 +755,24 @@ const bindRsvp = r => {
 };
 
 const bTraje = $('#abrirTraje'), bPres = $('#abrirPresentes'), bRsvp = $('#abrirRsvp');
-if (bTraje) bTraje.onclick = () => abreJ(`<p class="sub">${D.titulo}</p><div class="orn">♥</div>${imgJ(D.imagem)}${corpoD()}`);
-if (bPres) bPres.onclick = () => abreJ(`<h3>${G.titulo}</h3><div class="orn">♥</div>${imgJ(G.imagem)}${corpoG()}`, bindPix); else bindPix(document);
+if (bTraje) bTraje.onclick = () => D.imagem ? lbAbreImg(D.imagem) : abreJ(`<p class="sub">${D.titulo}</p><div class="orn">♥</div>${imgJ(D.imagem)}${corpoD()}`);
+if (bPres) bPres.onclick = () => G.imagem ? lbAbreImg(G.imagem) : abreJ(`<h3>${G.titulo}</h3><div class="orn">♥</div>${imgJ(G.imagem)}${corpoG()}`, bindPix); else bindPix(document);
 if (bRsvp) bRsvp.onclick = () => abreJ(`<h3>${R.titulo}</h3><div class="orn">♥</div>${formR()}`, bindRsvp); else bindRsvp(document);
 
 /* Galeria: tela cheia com deslize */
 const lb = $('#lb'), lbImg = $('#lbImg'), lbC = $('#lbC'); let lbI = 0, lbX0 = 0;
 const lbMostra = i => { if (!fotosG.length) return; lbI = (i + fotosG.length) % fotosG.length; lbImg.src = fotosG[lbI].src; lbC.textContent = (lbI + 1) + ' / ' + fotosG.length; };
-const lbAbre = i => { lbMostra(i); lb.classList.add('on'); document.body.classList.add('modal-aberto'); };
-const lbFecha = () => { lb.classList.remove('on'); document.body.classList.remove('modal-aberto'); lbImg.removeAttribute('src'); };
+const lbAbreImg = src => { lbC.textContent = ''; lbImg.src = src; lb.classList.add('on', 'solo'); document.body.classList.add('modal-aberto'); };
+const lbAbre = i => { lb.classList.remove('solo'); lbMostra(i); lb.classList.add('on'); document.body.classList.add('modal-aberto'); };
+const lbFecha = () => { lb.classList.remove('on', 'solo'); document.body.classList.remove('modal-aberto'); lbImg.removeAttribute('src'); };
 document.querySelectorAll('.mos-f').forEach(b => b.onclick = () => lbAbre(+b.dataset.i));
 $('#lbX').onclick = lbFecha; $('#lbP').onclick = () => lbMostra(lbI - 1); $('#lbN').onclick = () => lbMostra(lbI + 1);
 lb.onclick = e => { if (e.target === lb) lbFecha(); };
 lb.addEventListener('touchstart', e => { lbX0 = e.changedTouches[0].clientX; }, { passive: true });
-lb.addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - lbX0; if (Math.abs(dx) > 50) lbMostra(lbI + (dx < 0 ? 1 : -1)); }, { passive: true });
+lb.addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - lbX0; if (Math.abs(dx) > 50 && !lb.classList.contains('solo')) lbMostra(lbI + (dx < 0 ? 1 : -1)); }, { passive: true });
 addEventListener('keydown', e => {
   if (e.key === 'Escape') { fechaJ(); lbFecha(); }
-  if (lb.classList.contains('on')) { if (e.key === 'ArrowRight') lbMostra(lbI + 1); if (e.key === 'ArrowLeft') lbMostra(lbI - 1); }
+  if (lb.classList.contains('on') && !lb.classList.contains('solo')) { if (e.key === 'ArrowRight') lbMostra(lbI + 1); if (e.key === 'ArrowLeft') lbMostra(lbI - 1); }
 });
 
 /* vídeo da mensagem: pausa a música ao dar play */
