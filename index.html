@@ -88,8 +88,8 @@ section.alt{background:var(--secaoAlt)}
   outline:1px solid var(--rosa);outline-offset:6px;box-shadow:0 12px 30px rgba(138,78,91,.25)}
 
 /* GALERIA — mosaico (blocos de 4 fotos) */
-.mosaico{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:8px}
-.mos-bloco{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:repeat(20,1fr);gap:8px;aspect-ratio:1/1.1}
+.mosaico{max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:8px}
+.mos-bloco{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:repeat(20,minmax(0,1fr));gap:8px;aspect-ratio:1/1.1;height:auto}
 .mos-bloco>:nth-child(1){grid-area:1/1/14/2}
 .mos-bloco>:nth-child(2){grid-area:1/2/11/3}
 .mos-bloco>:nth-child(3){grid-area:14/1/21/2}
@@ -100,7 +100,7 @@ section.alt{background:var(--secaoAlt)}
 .mos-bloco.esp>:nth-child(3){grid-area:14/2/21/3}
 .mos-bloco.esp>:nth-child(4){grid-area:11/1/21/2}
 .mos-f{position:relative;overflow:hidden;min-width:0;min-height:0;border:2px solid var(--antigo);background:var(--card);box-shadow:0 6px 16px rgba(138,78,91,.18);padding:0}
-.mos-f img{width:100%;height:100%;max-width:none;object-fit:cover;transition:transform .5s}
+.mos-f img{position:absolute;top:0;left:0;width:100%;height:100%;max-width:none;object-fit:cover;transition:transform .5s}
 .mos-f:active img{transform:scale(1.04)}
 #lb{position:fixed;top:0;right:0;bottom:0;left:0;z-index:400;background:rgba(40,16,24,.95);display:none;align-items:center;justify-content:center;padding:56px 12px}
 #lb.on{display:flex}
@@ -202,7 +202,8 @@ footer p{letter-spacing:.2em;font-size:.8rem;color:var(--claro);margin-top:10px}
 .presente-lista p:last-child{border-bottom:none}
 .pix{margin-top:22px;padding:24px 18px;border:1px solid var(--antigo);background:var(--card)}
 .pix .sub{font-size:.9rem}
-.pix-num{display:block;width:100%;margin:10px 0 8px;padding:16px 10px;border-radius:18px;font-family:Arial,Helvetica,sans-serif;font-size:clamp(1.7rem,7.5vw,2.4rem);font-weight:700;letter-spacing:.06em;color:var(--btn-txt);transition:transform .2s}
+.pix-num{display:block;width:100%;margin:10px 0 8px;padding:16px 10px;border-radius:18px;font-family:Arial,Helvetica,sans-serif;font-size:clamp(1.15rem,5vw,1.5rem);font-weight:700;letter-spacing:.05em;color:var(--btn-txt);transition:transform .2s;
+  background:linear-gradient(180deg,#fff 0%,#f3e7ea 100%);border:1px solid rgba(210,153,162,.55);box-shadow:inset 0 2px 1px rgba(255,255,255,1),0 6px 16px rgba(138,78,91,.18)}
 .pix-dica{font-size:.85rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--enfase)}
 .deslize{margin-top:24px;display:flex;flex-direction:column;align-items:center}
 .deslize span{font-size:.95rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700}
@@ -382,14 +383,14 @@ const CONFIG = {
   galeria: {
     titulo: "Galeria",
     fotos: [
-      "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/foto01.jpeg?raw=true",
-      "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/foto02.jpg?raw=true",
-      "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/foto03.jpg?raw=true",
-      "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/foto05.jpeg?raw=true",
-      "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/foto04.jpeg?raw=true",   // foto 5 — ⚠️ coloque o link
-      "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/foto06.jpeg?raw=true",   // foto 6
-      "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/foto08.jpg?raw=true",   // foto 7
-      "https://github.com/deyvisonmarlondf-hash/convite-teste/blob/main/foto7.jpg?raw=true"    // foto 8
+      "https://github.com/maricriative/convite_MariaVitoria15Anos/blob/main/WhatsApp%20Image%202026-11-19%20at%2011.33.21.jpeg?raw=true",
+      "https://github.com/maricriative/convite_MariaVitoria15Anos/blob/main/WhatsApp%20Image%202026-11-19%20at%2011.33.26.jpeg?raw=true",
+      "https://github.com/maricriative/convite_MariaVitoria15Anos/blob/main/Foto%20de%20Deyvison%20Marlon%20(7).jpg?raw=true",
+      "https://github.com/maricriative/convite_MariaVitoria15Anos/blob/main/Foto%20de%20Deyvison%20Marlon%20(5).jpg?raw=true",
+      "",   // foto 5 — ⚠️ coloque o link
+      "",   // foto 6
+      "",   // foto 7
+      ""    // foto 8
     ],
     fundo: "", renda: "", cor: "#fbf3f5", veu: 0
   },
