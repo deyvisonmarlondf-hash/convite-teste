@@ -449,24 +449,29 @@ const CONFIG = {
   },
 
 
-/* 12 — CONFIRMAR PRESENÇA */
+/* 12 — CONFIRMAR PRESENÇA (com lista de convidados criptografada) */
   rsvp: {
     abrirEmJanela: true,
     titulo: "Confirmar Presença",
-    instrucao: "Para confirmar a sua presença, toque no ícone abaixo e informe o seu nome e o de seus acompanhantes.",
+    instrucao: "Para confirmar a sua presença, toque no ícone abaixo e digite o seu nome.",
     rotuloNome: "Seu nome",
-    placeholderNome: "Digite o seu nome completo",
-    rotuloAcomp: "Nome dos acompanhantes",
-    placeholderAcomp: "Um nome por linha (deixe em branco se for sozinho)",
+    placeholderNome: "Digite o seu nome",
     avisoNome: "Por favor, digite o seu nome.",
+    botaoBuscar: "Buscar meu convite",
+    naoEncontrado: "Não encontramos esse nome na lista. Confira como está escrito no convite que você recebeu.",
+    avisoCripto: "Não foi possível verificar o nome neste navegador. Abra o link no Chrome ou no Safari.",
+    saudacao: "Olá, {nome}!",
+    instrucaoLista: "Marque quem vai comparecer:",
     botao: "Confirmar pelo WhatsApp",
-    mensagemWhats: "Olá! Confirmo a minha presença no XV anos da Maria Vitória.\n\nNome: {nome}\nAcompanhantes: {acompanhantes}",
+    mensagemWhats: "Olá! Confirmo a presença no XV anos da Maria Vitória.\n\nConvite de: {nome}\nConfirmados: {confirmados}",
+    mensagemNao: "Olá! Infelizmente não poderemos comparecer ao XV anos da Maria Vitória.\n\nConvite de: {nome}",
     whatsapp: "",              // ⚠️ PREENCHA: só números com 55 + DDD. Ex.: "5538999999999"
+    sal: "mv-xv-2027",         // precisa ser IGUAL ao SAL do gerar-lista.js
+    convidados: [ { "h": "6c2e9d8319c2f2c8396ccf0c35e9ceda", "d": "elrtdp05Arsp5MoIMokqt4bePzOVG0hLDGW03Bk6Rhv84ZUkW4T526LPd48HxFMIKHTXIOUJYBBnwEDbeao1BD9fm4blPvP/fVea33Bb15pT53GaEmAY" }, { "h": "42479fa607237a80e6e63bd9e6e7f5ff", "d": "r8Yt6UcNSCwvPibPU3iV1uXkPz0AEYaAonw4ZCrjIhIVmBAwSad0EDp5wGiKxjhi4kuXWl0c5GRfmzf2RF9mUg333BVzuOgfzk45zahiOlZo7GAdALQj" }, { "h": "f7c95997fa3d9653c92e4b5de739d44b", "d": "diJhgn56zTYhLfI9z9Hm3n0yGLlSjaS/JevuFWCaTtGEk3qSPGMdN1HPiaN2t8g1dgWFN8Klj+Wx/vxUxytY6WcoP1I/rL24kSx/Di1HVT4h2pKA2ej6" }, { "h": "ab5469a7692833f8ef4bbaa334d69da7", "d": "MT2zwF9pM3aRhQcARd9M6G+DuWS4U1+LBKy91uaL2RKR1H6OK3bjCdH3KcF+gILaf9ub4O+KR7it5MD7c2iRV2fKqdOQfMuwhKv94hMZ" }, { "h": "2b766669216f8066c744ecac420b9398", "d": "cG7CNN/ykPekpLOCt785f41Xf2RREBgllS4BFHyLw0vxjv4jjRCtROkpMo30VALziOogzhwEkMEoCjvyWHxn3TMvU8B/iUCOgAh49u0I" }, { "h": "753a69f491a805aebbfb797d896645cc", "d": "YIWUb808aNDvzLd+B0Meb6nzTxSxmIw38WHNs8WNT209EVZdAJCO/iKFdstXQO+MNQikCC6Gxtf0Pg==" }, { "h": "51d3f88937712c7f2d46384298fcd1fe", "d": "+XT1p+FVfzLA+zxpVu1rLetBWovRDM+IYZOpNnXqrS9eEMv7C/Iss398H6cckTbFnsmlxilcunxb3A==" }, { "h": "0e94cd53c49e7f7f4f5090338f318467", "d": "vG67Bb25BkHyivOQjPNvHzjXpDyZ/iII9vGZ7fRbYbbu26Z3xyoZr95MxgYFCHlgjPq6CbuMCc89EcuXWK9UQBfMlHFk6IeWjJAKchAOMREWT+sYOOsHcGEtX9Q9nw==" }, { "h": "d8d8efec22be78db651cf395f950b1b1", "d": "5YLsAFUulGVz4nnvhUtoin/3qnE2o8pApsPtiw71mObd1VBDOJaegEvQjEGgYVq1YlpKu3Gnzkq2L6qnEDFCs2JSDVerl5DMjfrlkx7l7FiP1yZvMi/cIvEsBAmuIA==" } ],
     iconeImagem: "",
     fundo: "https://github.com/maricriative/convite_MariaVitoria15Anos/blob/main/Novo%20Projeto%20(13).png?raw=true",
     renda: "", cor: "", veu: 0
   },
-
 
 /* 13 — RODAPÉ */
   rodape: { renda: "", rendaAltura: 24, rendaPos: "topo" }
@@ -714,14 +719,81 @@ if (G && (G.texto || listaG || G.pix || G.imagem)) sec('presentes', 'Presentes',
 /* Confirmar presença */
 const R = C.rsvp, janR = R && R.abrirEmJanela !== false;
 const iconeR = R ? (R.iconeImagem ? `<img src="${R.iconeImagem}" alt="">` : ICONE_OK) : '';
+/* ===== Confirmar presença com lista (substitui as constantes formR e bindRsvp) ===== */
+{ const st = document.createElement('style'); st.textContent =
+  '.rsvp-ola{font-family:var(--f-tit);font-weight:600;font-size:1.5rem;color:var(--enfase);text-align:center;margin-bottom:6px}' +
+  '.rsvp-chk{display:flex;align-items:center;gap:14px;padding:14px 16px;margin-top:10px;border:2px solid var(--antigo);border-radius:12px;background:var(--card);font-size:1.1rem;font-weight:600;color:var(--textoForte);cursor:pointer}' +
+  '.rsvp-chk input{width:24px;height:24px;flex:none;accent-color:var(--enfase)}' +
+  '.rsvp-erro a{color:var(--enfase)}.rsvp-form .btn:disabled{opacity:.5}';
+  document.head.appendChild(st); }
+
+const normNome = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
+const TE = new TextEncoder(), TD = new TextDecoder();
+const idNome = async n => Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', TE.encode(R.sal + '|' + n)))).map(b => b.toString(16).padStart(2, '0')).join('').slice(0, 32);
+const chaveNome = async n => crypto.subtle.deriveKey({ name: 'PBKDF2', salt: TE.encode(R.sal), iterations: 150000, hash: 'SHA-256' },
+  await crypto.subtle.importKey('raw', TE.encode(n), 'PBKDF2', false, ['deriveKey']), { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
+async function abrirConvite(n) {
+  const id = await idNome(n), e = (R.convidados || []).find(x => x.h === id);
+  if (!e) return null;
+  const b = Uint8Array.from(atob(e.d), c => c.charCodeAt(0));
+  try { return JSON.parse(TD.decode(await crypto.subtle.decrypt({ name: 'AES-GCM', iv: b.slice(0, 12) }, await chaveNome(n), b.slice(12)))); }
+  catch (x) { return null; }
+}
+
 const formR = () => `<div class="rsvp-form">
+  <div id="rsvpBusca">
     <label for="rsvpNome">${R.rotuloNome}</label>
     <input id="rsvpNome" type="text" autocomplete="name" placeholder="${R.placeholderNome}">
-    <label for="rsvpAcomp">${R.rotuloAcomp}</label>
-    <textarea id="rsvpAcomp" rows="3" placeholder="${R.placeholderAcomp}"></textarea>
-    <p class="rsvp-erro" id="rsvpErro" hidden>${R.avisoNome}</p>
-    <button class="btn" id="rsvpEnviar" type="button">${R.botao}</button>
-  </div>`;
+    <p class="rsvp-erro" id="rsvpErro" hidden></p>
+    <button class="btn" id="rsvpBuscar" type="button">${R.botaoBuscar}</button>
+  </div>
+  <div id="rsvpLista" hidden></div>
+</div>`;
+
+const bindRsvp = r => {
+  const buscar = $('#rsvpBuscar', r); if (!buscar) return;
+  const nomeEl = $('#rsvpNome', r), erro = $('#rsvpErro', r), busca = $('#rsvpBusca', r), lista = $('#rsvpLista', r);
+  const num = (R.whatsapp || '').replace(/\D/g, '');
+  const falha = h => { erro.innerHTML = h; erro.hidden = false; };
+  const enviar = txt => window.open('https://wa.me/' + num + '?text=' + enc(txt), '_blank');
+
+  function mostrar(c) {
+    const pessoas = [c.t].concat(c.a || []);
+    lista.innerHTML = '';
+    const ola = document.createElement('p'); ola.className = 'rsvp-ola'; ola.textContent = R.saudacao.replace('{nome}', () => c.t.split(' ')[0]); lista.appendChild(ola);
+    const ins = document.createElement('p'); ins.className = 'texto'; ins.style.textAlign = 'center'; ins.textContent = R.instrucaoLista; lista.appendChild(ins);
+    const checks = pessoas.map(p => {
+      const l = document.createElement('label'); l.className = 'rsvp-chk';
+      const i = document.createElement('input'); i.type = 'checkbox'; i.checked = true;
+      l.appendChild(i); l.appendChild(document.createTextNode(p)); lista.appendChild(l); return { i, p };
+    });
+    const b = document.createElement('button'); b.className = 'btn'; b.type = 'button'; b.textContent = R.botao; lista.appendChild(b);
+    b.onclick = () => {
+      const ok = checks.filter(x => x.i.checked).map(x => x.p);
+      const f = ok.length ? R.mensagemWhats : R.mensagemNao;
+      enviar(f.replace('{nome}', () => c.t).replace('{confirmados}', () => ok.join(', ')));
+    };
+    busca.hidden = true; lista.hidden = false;
+  }
+
+  const rodar = async () => {
+    erro.hidden = true;
+    const n = normNome(nomeEl.value);
+    if (!n) { falha(R.avisoNome); nomeEl.focus(); return; }
+    if (!(window.crypto && crypto.subtle)) { falha(R.avisoCripto); return; }
+    buscar.disabled = true;
+    let c = null;
+    try { c = await abrirConvite(n); } catch (e) { buscar.disabled = false; falha(R.avisoCripto); return; }
+    buscar.disabled = false;
+    if (!c) {
+      const link = num ? ` <a href="https://wa.me/${num}?text=${enc('Olá! Não encontrei meu nome na lista de convidados do XV anos da Maria Vitória. Meu nome é ' + nomeEl.value.trim() + '.')}" target="_blank" rel="noopener">Falar pelo WhatsApp</a>` : '';
+      falha(R.naoEncontrado + link); return;
+    }
+    mostrar(c);
+  };
+  buscar.onclick = rodar;
+  nomeEl.onkeydown = e => { if (e.key === 'Enter') rodar(); };
+};
 if (R) sec('confirmar', 'Confirmar', tit(R.titulo) + (janR
   ? `<p class="texto">${R.instrucao}</p><button class="rsvp-ico" id="abrirRsvp" type="button" aria-label="${R.titulo}">${iconeR}</button>`
   : `<div class="rsvp-ico" aria-hidden="true">${iconeR}</div><p class="texto" style="margin:14px 0 8px">${R.instrucao}</p>${formR()}`), 'alt');
@@ -738,19 +810,6 @@ const bindPix = r => {
     const txt = C.presentes.pix, ok = () => { if (dica) { dica.textContent = 'Chave copiada!'; setTimeout(() => { dica.textContent = 'Toque na chave para copiar'; }, 2500); } };
     const alt = () => { const t = document.createElement('textarea'); t.value = txt; t.style.cssText = 'position:fixed;opacity:0'; document.body.appendChild(t); t.select(); try { document.execCommand('copy'); ok(); } catch (e) {} t.remove(); };
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(ok, alt); else alt();
-  };
-};
-
-/* confirmar presença → WhatsApp */
-const bindRsvp = r => {
-  const envia = $('#rsvpEnviar', r); if (!envia) return;
-  envia.onclick = () => {
-    const nome = $('#rsvpNome', r).value.trim(), acomp = $('#rsvpAcomp', r).value.trim().replace(/\n+/g, ', '), erro = $('#rsvpErro', r);
-    if (!nome) { erro.hidden = false; $('#rsvpNome', r).focus(); return; }
-    erro.hidden = true;
-    const msg = (R.mensagemWhats || '').replace('{nome}', () => nome).replace('{acompanhantes}', () => acomp || 'sem acompanhantes'),
-      num = (R.whatsapp || '').replace(/\D/g, '');
-    window.open('https://wa.me/' + num + '?text=' + enc(msg), '_blank');
   };
 };
 
