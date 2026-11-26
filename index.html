@@ -740,6 +740,12 @@ async function abrirConvite(n) {
   catch (x) { return null; }
 }
 
+/* Nome vindo do link do QR code (#c=Nome) */
+const NOME_LINK = (() => {
+  const m = location.hash.match(/[#&]c=([^&]*)/);
+  try { return m ? decodeURIComponent(m[1].replace(/\+/g, ' ')).trim() : ''; } catch (e) { return ''; }
+})();
+
 const formR = () => `<div class="rsvp-form">
   <div id="rsvpBusca">
     <label for="rsvpNome">${R.rotuloNome}</label>
@@ -793,6 +799,7 @@ const bindRsvp = r => {
   };
   buscar.onclick = rodar;
   nomeEl.onkeydown = e => { if (e.key === 'Enter') rodar(); };
+  if (NOME_LINK) { nomeEl.value = NOME_LINK; rodar(); }
 };
 if (R) sec('confirmar', 'Confirmar', tit(R.titulo) + (janR
   ? `<p class="texto">${R.instrucao}</p><button class="rsvp-ico" id="abrirRsvp" type="button" aria-label="${R.titulo}">${iconeR}</button>`
