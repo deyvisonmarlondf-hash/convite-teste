@@ -449,25 +449,27 @@ const CONFIG = {
   },
 
 
-/* 12 — CONFIRMAR PRESENÇA (com lista de convidados criptografada) */
+/* 12 — CONFIRMAR PRESENÇA (com lista de convidados criptografada)
+       Quem confirma digita o nome do TITULAR do convite (o primeiro nome de cada grupo).
+       Para atualizar a lista, edite o gerar-lista.js e rode: node gerar-lista.js */
   rsvp: {
     abrirEmJanela: true,
     titulo: "Confirmar Presença",
-    instrucao: "Para confirmar a sua presença, toque no ícone abaixo e digite o seu nome.",
-    rotuloNome: "Seu nome",
-    placeholderNome: "Digite o seu nome",
-    avisoNome: "Por favor, digite o seu nome.",
+    instrucao: "Para confirmar a sua presença, toque no ícone abaixo e digite o nome do titular do convite que você recebeu.",
+    rotuloNome: "Nome do titular do convite",
+    placeholderNome: "Nome e sobrenome",
+    avisoNome: "Por favor, digite o nome do titular do convite.",
     botaoBuscar: "Buscar meu convite",
-    naoEncontrado: "Não encontramos esse nome na lista. Confira como está escrito no convite que você recebeu.",
+    naoEncontrado: "Não encontramos esse nome na lista. Digite o nome completo do titular do convite, como está escrito no convite que você recebeu.",
     avisoCripto: "Não foi possível verificar o nome neste navegador. Abra o link no Chrome ou no Safari.",
     saudacao: "Olá, {nome}!",
     instrucaoLista: "Marque quem vai comparecer:",
     botao: "Confirmar pelo WhatsApp",
     mensagemWhats: "Olá! Confirmo a presença no XV anos da Maria Vitória.\n\nConvite de: {nome}\nConfirmados: {confirmados}",
     mensagemNao: "Olá! Infelizmente não poderemos comparecer ao XV anos da Maria Vitória.\n\nConvite de: {nome}",
-    whatsapp: "",              // ⚠️ PREENCHA: só números com 55 + DDD. Ex.: "5538999999999"
+    whatsapp: "5541992665353",   // 55 + DDD 41 + 9 9266-5353
     sal: "mv-xv-2027",         // precisa ser IGUAL ao SAL do gerar-lista.js
-    convidados: [ { "h": "6c2e9d8319c2f2c8396ccf0c35e9ceda", "d": "elrtdp05Arsp5MoIMokqt4bePzOVG0hLDGW03Bk6Rhv84ZUkW4T526LPd48HxFMIKHTXIOUJYBBnwEDbeao1BD9fm4blPvP/fVea33Bb15pT53GaEmAY" }, { "h": "42479fa607237a80e6e63bd9e6e7f5ff", "d": "r8Yt6UcNSCwvPibPU3iV1uXkPz0AEYaAonw4ZCrjIhIVmBAwSad0EDp5wGiKxjhi4kuXWl0c5GRfmzf2RF9mUg333BVzuOgfzk45zahiOlZo7GAdALQj" }, { "h": "f7c95997fa3d9653c92e4b5de739d44b", "d": "diJhgn56zTYhLfI9z9Hm3n0yGLlSjaS/JevuFWCaTtGEk3qSPGMdN1HPiaN2t8g1dgWFN8Klj+Wx/vxUxytY6WcoP1I/rL24kSx/Di1HVT4h2pKA2ej6" }, { "h": "ab5469a7692833f8ef4bbaa334d69da7", "d": "MT2zwF9pM3aRhQcARd9M6G+DuWS4U1+LBKy91uaL2RKR1H6OK3bjCdH3KcF+gILaf9ub4O+KR7it5MD7c2iRV2fKqdOQfMuwhKv94hMZ" }, { "h": "2b766669216f8066c744ecac420b9398", "d": "cG7CNN/ykPekpLOCt785f41Xf2RREBgllS4BFHyLw0vxjv4jjRCtROkpMo30VALziOogzhwEkMEoCjvyWHxn3TMvU8B/iUCOgAh49u0I" }, { "h": "753a69f491a805aebbfb797d896645cc", "d": "YIWUb808aNDvzLd+B0Meb6nzTxSxmIw38WHNs8WNT209EVZdAJCO/iKFdstXQO+MNQikCC6Gxtf0Pg==" }, { "h": "51d3f88937712c7f2d46384298fcd1fe", "d": "+XT1p+FVfzLA+zxpVu1rLetBWovRDM+IYZOpNnXqrS9eEMv7C/Iss398H6cckTbFnsmlxilcunxb3A==" }, { "h": "0e94cd53c49e7f7f4f5090338f318467", "d": "vG67Bb25BkHyivOQjPNvHzjXpDyZ/iII9vGZ7fRbYbbu26Z3xyoZr95MxgYFCHlgjPq6CbuMCc89EcuXWK9UQBfMlHFk6IeWjJAKchAOMREWT+sYOOsHcGEtX9Q9nw==" }, { "h": "d8d8efec22be78db651cf395f950b1b1", "d": "5YLsAFUulGVz4nnvhUtoin/3qnE2o8pApsPtiw71mObd1VBDOJaegEvQjEGgYVq1YlpKu3Gnzkq2L6qnEDFCs2JSDVerl5DMjfrlkx7l7FiP1yZvMi/cIvEsBAmuIA==" } ],
+    convidados: [],
     iconeImagem: "",
     fundo: "https://github.com/maricriative/convite_MariaVitoria15Anos/blob/main/Novo%20Projeto%20(13).png?raw=true",
     renda: "", cor: "", veu: 0
@@ -719,7 +721,7 @@ if (G && (G.texto || listaG || G.pix || G.imagem)) sec('presentes', 'Presentes',
 /* Confirmar presença */
 const R = C.rsvp, janR = R && R.abrirEmJanela !== false;
 const iconeR = R ? (R.iconeImagem ? `<img src="${R.iconeImagem}" alt="">` : ICONE_OK) : '';
-/* ===== Confirmar presença com lista (substitui as constantes formR e bindRsvp) ===== */
+/* ===== Confirmar presença com lista ===== */
 { const st = document.createElement('style'); st.textContent =
   '.rsvp-ola{font-family:var(--f-tit);font-weight:600;font-size:1.5rem;color:var(--enfase);text-align:center;margin-bottom:6px}' +
   '.rsvp-chk{display:flex;align-items:center;gap:14px;padding:14px 16px;margin-top:10px;border:2px solid var(--antigo);border-radius:12px;background:var(--card);font-size:1.1rem;font-weight:600;color:var(--textoForte);cursor:pointer}' +
@@ -740,16 +742,10 @@ async function abrirConvite(n) {
   catch (x) { return null; }
 }
 
-/* Nome vindo do link do QR code (#c=Nome) */
-const NOME_LINK = (() => {
-  const m = location.hash.match(/[#&]c=([^&]*)/);
-  try { return m ? decodeURIComponent(m[1].replace(/\+/g, ' ')).trim() : ''; } catch (e) { return ''; }
-})();
-
 const formR = () => `<div class="rsvp-form">
   <div id="rsvpBusca">
     <label for="rsvpNome">${R.rotuloNome}</label>
-    <input id="rsvpNome" type="text" autocomplete="name" placeholder="${R.placeholderNome}">
+    <input id="rsvpNome" type="text" autocomplete="off" placeholder="${R.placeholderNome}">
     <p class="rsvp-erro" id="rsvpErro" hidden></p>
     <button class="btn" id="rsvpBuscar" type="button">${R.botaoBuscar}</button>
   </div>
@@ -799,7 +795,6 @@ const bindRsvp = r => {
   };
   buscar.onclick = rodar;
   nomeEl.onkeydown = e => { if (e.key === 'Enter') rodar(); };
-  if (NOME_LINK) { nomeEl.value = NOME_LINK; rodar(); }
 };
 if (R) sec('confirmar', 'Confirmar', tit(R.titulo) + (janR
   ? `<p class="texto">${R.instrucao}</p><button class="rsvp-ico" id="abrirRsvp" type="button" aria-label="${R.titulo}">${iconeR}</button>`
