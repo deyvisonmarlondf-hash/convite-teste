@@ -1,32 +1,124 @@
-// Uso:  node gerar-lista.js     → imprime o bloco  convidados: [...]  para colar no CONFIG.rsvp do convite
-// Edite só a LISTA abaixo. "nomes" = tudo que a pessoa pode digitar para abrir o convite (nome completo, apelido…).
-// "titular" e "acompanhantes" = como aparecem na tela de confirmação.
-const SAL = "mv-xv-2027";   // precisa ser IGUAL ao rsvp.sal do convite
+/* ============================================================================
+   gerar-lista.js — gera a lista criptografada de convidados do convite.
 
-const LISTA = [   // ⚠️ LISTA FICTÍCIA DE TESTE
-  { nomes: ["Ana Paula Souza", "Ana Paula", "Paulinha"], titular: "Ana Paula Souza", acompanhantes: ["Carlos Souza", "Lívia Souza"] },
-  { nomes: ["João Pedro Almeida", "João Pedro"],          titular: "João Pedro Almeida", acompanhantes: ["Marina Almeida"] },
-  { nomes: ["Tia Lúcia", "Lúcia Ferreira"],               titular: "Lúcia Ferreira", acompanhantes: [] },
-  { nomes: ["Roberto Lima", "Beto Lima"],                 titular: "Roberto Lima", acompanhantes: ["Sandra Lima", "Pedro Lima", "Julia Lima"] }
+   COMO USAR (precisa do Node.js instalado):
+     1. Edite os GRUPOS abaixo. Cada grupo = um convite.
+        O PRIMEIRO nome do grupo é o TITULAR: é o nome que a pessoa digita no convite.
+        Os demais aparecem como acompanhantes na tela de confirmação.
+     2. Coloque este arquivo na mesma pasta do index.html e rode:
+          node gerar-lista.js
+        Ele atualiza a lista dentro do index.html sozinho.
+        (Sem index.html na pasta, ele grava lista-criptografada.txt para você colar no CONFIG.)
+
+   O SAL precisa ser IGUAL ao rsvp.sal do index.html.
+   ============================================================================ */
+const fs = require('fs');
+const crypto = require('crypto');
+
+const SAL = 'mv-xv-2027';
+
+const GRUPOS = [
+  ['Antônio José Veloso'],
+  ['Kacilene Veloso', 'José Vinicius Suzart', 'Marcus Veloso Suzart', 'Aressa Dias Adelar', 'Maurício Veloso Suzart', 'Millena Dias Adelar'],
+  ['Mateus Veloso Suzart', 'Tamara Lopes', 'Maria Tereza'],
+  ['Mariana Veloso', 'Lucas Gonçalves', 'Eduarda'],
+  ['Lucilene Veloso', 'Francisco José Vieira'],
+  ['Samuel Veloso Vieira', 'Madson'],
+  ['Vitor Vieira', 'Ana Flavia', 'Laura'],
+  ['Valdilene Veloso', 'Luis Fabio Almeida Magalhaes'],
+  ['Luis Fernando Veloso', 'Keller Souane'],
+  ['Maria Fernanda Veloso', 'Abraão'],
+  ['Bárbara Veloso', 'Igor Matheus', 'Arthur Veloso Souza Rocha', 'Heitor Veloso Sousa Rocha', 'Melissa'],
+  ['Antonio José Veloso Filho', 'Celine Almeida'],
+  ['João Pedro Veloso', 'Valentina Veloso'],
+  ['Marcelo Veloso', 'Bianca Veloso', 'Heitor Veloso', 'Luiza Veloso'],
+  ['João Paulo Mendes Veloso', 'Terezinha Gonçalves Pereira Nunes'],
+  ['José Alberto Veloso Neto', 'Alice'],
+  ['Kamila Veloso', 'Diego Fonseca'],
+  ['Silvio Ribeiro', 'Iracema Guedes Ribeiro', 'Vanusa Ribeiro'],
+  ['Felipe Bezuska Ribeiro', 'Júlia Colla'],
+  ['Sílvio Ribeiro Neto'],
+  ['Ana Veloso'],
+  ['Elane Veloso', 'Tales Veloso'],
+  ['Élen Veloso', 'Charles', 'Felipe'],
+  ['James Veloso', 'Edvania', 'Júlia Veloso'],
+  ['Maria Nice Veloso', 'Joaquim Moura Ramos'],
+  ['José Mendes Veloso Junior', 'Karina Ribeiro Caetano', 'Anne Caroline Ribeiro Veloso', 'Ana Lívia Ribeiro Caetano Veloso', 'Anna Laura Ribeiro Caetano Veloso', 'Carolina Mendes Magalhães'],
+  ['Alisson Veloso', 'Carla Ribeiro Fonseca', 'Maria Soares'],
+  ['Antônio Paulo Veloso', 'Marilda'],
+  ['Elisangela', 'Gilberto Veloso'],
+  ['Dey', 'Múcio Fiel Carvalho'],
+  ['Angela Marileide', 'Johnny', 'Savio', 'Gustavo'],
+  ['Angela Merícia', 'Salvador Ramos Júnior'],
+  ['Aparecida Veloso', 'Hermes Veloso'],
+  ['Greice Ione Mendes', 'Serginho', 'Emyle Mendes'],
+  ['Liliany Mendes', 'Marcos Parreiras dos Santos', 'Letícia'],
+  ['Lilia Mendes', 'Marcelo', 'Mariana'],
+  ['Teodorica Mendes', 'Mauro Mendes', 'Maria Helena Mendes Ribeiro', 'Antonio Ribeiro Filho'],
+  ['Carol Mendes', 'Datan Sousa Silva'],
+  ['Zirlete Mendes', 'Hugo Rodrigues de Aquino'],
+  ['Zirlene Mendes', 'Celso Ramiro Almeida Neto', 'Mariana Almeida'],
+  ['Zuleide Mendes', 'Aluisio Mesquita'],
+  ['Ley Mendes', 'José Carlos Ferreira Soares'],
+  ['Nalva Mendes', 'José Gedeon Vieira', 'Guilherme Vieira'],
+  ['Edna Mendes', 'João Batista Mendes', 'Anita Mendes', 'Lucas Mendes Ribeiro Filho'],
+  ['Sarah Mendes Costa Lauton', 'Waldete Lauton', 'Lara Mendes Lauton', 'Maria Violeta Costa Mendes'],
+  ['Kênia Mendes Medeiros', 'Ademir Medeiros', 'Ana Lívia Mendes Costa Medeiros'],
+  ['Márcia Mendes', 'João Paulo Mendes'],
+  ['Eduardo Leal', 'Arlete Sales'],
+  ['Nádia Marques', 'Emanoel'],
+  ['Sinara'],
+  ['Celma Costa', 'José Vicente Gomes da Silva'],
+  ['Eomar Alves da Silva', 'Helenice Ribeiro da Silva'],
+  ['Ivanete França', 'Manoel França', 'Ana Vitória'],
+  ['Adelza Rodrigues Vieira Liberato', 'Euclides Liberato Neto', 'Maria Fernanda Vieira Liberato', 'Marina Liberato Oliveira'],
+  ['Quênia Almeida', 'Leandro Almeida', 'Júlia Almeida', 'Isabel Almeida'],
+  ['Carluce Saraiva'],
+  ['Elza Nascimento', 'Luis Fernando Nascimento'],
+  ['Clécio', 'Agda', 'Maria Clara'],
+  ['Daiane', 'Nilton', 'Júlia Lopes', 'Pedro'],
+  ['Arthur Brito Rocha'],
+  ['Laura Albuquerque'],
+  ['Luiz Eduardo'],
+  ['Luiza'],
+  ['Cecília Braga', 'Analu'],
+  ['Melissa Fiori', 'Fabiano', 'Melina Fiori', 'Marlon Fiori'],
+  ['Raul Roger']
 ];
 
-const norm = s => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9 ]/g, " ").replace(/\s+/g, " ").trim();
-const enc = new TextEncoder(), sub = crypto.subtle, b64 = u => Buffer.from(u).toString("base64");
-async function idDe(n) { return Buffer.from(await sub.digest("SHA-256", enc.encode(SAL + "|" + n))).toString("hex").slice(0, 32); }
-async function chave(n) {
-  const base = await sub.importKey("raw", enc.encode(n), "PBKDF2", false, ["deriveKey"]);
-  return sub.deriveKey({ name: "PBKDF2", salt: enc.encode(SAL), iterations: 150000, hash: "SHA-256" }, base, { name: "AES-GCM", length: 256 }, false, ["encrypt", "decrypt"]);
+/* ---------------------------- NÃO PRECISA MEXER ---------------------------- */
+const norm = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
+  .replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
+const idNome = n => crypto.createHash('sha256').update(SAL + '|' + n).digest('hex').slice(0, 32);
+
+function cifrar(titularNorm, obj) {
+  const key = crypto.pbkdf2Sync(titularNorm, SAL, 150000, 32, 'sha256');
+  const iv = crypto.randomBytes(12);
+  const c = crypto.createCipheriv('aes-256-gcm', key, iv);
+  const ct = Buffer.concat([c.update(JSON.stringify(obj), 'utf8'), c.final(), c.getAuthTag()]);
+  return Buffer.concat([iv, ct]).toString('base64');   // mesmo formato que o navegador lê
 }
-(async () => {
-  const saida = [], vistos = new Map();
-  for (const c of LISTA) for (const nome of c.nomes) {
-    const n = norm(nome);
-    if (vistos.has(n) && vistos.get(n) !== c) { console.error(`⚠️ Nome repetido em dois convites: "${nome}". Use o sobrenome para diferenciar.`); process.exit(1); }
-    vistos.set(n, c);
-    const iv = crypto.getRandomValues(new Uint8Array(12));
-    const ct = new Uint8Array(await sub.encrypt({ name: "AES-GCM", iv }, await chave(n), enc.encode(JSON.stringify({ t: c.titular, a: c.acompanhantes }))));
-    const junto = new Uint8Array(12 + ct.length); junto.set(iv); junto.set(ct, 12);
-    saida.push({ h: await idDe(n), d: b64(junto) });
-  }
-  console.log("convidados: " + JSON.stringify(saida, null, 1).replace(/\n\s*/g, " ") + ",");
-})();
+
+/* confere se há titulares repetidos */
+const vistos = new Map();
+let erro = false;
+GRUPOS.forEach(g => {
+  const n = norm(g[0]);
+  if (vistos.has(n)) { console.error('ERRO: titular repetido: "' + g[0] + '" (igual a "' + vistos.get(n) + '")'); erro = true; }
+  vistos.set(n, g[0]);
+});
+if (erro) process.exit(1);
+
+const lista = GRUPOS.map(g => ({ h: idNome(norm(g[0])), d: cifrar(norm(g[0]), { t: g[0], a: g.slice(1) }) }));
+const texto = 'convidados: [ ' + lista.map(x => JSON.stringify(x)).join(', ') + ' ],';
+
+if (fs.existsSync('index.html')) {
+  const html = fs.readFileSync('index.html', 'utf8');
+  const re = /convidados:\s*\[[\s\S]*?\]\s*,(\s*\n\s*iconeImagem)/;
+  if (!re.test(html)) { console.error('Não achei o campo "convidados" no index.html.'); process.exit(1); }
+  fs.writeFileSync('index.html', html.replace(re, (m, resto) => texto + resto));
+  console.log('index.html atualizado: ' + GRUPOS.length + ' convites, ' + GRUPOS.reduce((s, g) => s + g.length, 0) + ' pessoas.');
+} else {
+  fs.writeFileSync('lista-criptografada.txt', texto);
+  console.log('Gravei lista-criptografada.txt (' + GRUPOS.length + ' convites). Cole no campo "convidados" do CONFIG.');
+}
